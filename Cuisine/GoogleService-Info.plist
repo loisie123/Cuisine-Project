@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>952686239401-4gtu5pi3edp32k45dmrjgp9obdc9jbur.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.952686239401-4gtu5pi3edp32k45dmrjgp9obdc9jbur</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAtGCSM88x_suutVnk1t37oshDQmk89tfE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>952686239401</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>nl.mprog.Cuisine</string>
+	<key>PROJECT_ID</key>
+	<string>cuisine-9474f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cuisine-9474f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:952686239401:ios:8841fa6dcfb45d66</string>
+	<key>DATABASE_URL</key>
+	<string>https://cuisine-9474f.firebaseio.com</string>
+</dict>
+</plist>

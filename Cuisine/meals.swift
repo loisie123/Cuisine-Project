@@ -13,6 +13,6 @@ class meals: NSObject {
     var name: String!
     var price: String!
     var likes: Int!
-        
-        
+    var typeOFMEal: String!
+    
 }

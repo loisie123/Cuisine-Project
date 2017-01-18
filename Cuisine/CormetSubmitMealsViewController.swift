@@ -60,9 +60,14 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.inputSoop.text != "" && self.priceSoop.text != "" ){
 
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("soop").child(self.inputSoop.text!).child("nameSoop").setValue(self.inputSoop.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("soop").child(self.inputSoop.text!).child("priceSoop").setValue(self.priceSoop.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("soop").child(self.inputSoop.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("nameSoop").setValue(self.inputSoop.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("priceSoop").setValue(self.priceSoop.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
+            
+                inputSoop.text = ""
+                priceSoop.text = ""
+            
         }
         else{
             let alertController = UIAlertController(title: "Empty box", message: "There is nothing to save", preferredStyle: UIAlertControllerStyle.alert)
@@ -118,9 +123,10 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.sandwichtInput.text != "" && self.sandwichPrice.text != "" ){
             
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Sandwich").child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Sandwich").child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Sandwich").child(self.sandwichtInput.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("likes").setValue(0)
+        self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
             sandwichtInput.text = ""
             sandwichPrice.text = ""
@@ -143,13 +149,13 @@ class CormetSubmitMealsViewController: UIViewController {
     let user = FIRAuth.auth()?.currentUser?.uid
     
         if (self.inputDinner.text != "" && self.priceDinner.text != "" ){
-    
-        self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Dinner").child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Dinner").child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child("Dinner").child(self.inputDinner.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("Dinner")
             
-            inputDinner.text = ""
-            priceDinner.text = ""
+                inputDinner.text = ""
+                priceDinner.text = ""
             
         }
             

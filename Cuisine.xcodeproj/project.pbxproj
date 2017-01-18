@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0FAE5705C2E87D0A046A4151 /* Pods_Cuisine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E46E90A6FEA036CBE337D /* Pods_Cuisine.framework */; };
+		CA1238B81E2F842700FE2759 /* week.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1238B71E2F842700FE2759 /* week.swift */; };
 		CA12F2AB1E2E595300C0003A /* meals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AA1E2E595300C0003A /* meals.swift */; };
 		CA12F2AD1E2E68E900C0003A /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */; };
 		CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		41BAFE43EB1F6DF59C8ABC27 /* Pods-Cuisine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuisine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cuisine/Pods-Cuisine.debug.xcconfig"; sourceTree = "<group>"; };
 		518E46E90A6FEA036CBE337D /* Pods_Cuisine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuisine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA1238B71E2F842700FE2759 /* week.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = week.swift; sourceTree = "<group>"; };
 		CA12F2AA1E2E595300C0003A /* meals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = meals.swift; sourceTree = "<group>"; };
 		CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUserViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				CAE569441E2CF46200E38109 /* users.swift */,
 				CA12F2AA1E2E595300C0003A /* meals.swift */,
+				CA1238B71E2F842700FE2759 /* week.swift */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE569451E2CF46200E38109 /* users.swift in Sources */,
+				CA1238B81E2F842700FE2759 /* week.swift in Sources */,
 				CA34ED661E24FE0900C8748F /* AppDelegate.swift in Sources */,
 				CA12F2AB1E2E595300C0003A /* meals.swift in Sources */,
 				CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */,

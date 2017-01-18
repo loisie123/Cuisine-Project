@@ -15,33 +15,55 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableViewImage: UITableView!
 
     
+    var listOfmeals = [meals]()
+    var listOFSoop = [meals]()
+    var listOFSandwiches = [meals]()
+    var listNameSoop = [String]()
+    var listNameSandwich = [String]()
+    var listNameDinner = [String]()
+    var listPriceSoop = [String]()
+    var listPriceSandwich = [String]()
+    var listPriceDinner = [String]()
+    var listLikesSoop = [Int]()
+    var listLikesSandwich = [Int]()
+    var listLikesDinner = [Int]()
+    
+    
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     var meal = [String]()
     var prices = [String]()
-    var likes = [String]()
+    var likes = [Int]()
+    var day = String()
+    var listAllNames = [[String]]()
+    var listAllLikes = [[Int]]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        print(day)
+        ref = FIRDatabase.database().reference()
+        getMeals()
 
-        
-    ref = FIRDatabase.database().reference()
-    let user = FIRAuth.auth()?.currentUser?.uid
-        
-    self.tableViewImage.reloadData()
+        self.tableViewImage.reloadData()
         
         print ("show table view")
         // Do any additional setup after loading the view.
     }
     
 
-
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return  listAllNames.count
+    }
+    
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print ("hoi")
-        print (meal.count)
-        return meal.count
+      //  print ("hoi")
+    // print (listOfmeals.count + listOFSoop.count + listOFSandwiches.count)
+        return listAllNames[section].count
+    
     }
 
     
@@ -50,9 +72,20 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let mealcell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealsTodayTableViewCell
-        print(meal[indexPath.row])
-        mealcell.nameMeal.text = meal[indexPath.row]
-        mealcell.numberOfLikes.text = likes[indexPath.row]
+        mealcell.nameMeal.text = listAllNames[indexPath.section][indexPath.row]
+        //mealcell.numberOfLikes.text = listAllLikes[indexPath.section][indexPath.row]
+        
+        
+        print ("sandwiches")
+        print(listOFSandwiches)
+        print("dinner")
+        print(listOfmeals)
+        print("soop")
+        print(listOFSoop)
+        
+        //print(meal[indexPath.row])
+        //mealcell.nameMeal.text = meal[indexPath.row]
+        //mealcell.numberOfLikes.text = likes[indexPath.row]
         return mealcell
     
     }
@@ -75,4 +108,87 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return [delete, like]
         }
+    
+    
+    func getMeals(){
+        print ("gebeurd dit uberhaupt wel")
+        let ref = FIRDatabase.database().reference()
+        ref.child("cormet").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let Dish = snapshot.value as! [String: AnyObject]
+            for (_, value) in Dish{
+                let mealsToShow = meals()
+                if let type = value["type"] as? String{
+                    print (type)
+                    if type == "soop"{
+                        print ("het is soop")
+                        if let likes = value["likes"] as? Int{                            print ("true")
+                            if let name = value["name"] as? String, let price = value["price"] as? String{
+
+                            
+                            
+                            mealsToShow.name = name
+                            mealsToShow.likes = likes
+                            mealsToShow.price = price
+                            mealsToShow.typeOFMEal = type
+
+                            self.listNameSoop.append(name)
+                            
+                            print("ik wil dat dit werkt")
+                            print(self.listNameSoop)
+                            self.listPriceSoop.append(price)
+                            self.listLikesSoop.append(likes)
+                            
+                            self.listOFSoop.append(mealsToShow)
+                            }}
+                        else {print ("false")
+                        }
+                    }
+                    else if type == "dinner"{
+                        if let name = value["name"] as? String, let price = value["price"] as? String, let likes = value["likes"] as? Int{
+                            mealsToShow.name = name
+                            mealsToShow.likes = likes
+                            mealsToShow.price = price
+                            mealsToShow.typeOFMEal = type
+                            
+                            self.listNameDinner.append(name)
+                            self.listPriceDinner.append(price)
+                            self.listLikesDinner.append(likes)
+                            
+                            self.listOfmeals.append(mealsToShow)
+                        }
+                        }
+                   else if type == "sandwich"{
+                        if let name = value["name"] as? String, let price = value["price"] as? String, let likes = value["likes"] as? Int{
+                            mealsToShow.name = name
+                            mealsToShow.likes = likes
+                            mealsToShow.price = price
+                            mealsToShow.typeOFMEal = type
+                            
+                            self.listNameSandwich.append(name)
+                            self.listPriceSandwich.append(price)
+                            self.listLikesSandwich.append(likes)
+                            self.listOFSandwiches.append(mealsToShow)
+                        }
+                        }
+                    else{
+                        print ("false")
+                    }
+                    
+                        
+                    }
+                }
+            self.listAllNames = [self.listNameSoop, self.listNameSandwich, self.listNameDinner]
+            print("hoooooooooooooiiiiiiii")
+            print (self.listAllNames)
+             _ = [self.listPriceSoop, self.listPriceSandwich, self.listPriceDinner]
+            //self.listAllLikes = [self.listLikesSoop, self.listLikesSandwich, self.listPriceDinner as! Array<Int>]
+            self.tableViewImage.reloadData()
+        })
+        
+        ref.removeAllObservers()
+    
+   
+    }
+    
 }

@@ -26,7 +26,7 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var numberOflikes = [String]()
     var nameDish = [String]()
     var differentMeals = [String]()
-    
+    var selectedDay = String()
     
     
     
@@ -67,50 +67,17 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(daysOfTheWeek.count)
+       // print(daysOfTheWeek.count)
         return daysOfTheWeek.count
     }
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-        self.ref?.child("cormet").child(daysOfTheWeek[indexPath.row]).observeSingleEvent(of: .value, with: { (snapshot) in
-            let meals = snapshot.value as? NSDictionary
-            
-            self.kindOfMeals = meals?.allKeys as! [String]
-            
-            for key in self.daysOfTheWeek{
-                self.ref?.child("cormet").child(self.daysOfTheWeek[indexPath.row]).child(key).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let nameMeals = snapshot.value as? NSDictionary
-                    
-                    self.differentMeals = nameMeals?.allKeys as! [String]
-                    for names in self.differentMeals{
-                        
-                        self.ref?.child("cormet").child(self.daysOfTheWeek[indexPath.row]).child(key).child(names).child("likes").observeSingleEvent(of: .value, with: {(snapshot) in
-                            if let likesName = snapshot.value as? String{
-                                self.numberOflikes.append(likesName)
-                                print (self.numberOflikes)
-                            }
-                        })
-                        self.ref?.child("cormet").child(self.daysOfTheWeek[indexPath.row]).child(key).child(names).child("name").observeSingleEvent(of: .value, with: {(snapshot) in
-                            if let mealsName = snapshot.value as? String{
-                                self.nameDish.append(mealsName)
-                            }
-                        })
-                        self.ref?.child("cormet").child(self.daysOfTheWeek[indexPath.row]).child(key).child(names).child("price").observeSingleEvent(of: .value, with: {(snapshot) in
-                            if let pricesName = snapshot.value as? String{
-                                self.prices.append(pricesName)
-                            }
-                        })
-                        
-                        
-                    }
-                })
-                
-            }
-        })
-    self.performSegue(withIdentifier: "mealsVC", sender: nil)
+        
+            selectedDay = daysOfTheWeek[indexPath.row]
+        
+            self.performSegue(withIdentifier: "mealsVC", sender: nil)
         
     }
     
@@ -120,8 +87,9 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mealsVC"{
             
-            let controller = segue.destination as! TodayMealsViewController,
-            index = self.tableViewImage.indexPathForSelectedRow?.row
+            let controller = segue.destination as! TodayMealsViewController
+            //index = self.tableViewImage.indexPathForSelectedRow?.row
+            controller.day = selectedDay
             print (self.nameDish)
             //controller.meal = [self.nameDish[index!]]
             //controller.likes = [self.numberOflikes[index!]]

@@ -60,10 +60,12 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.inputSoop.text != "" && self.priceSoop.text != "" ){
 
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("nameSoop").setValue(self.inputSoop.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("priceSoop").setValue(self.priceSoop.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("name").setValue(self.inputSoop.text!)
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("price").setValue(self.priceSoop.text!)
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("type").setValue("soop")
+            
+            //self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
                 inputSoop.text = ""
                 priceSoop.text = ""
@@ -124,9 +126,11 @@ class CormetSubmitMealsViewController: UIViewController {
         if (self.sandwichtInput.text != "" && self.sandwichPrice.text != "" ){
             
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
+            
+            
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("likes").setValue(0)
-        self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
             sandwichtInput.text = ""
             sandwichPrice.text = ""
@@ -152,7 +156,7 @@ class CormetSubmitMealsViewController: UIViewController {
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
             self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("Dinner")
+            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("type").setValue("dinner")
             
                 inputDinner.text = ""
                 priceDinner.text = ""

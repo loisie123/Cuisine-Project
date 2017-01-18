@@ -3,8 +3,8 @@
 
 This Style guide is based on the next style guides:
 
-*[Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
-*[Ray Wenderlich Styl Guide](https://github.com/raywenderlich/swift-style-guide/blob/master/README.markdown)
+* [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
+* [Ray Wenderlich Styl Guide](https://github.com/raywenderlich/swift-style-guide/blob/master/README.markdown)
 
 
 

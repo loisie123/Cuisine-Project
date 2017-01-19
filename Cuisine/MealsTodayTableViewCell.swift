@@ -10,8 +10,19 @@ import UIKit
 
 class MealsTodayTableViewCell: UITableViewCell {
     @IBOutlet weak var numberOfLikes: UILabel!
+    
+    @IBOutlet weak var priceMeal: UILabel!
 
     @IBOutlet weak var nameMeal: UILabel!
+    
+    
+    
+
+ 
+    
+    
+    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

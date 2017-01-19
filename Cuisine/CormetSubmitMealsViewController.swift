@@ -29,7 +29,8 @@ class CormetSubmitMealsViewController: UIViewController {
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
-    var daysOfTheWeek: [String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    var daysOfTheWeek = [String]()
+    var workingDays = [String]()
     var number: Int = 0
     
     
@@ -38,9 +39,13 @@ class CormetSubmitMealsViewController: UIViewController {
         super.viewDidLoad()
         
         
+        daysOfTheWeek = formattedDaysInThisWeek()
+        workingDays = Array(daysOfTheWeek[1..<6])
+        print(workingDays)
+    
         ref = FIRDatabase.database().reference()
-            
-        dayNumber.text = daysOfTheWeek[number]
+        
+        dayNumber.text = workingDays[number]
         
         doneButton.isHidden = true
         
@@ -60,10 +65,10 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.inputSoop.text != "" && self.priceSoop.text != "" ){
 
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("name").setValue(self.inputSoop.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("price").setValue(self.priceSoop.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputSoop.text!).child("type").setValue("soop")
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("name").setValue(self.inputSoop.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("price").setValue(self.priceSoop.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("type").setValue("soop")
             
             //self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
@@ -95,7 +100,7 @@ class CormetSubmitMealsViewController: UIViewController {
             let nextDAy = UIAlertAction (title: "Next", style: .default) { action in
         
                 self.number = self.number+1
-                self.dayNumber.text = self.daysOfTheWeek[self.number]
+                self.dayNumber.text = self.workingDays[self.number]
 
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -125,12 +130,12 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.sandwichtInput.text != "" && self.sandwichPrice.text != "" ){
             
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
             
             
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
+            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
             sandwichtInput.text = ""
             sandwichPrice.text = ""
@@ -153,10 +158,10 @@ class CormetSubmitMealsViewController: UIViewController {
     let user = FIRAuth.auth()?.currentUser?.uid
     
         if (self.inputDinner.text != "" && self.priceDinner.text != "" ){
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.inputDinner.text!).child("type").setValue("dinner")
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("type").setValue("dinner")
             
                 inputDinner.text = ""
                 priceDinner.text = ""
@@ -191,7 +196,44 @@ class CormetSubmitMealsViewController: UIViewController {
     }
 
     
+    // http://stackoverflow.com/questions/33109633/getting-weekdays-and-dates-for-a-week
+    func formattedDaysInThisWeek() -> [String] {
+        // create calendar
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
+        
+        // today's date
+        let today = NSDate()
+        let todayComponent = calendar.components([.day, .month, .year], from: today as Date)
+        
+        // range of dates in this week
+        let thisWeekDateRange = calendar.range(of: .day, in:.weekOfMonth, for:today as Date)
+        
+        // date interval from today to beginning of week
+        let dayInterval = thisWeekDateRange.location - todayComponent.day!
+        
+        // date for beginning day of this week, ie. this week's Sunday's date
+        let beginningOfWeek = calendar.date(byAdding: .day, value: dayInterval, to: today as Date, options: .matchNextTime)
+        
+        var formattedDays: [String] = []
+        
+        for i in 0 ..< thisWeekDateRange.length {
+            let date = calendar.date(byAdding: .day, value: i, to: beginningOfWeek!, options: .matchNextTime)!
+            formattedDays.append(formatDate(date: date as NSDate))
+        }
+        
+        return formattedDays
+    }
+    
+    func formatDate(date: NSDate) -> String {
+        let format = "EEE MMMdd"
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: date as Date)
+    }
+    
+    
+    
+    
+    
 }
-
-
 

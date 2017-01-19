@@ -14,19 +14,21 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var tableViewImage: UITableView!
 
+    @IBOutlet weak var nameDay: UILabel!
     
     var listOfmeals = [meals]()
     var listOFSoop = [meals]()
     var listOFSandwiches = [meals]()
-    var listNameSoop = [String]()
-    var listNameSandwich = [String]()
-    var listNameDinner = [String]()
+    var listNameSoop = ["soop"]
+    var listNameSandwich = ["Sandwiches"]
+    var listNameDinner = ["Warm Eten"]
     var listPriceSoop = [String]()
     var listPriceSandwich = [String]()
     var listPriceDinner = [String]()
     var listLikesSoop = [Int]()
     var listLikesSandwich = [Int]()
     var listLikesDinner = [Int]()
+    var listAllPrices = [[String]]()
     
     
     var ref: FIRDatabaseReference?
@@ -41,7 +43,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        nameDay.text = day
         print(day)
         ref = FIRDatabase.database().reference()
         getMeals()
@@ -62,8 +64,11 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       //  print ("hoi")
     // print (listOfmeals.count + listOFSoop.count + listOFSandwiches.count)
-        return listAllNames[section].count
+        return listAllNames[section].count-1
     
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return listAllNames[section][0]
     }
 
     
@@ -72,7 +77,8 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let mealcell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealsTodayTableViewCell
-        mealcell.nameMeal.text = listAllNames[indexPath.section][indexPath.row]
+        mealcell.nameMeal.text = listAllNames[indexPath.section][indexPath.row+1]
+        mealcell.priceMeal.text = "€ \(listAllPrices[indexPath.section][indexPath.row])"
         //mealcell.numberOfLikes.text = listAllLikes[indexPath.section][indexPath.row]
         
         
@@ -93,20 +99,20 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.tableViewImage.deleteRows(at: [indexPath], with: .fade)
-        }
+        //let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+         //   self.tableViewImage.deleteRows(at: [indexPath], with: .fade)
+        //}
         
         
-        let like = UITableViewRowAction(style: .normal, title:"Like"){ (action, indexPath) in
+        let like = UITableViewRowAction(style: .normal, title:"Vind ik Lekker"){ (action, indexPath) in
             self.tableViewImage.deleteRows(at: [indexPath], with: .fade)
     
         }
         
-        like.backgroundColor = UIColor.blue
-        delete.backgroundColor = UIColor.red
+        like.backgroundColor = UIColor.green
+        //delete.backgroundColor = UIColor.red
         
-        return [delete, like]
+        return [ like]
         }
     
     
@@ -179,8 +185,8 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
                 }
             self.listAllNames = [self.listNameSoop, self.listNameSandwich, self.listNameDinner]
-            print("hoooooooooooooiiiiiiii")
-            print (self.listAllNames)
+            self.listAllPrices = [self.listPriceSoop, self.listPriceSandwich, self.listPriceDinner]
+            
              _ = [self.listPriceSoop, self.listPriceSandwich, self.listPriceDinner]
             //self.listAllLikes = [self.listLikesSoop, self.listLikesSandwich, self.listPriceDinner as! Array<Int>]
             self.tableViewImage.reloadData()

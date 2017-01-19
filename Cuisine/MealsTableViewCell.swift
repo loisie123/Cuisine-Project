@@ -9,6 +9,7 @@
 import UIKit
 
 class MealsTableViewCell: UITableViewCell {
+    @IBOutlet weak var priceMeal: UILabel!
 
     @IBOutlet weak var nameMeal: UILabel!
     @IBOutlet weak var numberOfLikes: UILabel!

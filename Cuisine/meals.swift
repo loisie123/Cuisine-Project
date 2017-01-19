@@ -15,4 +15,6 @@ class meals: NSObject {
     var likes: Int!
     var typeOFMEal: String!
     
+    var peopleWhoLike: [String] = [String]()
+    
 }

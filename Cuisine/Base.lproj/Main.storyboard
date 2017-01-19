@@ -1129,7 +1129,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="42" id="Uqo-pT-8gA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1148,6 +1148,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9y3-dc-yKn">
+                                                    <rect key="frame" x="278" y="0.0" width="46" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="unlikeButtonPressed:" destination="bfU-Fm-PM1" eventType="touchUpInside" id="9uI-5k-CKs"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="na9-YG-V0K">
+                                                    <rect key="frame" x="286" y="39" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Like"/>
+                                                    <connections>
+                                                        <action selector="likePressed:" destination="bfU-Fm-PM1" eventType="touchUpInside" id="tI1-Tt-foV"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TLV-tU-Wlt" firstAttribute="leading" secondItem="DFo-aI-0cn" secondAttribute="trailing" constant="8" id="4RQ-MJ-VGD"/>
@@ -1166,9 +1182,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="na9-YG-V0K" id="Put-g9-9Lw"/>
                                             <outlet property="nameMeal" destination="DFo-aI-0cn" id="5I5-Re-suc"/>
                                             <outlet property="numberOfLikes" destination="jf0-7K-F7v" id="bqw-U0-Kl7"/>
                                             <outlet property="priceMeal" destination="TLV-tU-Wlt" id="rQC-HY-lLp"/>
+                                            <outlet property="unlikeButton" destination="9y3-dc-yKn" id="TXN-sp-q0x"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

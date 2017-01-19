@@ -79,15 +79,23 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         let mealcell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealsTodayTableViewCell
         mealcell.nameMeal.text = listAllNames[indexPath.section][indexPath.row+1]
         mealcell.priceMeal.text = "€ \(listAllPrices[indexPath.section][indexPath.row])"
-        //mealcell.numberOfLikes.text = listAllLikes[indexPath.section][indexPath.row]
+        mealcell.numberOfLikes.text = " \(self.listOfmeals[indexPath.row].likes) likes"
+        mealcell.day = day
+        mealcell.nameMealPost = listAllNames[indexPath.section][indexPath.row+1]
         
+        print("wanneer worden deze geladen?")
         
-        print ("sandwiches")
-        print(listOFSandwiches)
-        print("dinner")
-        print(listOfmeals)
-        print("soop")
-        print(listOFSoop)
+        for person in self.listOfmeals[indexPath.row].peopleWhoLike{
+            print ("zit persoon erin?")
+            print(person)
+            if person == FIRAuth.auth()!.currentUser!.uid{
+                print("true")
+                mealcell.likeButton.isHidden = true
+                mealcell.unlikeButton.isHidden = false
+                break
+
+            }
+        }
         
         //print(meal[indexPath.row])
         //mealcell.nameMeal.text = meal[indexPath.row]
@@ -106,14 +114,24 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let like = UITableViewRowAction(style: .normal, title:"Vind ik Lekker"){ (action, indexPath) in
             self.tableViewImage.deleteRows(at: [indexPath], with: .fade)
+            
+            
+    
     
         }
+        
+    
         
         like.backgroundColor = UIColor.green
         //delete.backgroundColor = UIColor.red
         
-        return [ like]
+        return [like]
         }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
     
     func getMeals(){
@@ -144,8 +162,16 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                             print(self.listNameSoop)
                             self.listPriceSoop.append(price)
                             self.listLikesSoop.append(likes)
+                                
+                                
+                            if let people = value["peoplewholike"] as? [String : AnyObject] {
+                                    for (_,person) in people{
+                                        mealsToShow.peopleWhoLike.append(person as! String)
+                                    }
+                                }
                             
                             self.listOFSoop.append(mealsToShow)
+                                
                             }}
                         else {print ("false")
                         }
@@ -160,7 +186,11 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                             self.listNameDinner.append(name)
                             self.listPriceDinner.append(price)
                             self.listLikesDinner.append(likes)
-                            
+                            if let people = value["peoplewholike"] as? [String : AnyObject] {
+                                for (_,person) in people{
+                                    mealsToShow.peopleWhoLike.append(person as! String)
+                                }
+                            }
                             self.listOfmeals.append(mealsToShow)
                         }
                         }
@@ -174,6 +204,14 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                             self.listNameSandwich.append(name)
                             self.listPriceSandwich.append(price)
                             self.listLikesSandwich.append(likes)
+                            
+                            if let people = value["peoplewholike"] as? [String : AnyObject] {
+                                for (_,person) in people{
+                                    mealsToShow.peopleWhoLike.append(person as! String)
+                                }
+                            }
+                            
+                            
                             self.listOFSandwiches.append(mealsToShow)
                         }
                         }

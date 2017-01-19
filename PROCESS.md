@@ -37,4 +37,4 @@ Verder deed Xcode vandaag vreemd. Minsten anderhalf uur daarmee bezig geweest om
 
 ## Dag 8 Woensdag 18-01
 
-
+Classe meal.swift werkt nu goed. Hier moet ik ook nog kijken naar of ik de code nog korter kan maken. Voor nu werkt hij in ieder geval. 

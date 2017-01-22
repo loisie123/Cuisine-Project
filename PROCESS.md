@@ -38,3 +38,17 @@ Verder deed Xcode vandaag vreemd. Minsten anderhalf uur daarmee bezig geweest om
 ## Dag 8 Woensdag 18-01
 
 Classe meal.swift werkt nu goed. Hier moet ik ook nog kijken naar of ik de code nog korter kan maken. Voor nu werkt hij in ieder geval. 
+
+## Dag  9 Donderdag 19-01
+
+De beginselen van de like en unlike functie zijn er. maar werkt nog niet optimaal 
+
+## Dag 10 Vrijdag 20-01
+
+Like en unlike werken inmiddels. Maar nog steeds problemen met wanneer ik de app open hij niet laat zien welke al geliket zijn door de persoon
+De favorieten pagina is ook gemaakt, maar moet nog aangepst worden
+
+allee viewcontrollers moeten ook nog moooie constraints krijgenen mooi aangekleed worden
+
+
+

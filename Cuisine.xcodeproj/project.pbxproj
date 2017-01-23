@@ -18,7 +18,6 @@
 		CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9D11E268A91004C1B2E /* LoginViewController.swift */; };
 		CA16B9E61E28F117004C1B2E /* TodayMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */; };
 		CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */; };
-		CA16B9F01E2BA282004C1B2E /* TomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9EF1E2BA282004C1B2E /* TomorrowViewController.swift */; };
 		CA16B9F21E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */; };
 		CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */; };
 		CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */; };
@@ -27,7 +26,11 @@
 		CA34ED6D1E24FE0900C8748F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED6C1E24FE0900C8748F /* Assets.xcassets */; };
 		CA34ED701E24FE0900C8748F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED6E1E24FE0900C8748F /* LaunchScreen.storyboard */; };
 		CA34ED7E1E250B4E00C8748F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */; };
+		CA8C41AB1E362847009A2BE7 /* StandardAssortimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */; };
+		CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */; };
 		CAE569451E2CF46200E38109 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE569441E2CF46200E38109 /* users.swift */; };
+		CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */; };
+		CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +46,6 @@
 		CA16B9D11E268A91004C1B2E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayMealsViewController.swift; sourceTree = "<group>"; };
 		CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
-		CA16B9EF1E2BA282004C1B2E /* TomorrowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TomorrowViewController.swift; sourceTree = "<group>"; };
 		CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetSubmitMealsViewController.swift; sourceTree = "<group>"; };
 		CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
 		CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
@@ -54,7 +56,11 @@
 		CA34ED6F1E24FE0900C8748F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA34ED711E24FE0900C8748F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardAssortimentViewController.swift; sourceTree = "<group>"; };
+		CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CAE569441E2CF46200E38109 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
+		CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewCell.swift; path = ../FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		EBB66214A2A1D4D0A90837BF /* Pods-Cuisine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuisine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cuisine/Pods-Cuisine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +108,7 @@
 			children = (
 				CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */,
 				CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */,
+				CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */,
 				CA12F2B21E2E692C00C0003A /* UsersTableViewCell.swift */,
 				CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */,
 			);
@@ -111,13 +118,15 @@
 		CA16B9EA1E2B97EA004C1B2E /* Viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
-				CA16B9D11E268A91004C1B2E /* LoginViewController.swift */,
 				CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */,
+				CA16B9D11E268A91004C1B2E /* LoginViewController.swift */,
+				CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */,
+				CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */,
 				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
 				CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */,
+				CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */,
 				CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */,
 				CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */,
-				CA16B9EF1E2BA282004C1B2E /* TomorrowViewController.swift */,
 				CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */,
 			);
 			name = Viewcontrollers;
@@ -286,15 +295,18 @@
 				CA34ED661E24FE0900C8748F /* AppDelegate.swift in Sources */,
 				CA12F2AB1E2E595300C0003A /* meals.swift in Sources */,
 				CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */,
+				CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */,
 				CA12F2AD1E2E68E900C0003A /* UsersViewController.swift in Sources */,
+				CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */,
 				CA34ED7E1E250B4E00C8748F /* RegisterViewController.swift in Sources */,
 				CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */,
 				CA12F2B31E2E692C00C0003A /* UsersTableViewCell.swift in Sources */,
 				CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */,
 				CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */,
+				CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */,
+				CA8C41AB1E362847009A2BE7 /* StandardAssortimentViewController.swift in Sources */,
 				CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */,
 				CA16B9E61E28F117004C1B2E /* TodayMealsViewController.swift in Sources */,
-				CA16B9F01E2BA282004C1B2E /* TomorrowViewController.swift in Sources */,
 				CA12F2B11E2E692200C0003A /* MealsTodayTableViewCell.swift in Sources */,
 				CA16B9F21E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift in Sources */,
 			);

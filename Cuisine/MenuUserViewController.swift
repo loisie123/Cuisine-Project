@@ -45,6 +45,8 @@ class MenuUserViewController: UIViewController {
             let UserName = snapshot.value as! String
             
             self.nameUser.text = "Welcome \(UserName)"
+            print (snapshot.value)
+            
             
             
         })
@@ -89,6 +91,13 @@ class MenuUserViewController: UIViewController {
             controller.daysOfTheWeek = self.daysOfTheWeek
 
         }
+        if segue.identifier == "settings"{
+            let settings = segue.destination as! SettingsViewController
+            
+            settings.NameUser.text = nameUser.text!
+            //settings.EmailUser.text =
+
+    }
     }
 }
 

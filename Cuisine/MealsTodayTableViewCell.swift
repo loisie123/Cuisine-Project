@@ -21,6 +21,7 @@ class MealsTodayTableViewCell: UITableViewCell {
     var postID: String!
     var day: String!
     var nameMealPost: String!
+    var typeMealLiked: String!
     
 
     override func awakeFromNib() {
@@ -36,29 +37,44 @@ class MealsTodayTableViewCell: UITableViewCell {
 
     
     @IBAction func likePressed(_ sender: Any) {
+        
         self.likeButton.isHidden = false
         self.unlikeButton.isHidden = true
-       
+        let user =  FIRAuth.auth()?.currentUser?.uid
+        
         let ref = FIRDatabase.database().reference()
-        let keytoPost = ref.child("cormet").child(self.day).child(self.nameMealPost).childByAutoId().key
-        ref.child("cormet").child(self.day).child(self.nameMealPost).observeSingleEvent(of: .value, with: {(snapshot) in
+        
+      
+        
+        let keytoPost = ref.child("cormet").child(self.day).child(self.nameMeal.text!).childByAutoId().key
+        ref.child("cormet").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: {(snapshot) in
             
             if let meal = snapshot.value as? [String : AnyObject]{
                 print ("meal is \(meal)")
                 let updateLikes: [String : Any] = ["peoplewholike/\(keytoPost)" : FIRAuth.auth()!.currentUser!.uid]
-                ref.child("cormet").child(self.day).child(self.nameMealPost).updateChildValues(updateLikes, withCompletionBlock: {(error, reff) in
+                ref.child("cormet").child(self.day).child(self.nameMeal.text!).updateChildValues(updateLikes, withCompletionBlock: {(error, reff) in
                     if error == nil{
-                        ref.child("cormet").child(self.day).child(self.nameMealPost).observeSingleEvent(of: .value, with: { (snap) in
+                        ref.child("cormet").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: { (snap) in
                             if let properties = snap.value as? [String : AnyObject] {
                                 if let likes = properties["peoplewholike"] as? [String : AnyObject]{
                                   let count = likes.count
                                     print("werkt het?")
-                                    self.numberOfLikes.text = "\(count)"
-                                    let update = ["likes " : count]
-                                    ref.child("cormet").child(self.day).child(self.nameMealPost).updateChildValues(update)
+                                    self.numberOfLikes.text = "\(count) likes"
+                                    let update = ["likes" : count]
+                                    ref.child("cormet").child(self.day).child(self.nameMeal.text!).updateChildValues(update)
                                     self.likeButton.isHidden = true
                                     self.unlikeButton.isHidden = false
                                     self.likeButton.isEnabled = true
+                                    
+                                    
+                                    // slaat hij op in het likes van de gebruiker
+                                    ref.child("users").child(user!).child("liked").child(self.nameMeal.text!).child("name").setValue(self.nameMeal.text!)
+                                    ref.child("users").child(user!).child("liked").child(self.nameMeal.text!).child("price").setValue(self.priceMeal.text!)
+                                    ref.child("users").child(user!).child("liked").child(self.nameMeal.text!).child("liked").setValue(self.numberOfLikes.text!)
+                                    ref.child("users").child(user!).child("liked").child(self.nameMeal.text!).child("day").setValue(self.day)
+                                    ref.child("users").child(user!).child("liked").child(self.nameMeal.text!).child("type").setValue(self.typeMealLiked)
+                                    
+                                    
                                 }
                             }
                         })
@@ -73,35 +89,58 @@ class MealsTodayTableViewCell: UITableViewCell {
     
     
     @IBAction func unlikeButtonPressed(_ sender: Any) {
-        
         self.unlikeButton.isEnabled = false
         let ref = FIRDatabase.database().reference()
+        let currentUser =  FIRAuth.auth()?.currentUser?.uid
         
-        ref.child("cormet").child(self.day).child(self.nameMealPost).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        // Removed from  the liked list from the user
+        let remove = self.nameMeal.text
+        print (remove!)
+        self.myDeleteFunction(firstTree: currentUser!, secondTree: "liked", childIWantToRemove: remove!)
+        
+        // likes most be updated.
+        
+        ref.child("cormet").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             if let properties = snapshot.value as? [String : AnyObject]{
-                print ("properties : \(properties)")
+               print ("properties : \(properties)")
+                
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
                     print (peopleWhoLike)
-                    
+
                     for(id, person) in peopleWhoLike{
                         print (person)
                         if person as? String == FIRAuth.auth()!.currentUser!.uid{
-                            ref.child("cormet").child(self.day).child(self.nameMealPost).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
-                                if error != nil{
-                                    ref.child("cormet").child(self.day).child(self.nameMealPost).observeSingleEvent(of: .value, with: {(snap) in
+                            ref.child("cormet").child(self.day).child(self.nameMeal.text!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
+                                if error == nil{
+                                    
+                                    print ("Waar zal die stoppen")
+                                    ref.child("cormet").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: {(snap) in
                                         if let prop = snap.value as? [String: AnyObject] {
+                                            print ("is prop goed")
+                                            print (prop)
                                             if let likes = prop["peoplewholike"] as? [String : AnyObject] {
+                                                
+                                                
+                                                print (" niks ")
+                                                print("worden de likes geupdate?")
                                                 let count = likes.count
-                                                self.numberOfLikes.text = "\(count)"
-                                                ref.child("cormet").child(self.day).child(self.nameMealPost).updateChildValues(["likes" : count])
+                                                self.numberOfLikes.text = "\(count) likes"
+                                                
+                                                ref.child("cormet").child(self.day).child(self.nameMeal.text!).updateChildValues(["likes" : count])
+                                                
                                             } else{
-                                                self.numberOfLikes.text = "0"
-                                                ref.child("posts").child(self.postID).updateChildValues(["likes" : 0])
+                                                self.numberOfLikes.text = "0 likes"
+                                                ref.child("cormet").child(self.day).child(self.nameMeal.text!).updateChildValues(["likes" : 0])
                                             }
+                                            
                                         }
                                     })
                                 }
                             })
+                            
+                            
+                            // TO DO: Verwijderen uit de favorite lijst. 
                             
                             self.likeButton.isHidden = false
                             self.unlikeButton.isHidden = true
@@ -113,6 +152,24 @@ class MealsTodayTableViewCell: UITableViewCell {
             }
         })
         ref.removeAllObservers()
+    }
+    
+    
+    
+    //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
+    func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("users").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
+            if error != nil {
+                print("error \(error)")
+            }
+            else{
+                print ("removed")
+            }
+            
+            
+        }
     }
     
 

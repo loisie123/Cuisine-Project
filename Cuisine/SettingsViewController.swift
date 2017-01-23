@@ -23,7 +23,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     
     var userName: String!
     var userEmail: String!
-    
 
     override func viewDidLoad() {
           super.viewDidLoad()
@@ -50,14 +49,32 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
             
         })
         
+        ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let UserName = snapshot.value as! String
+            self.NameUser.text = "Welcome \(UserName)"
+        })
+        ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value)
+            if let email = snapshot.value as? String
+            {
+                print(email)
+                self.EmailUser.text = email
+            }
+            else
+            {
+                print( "default title")
+            }
+            
+        })
+
+        
+    
         self.imageUser.layer.cornerRadius = self.imageUser.frame.size.width / 2
         self.imageUser.clipsToBounds = true
     
      
         PasswordUser.text = "*********"
-        
-        NameUser.text = userName
-        EmailUser.text = userEmail
         
         
 
@@ -80,17 +97,13 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         let changeAction = UIAlertAction(title: "Change",
                                        style: .default) { action in
-                                        
-                                        
-                                    
-                                        let nameField = alertController.textFields![0]
-                                        if let newName = nameField.text! as? String{
+                 
+                            let nameField = alertController.textFields![0]
+                            if let newName = nameField.text! as? String{
                                             
-                                    self.ref?.child("users").child(currentUser).updateChildValues(["name" : newName])
-                                            
-                                                                                                            
-                                                        }
-                                            }
+                                self.ref?.child("users").child(currentUser).updateChildValues(["name" : newName])
+                            }
+                }
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
         alertController.addTextField(configurationHandler: { (textField) -> Void in
@@ -105,10 +118,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
     }
  
-   
-    
-    
-    
     
     
     @IBAction func changeEmailButton(_ sender: Any) {
@@ -122,8 +131,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         let changeAction = UIAlertAction(title: "Change",
                                          style: .default) { action in
                                             
-                                            
-                                            
                                             let emailField = alertController.textFields![0]
                                             if let newEmail = emailField.text! as? String{
                                                 if emailField.text != ""{
@@ -136,6 +143,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                                                         if errEM == nil{
                                                             print(referenceEM)
                                                         }else{
+                                                            self.error()
                                                             print(errEM?.localizedDescription)
                                                         }
                                                     })
@@ -146,17 +154,14 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                                             else { print("Email Field is empty")
                                             }
         }
-
     let cancelAction = UIAlertAction(title: "Cancel",
                                      style: .default)
         alertController.addTextField(configurationHandler: { (textField) -> Void in
             textField.text = ""
             textField.placeholder = "Enter Email"
         })
-    
-    alertController.addAction(changeAction)
     alertController.addAction(cancelAction)
-    
+    alertController.addAction(changeAction)
     present(alertController, animated: true, completion: nil)
     
     }
@@ -164,38 +169,30 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     
     
     
-    
+    //MARK: function to change Password
     @IBAction func changePassword(_ sender: Any) {
-        let currentUser = FIRAuth.auth()!.currentUser!.uid
-        
         let alertController = UIAlertController(title: "Change Password", message:
             
             "Do you want to change your Password?", preferredStyle: UIAlertControllerStyle.alert)
-
-        
         let changeAction = UIAlertAction(title: "Change",
                                          style: .default) { action in
                                             
-                                            
                                             let namePassword = alertController.textFields![0]
                                             let checkPassword = alertController.textFields![1]
-                                            
-                                            
-                                            if let newPassword = namePassword.text! as? String{
+                                            if let newPassword = namePassword.text! as? String {
                                                 if newPassword == checkPassword.text{
-                                                    
-                                                print("passwords match")
-                                                    
+                                        
                                                     FIRAuth.auth()?.currentUser!.updatePassword(newPassword,  completion: { error in
-                                                                                if error != nil {
-                                                                                  print (error?.localizedDescription)
-                                                                                } else {
-                                                                                    print("succes")
-                                                                                }
+                                                        if error != nil {
+                                                            self.error()
+                                                            print(error?.localizedDescription)
+                                                        } else {
+                                                            print("succes")
+                                                        }
                                                     })
                                                 }
                                                 else{
-                                                    print("passwords dont match")
+                                                    self.error()
                                                 }
                                                 
                                             }
@@ -215,9 +212,9 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         })
         
         
-        
-        alertController.addAction(changeAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(changeAction)
+        
         
         present(alertController, animated: true, completion: nil)
     }
@@ -232,20 +229,16 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     }
     
     
+    //MARK: fuction to pick an image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             self.imageUser.image = image
         }
         self.dismiss(animated: true, completion: nil)
-        
-        
-        // still to do
-        
-        
+    
     }
     
-    
-    
+    //MARK: Function to save an image
     func saveImage() {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
@@ -258,20 +251,19 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
             if err != nil {
-                print("bloebloebloe")
-                print (err!.localizedDescription)
-                //self.signupErrorAlert(title: "Oops!", message: err!.localizedDescription)
-                
+                self.error()
             }
             
             imageRef.downloadURL(completion: {(url, er) in
                 if er != nil {
                     print(er!.localizedDescription)
-                    //self.signupErrorAlert(title: "Oops!", message: er!.localizedDescription)
+                    
+                    self.error()
+                    
                 }
                 
                 if let url = url {
-                    //self.ref.child("users").child(userID!).child("urlToImage").setValue(url.absoluteString)
+                        self.ref?.child("users").child(userID!).child("urlToImage").setValue(url.absoluteString)
                 }
             })
         })
@@ -283,6 +275,19 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
    // maak hier nog een foutmelding
     
     
-    
-    
+    func error(){
+        let alertController = UIAlertController(title: "Something went wrong", message:
+            
+            "try again", preferredStyle: UIAlertControllerStyle.alert)
+        
+        
+               let cancelAction = UIAlertAction(title: "Ok",
+                                         style: .default)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+
 }

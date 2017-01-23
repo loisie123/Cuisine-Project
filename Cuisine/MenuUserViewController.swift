@@ -16,7 +16,7 @@ class MenuUserViewController: UIViewController {
     @IBOutlet weak var profiePicture: UIImageView!
     var ref:FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
-    
+    var UserName = String()
     
     var daysOfTheWeek = [String]()
     
@@ -43,7 +43,7 @@ class MenuUserViewController: UIViewController {
         ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
           
             let UserName = snapshot.value as! String
-            
+            print(UserName)
             self.nameUser.text = "Welcome \(UserName)"
             print (snapshot.value)
             
@@ -89,17 +89,13 @@ class MenuUserViewController: UIViewController {
             let controller = segue.destination as! WeekTableViewController
 
             controller.daysOfTheWeek = self.daysOfTheWeek
-
         }
-        if segue.identifier == "settings"{
-            let settings = segue.destination as! SettingsViewController
-            
-            settings.NameUser.text = nameUser.text!
-            //settings.EmailUser.text =
 
-    }
+
+    
     }
 }
+
 
 
 

@@ -20,12 +20,17 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     var listAllFavoritesNames = [[String]]()
     
     
-    
-    
     @IBOutlet weak var FavoriteTableImage: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Define identifier
+        let reloadTableView = Notification.Name("reloadTableView")
+        
+        // Register to receive notification
+        NotificationCenter.default.addObserver(self, selector: #selector(FavoriteViewController.reloadTableView), name: reloadTableView, object: nil)
+
         
         
         ref = FIRDatabase.database().reference()
@@ -36,7 +41,10 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
     }
 
-    
+    func reloadTableView() {
+        getMeals()
+        FavoriteTableImage.reloadData()
+    }
     
     
     // make tableView
@@ -80,6 +88,11 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func getMeals(){
+        listOfFavorites = [meals]()
+        listAllFavoritesNames = [[String]]()
+        listOfFAvoriteMealsNamesSoop = ["soup"]
+        listOfFavoriteMealsNameSandwich = ["Sandwich"]
+        listOfFavoriteMealsNameMeals = ["warm eten"]
         
         let currentUser =  FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
@@ -160,12 +173,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         ref.removeAllObservers()
         
         
-    }
-    
-    @IBAction func UnlikePressed(_ sender: Any) {
-        
-        
-        self.FavoriteTableImage.reloadData()
     }
     
     

@@ -61,7 +61,6 @@ class CormetSubmitMealsViewController: UIViewController {
     
     //MARK: Action to add soop to the database
     @IBAction func inputSoopButton(_ sender: Any) {
-        let user = FIRAuth.auth()?.currentUser?.uid
         
         if (self.inputSoop.text != "" && self.priceSoop.text != "" ){
 

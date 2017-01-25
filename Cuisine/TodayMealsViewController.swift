@@ -46,6 +46,8 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         nameDay.text = day
         print(day)
+        
+        
         ref = FIRDatabase.database().reference()
         getMeals()
 
@@ -141,6 +143,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: Get meals from firebase
     func getMeals(){
         
+               
         let ref = FIRDatabase.database().reference()
         ref.child("cormet").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             

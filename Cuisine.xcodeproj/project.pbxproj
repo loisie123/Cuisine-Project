@@ -26,6 +26,10 @@
 		CA34ED6D1E24FE0900C8748F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED6C1E24FE0900C8748F /* Assets.xcassets */; };
 		CA34ED701E24FE0900C8748F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED6E1E24FE0900C8748F /* LaunchScreen.storyboard */; };
 		CA34ED7E1E250B4E00C8748F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */; };
+		CA659BD21E3765B000C45208 /* CormetMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */; };
+		CA659BD41E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */; };
+		CA659BD61E37785C00C45208 /* CormetStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */; };
+		CA659BD81E3778B900C45208 /* CormetStandaardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */; };
 		CA8C41AB1E362847009A2BE7 /* StandardAssortimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */; };
 		CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */; };
 		CAE569451E2CF46200E38109 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE569441E2CF46200E38109 /* users.swift */; };
@@ -56,6 +60,10 @@
 		CA34ED6F1E24FE0900C8748F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA34ED711E24FE0900C8748F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetMenuViewController.swift; sourceTree = "<group>"; };
+		CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetStandaarAssortimentViewController.swift; sourceTree = "<group>"; };
+		CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetStandardViewController.swift; sourceTree = "<group>"; };
+		CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetStandaardTableViewCell.swift; sourceTree = "<group>"; };
 		CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardAssortimentViewController.swift; sourceTree = "<group>"; };
 		CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CAE569441E2CF46200E38109 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
@@ -106,6 +114,7 @@
 		CA16B9E91E2B97E4004C1B2E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */,
 				CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */,
 				CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */,
 				CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */,
@@ -119,8 +128,11 @@
 			isa = PBXGroup;
 			children = (
 				CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */,
+				CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */,
+				CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */,
 				CA16B9D11E268A91004C1B2E /* LoginViewController.swift */,
 				CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */,
+				CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */,
 				CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */,
 				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
 				CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */,
@@ -293,14 +305,18 @@
 				CAE569451E2CF46200E38109 /* users.swift in Sources */,
 				CA1238B81E2F842700FE2759 /* week.swift in Sources */,
 				CA34ED661E24FE0900C8748F /* AppDelegate.swift in Sources */,
+				CA659BD21E3765B000C45208 /* CormetMenuViewController.swift in Sources */,
 				CA12F2AB1E2E595300C0003A /* meals.swift in Sources */,
 				CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */,
 				CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */,
 				CA12F2AD1E2E68E900C0003A /* UsersViewController.swift in Sources */,
 				CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */,
+				CA659BD61E37785C00C45208 /* CormetStandardViewController.swift in Sources */,
+				CA659BD81E3778B900C45208 /* CormetStandaardTableViewCell.swift in Sources */,
 				CA34ED7E1E250B4E00C8748F /* RegisterViewController.swift in Sources */,
 				CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */,
 				CA12F2B31E2E692C00C0003A /* UsersTableViewCell.swift in Sources */,
+				CA659BD41E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift in Sources */,
 				CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */,
 				CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */,
 				CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */,

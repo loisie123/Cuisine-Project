@@ -11,6 +11,9 @@ import Firebase
 
 class FavoriteTableViewCell: UITableViewCell {
 
+    
+    
+    
     @IBOutlet weak var nameMeal: UILabel!
     @IBOutlet weak var priceFavoriteMeal: UILabel!
     @IBOutlet weak var UnlikeButton: UIButton!
@@ -22,6 +25,10 @@ class FavoriteTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+       
+        
+    
         // Initialization code
     }
 
@@ -33,6 +40,8 @@ class FavoriteTableViewCell: UITableViewCell {
 
     //MARK: Unlike a dish that is in favorites.
     @IBAction func UnlikePressedFavorites(_ sender: Any) {
+        
+    
         
         UnlikeButton.isHidden = true
         // bij unliken, verwijderen uit favorites van de user
@@ -82,6 +91,12 @@ class FavoriteTableViewCell: UITableViewCell {
             }
         })
         ref.removeAllObservers()
+        
+        let reloadTableView = Notification.Name("reloadTableView")
+        NotificationCenter.default.post(name: reloadTableView, object: nil)
+        
+        
+        
     }
     
 

@@ -102,6 +102,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                             if let newName = nameField.text! as? String{
                                             
                                 self.ref?.child("users").child(currentUser).updateChildValues(["name" : newName])
+                                self.NameUser.text! = "Welcome \(newName)"
                             }
                 }
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -116,57 +117,58 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         present(alertController, animated: true, completion: nil)
         
+        
     }
  
-    
-    
-    @IBAction func changeEmailButton(_ sender: Any) {
-        
+    @IBAction func changeEmail(_ sender: Any) {
         let alertController = UIAlertController(title: "Change Email", message:
             
             "Do you want to change your Email?", preferredStyle: UIAlertControllerStyle.alert)
-
+        
         let userRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
-       
+        
         let changeAction = UIAlertAction(title: "Change",
                                          style: .default) { action in
                                             
                                             let emailField = alertController.textFields![0]
                                             if let newEmail = emailField.text! as? String{
                                                 if emailField.text != ""{
-                                            
-                                            FIRAuth.auth()!.currentUser!.updateEmail(newEmail) { error in
-                                                
-                                                if error == nil{
-                                                    userRef.updateChildValues(["email" : newEmail ], withCompletionBlock: {(errEM, referenceEM)   in
-                                                        print("change succeeded")
-                                                        if errEM == nil{
-                                                            print(referenceEM)
-                                                        }else{
-                                                            self.error()
-                                                            print(errEM?.localizedDescription)
+                                                    
+                                                    FIRAuth.auth()!.currentUser!.updateEmail(newEmail) { error in
+                                                        
+                                                        if error == nil{
+                                                            userRef.updateChildValues(["email" : newEmail ], withCompletionBlock: {(errEM, referenceEM)   in
+                                                                print("change succeeded")
+                                                                if errEM == nil{
+                                                                    print(referenceEM)
+                                                                }else{
+                                                                    self.error()
+                                                                    print(errEM?.localizedDescription)
+                                                                }
+                                                            })
                                                         }
-                                                    })
-                                                }
-                                                }
+                                                        else{
+                                                            self.error()
+                                                        }
+                                                    }
                                                 }
                                             }
                                             else { print("Email Field is empty")
                                             }
         }
-    let cancelAction = UIAlertAction(title: "Cancel",
-                                     style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
         alertController.addTextField(configurationHandler: { (textField) -> Void in
             textField.text = ""
             textField.placeholder = "Enter Email"
         })
-    alertController.addAction(cancelAction)
-    alertController.addAction(changeAction)
-    present(alertController, animated: true, completion: nil)
-    
+        alertController.addAction(cancelAction)
+        alertController.addAction(changeAction)
+        present(alertController, animated: true, completion: nil)
+        
     }
     
-    
+  
     
     
     //MARK: function to change Password

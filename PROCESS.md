@@ -46,9 +46,22 @@ De beginselen van de like en unlike functie zijn er. maar werkt nog niet optimaa
 ## Dag 10 Vrijdag 20-01
 
 Like en unlike werken inmiddels. Maar nog steeds problemen met wanneer ik de app open hij niet laat zien welke al geliket zijn door de persoon
-De favorieten pagina is ook gemaakt, maar moet nog aangepst worden
+De favorieten pagina is ook gemaakt, maar moet nog aangepst worden. Een cell wordt nog niet verwijderd zodra een like wordt 'geunliked'
 
 allee viewcontrollers moeten ook nog moooie constraints krijgenen mooi aangekleed worden
+
+
+## dag 11 maandag 23-01
+
+settings pagina aangemaakt. 
+alleen het veranderen van de email werkt nog niet helemaal.Wachtwoord veranderen en username en foto veranderen werkt wel. 
+
+
+
+## dag 12 dinsdag 24-01
+
+Ik heb hulp gekregen bij het oplossen van het probleem van mijn table view controller, door een post en observe te sturen. 
+bezig met het maken van een standaard assortiment. Echter het lezen uit firebase gaat nog niet zoals gewenst. Dat moet morgen opgelost worden. 
 
 
 

@@ -20,12 +20,6 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     var daysOfTheWeek = [String]()
-    var number: Int = 0
-    var kindOfMeals = [String]()
-    var prices = [String]()
-    var numberOflikes = [String]()
-    var nameDish = [String]()
-    var differentMeals = [String]()
     var selectedDay = String()
     
     
@@ -46,8 +40,7 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
          //   print(self.daysOfTheWeek)
         
        // })
-        print("kijken wat er precies print")
-        print(self.daysOfTheWeek)
+       
         self.tableViewImage.reloadData()
         
         
@@ -67,7 +60,6 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // print(daysOfTheWeek.count)
         return daysOfTheWeek.count
     }
     
@@ -88,12 +80,9 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == "mealsVC"{
             
             let controller = segue.destination as! TodayMealsViewController
-            //index = self.tableViewImage.indexPathForSelectedRow?.row
-            controller.day = selectedDay
-            print (self.nameDish)
-            //controller.meal = [self.nameDish[index!]]
-            //controller.likes = [self.numberOflikes[index!]]
-            //controller.prices = [self.prices[index!]]
+                        controller.day = selectedDay
+         
+           
         }
         
     }

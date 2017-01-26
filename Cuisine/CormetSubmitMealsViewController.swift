@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 
 class CormetSubmitMealsViewController: UIViewController {
+    @IBOutlet weak var datePickerField: UITextField!
     
     @IBOutlet weak var weekNumber: UILabel!
     @IBOutlet weak var dayNumber: UILabel!
@@ -33,22 +34,31 @@ class CormetSubmitMealsViewController: UIViewController {
     var workingDays = [String]()
     var number: Int = 0
     
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
     
         super.viewDidLoad()
         
+        createDatePicker()
         
-        daysOfTheWeek = formattedDaysInThisWeek()
-        workingDays = Array(daysOfTheWeek[1..<6])
-        print(workingDays)
+        
+        //daysOfTheWeek = formattedDaysInThisWeek()
+       // workingDays = Array(daysOfTheWeek[1..<6])
+       // print(workingDays)
     
         ref = FIRDatabase.database().reference()
         
-        dayNumber.text = workingDays[number]
-        
         doneButton.isHidden = true
         
+        //get the day of the week
+        ref?.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let dictionary = snapshot.value as? NSDictionary
+            self.daysOfTheWeek = dictionary?.allKeys as! [String]
+            print(self.daysOfTheWeek)
+            
+        })
 
         // Do any additional setup after loading the view.
     }
@@ -64,10 +74,10 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.inputSoop.text != "" && self.priceSoop.text != "" ){
 
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("name").setValue(self.inputSoop.text!)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("price").setValue(self.priceSoop.text!)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputSoop.text!).child("type").setValue("soop")
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputSoop.text!).child("name").setValue(self.inputSoop.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputSoop.text!).child("price").setValue(self.priceSoop.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputSoop.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputSoop.text!).child("type").setValue("soop")
             
             //self.ref?.child("cormet").child(daysOfTheWeek[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
@@ -129,12 +139,12 @@ class CormetSubmitMealsViewController: UIViewController {
         
         if (self.sandwichtInput.text != "" && self.sandwichPrice.text != "" ){
             
-            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.sandwichtInput.text!).child("name").setValue(self.sandwichtInput.text!)
             
             
-            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.sandwichtInput.text!).child("price").setValue(self.sandwichPrice.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.sandwichtInput.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.sandwichtInput.text!).child("type").setValue("sandwich")
             
             sandwichtInput.text = ""
             sandwichPrice.text = ""
@@ -157,10 +167,10 @@ class CormetSubmitMealsViewController: UIViewController {
     let user = FIRAuth.auth()?.currentUser?.uid
     
         if (self.inputDinner.text != "" && self.priceDinner.text != "" ){
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child(workingDays[number]).child(self.inputDinner.text!).child("type").setValue("dinner")
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputDinner.text!).child("name").setValue(self.inputDinner.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputDinner.text!).child("price").setValue(self.priceDinner.text!)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputDinner.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child("different days").child(datePickerField.text!).child(self.inputDinner.text!).child("type").setValue("dinner")
             
                 inputDinner.text = ""
                 priceDinner.text = ""
@@ -180,6 +190,9 @@ class CormetSubmitMealsViewController: UIViewController {
     @IBAction func doneButton(_ sender: Any) {
         self.performSegue(withIdentifier: "cormetVC", sender: nil)
     }
+    
+    
+    
 
     @IBAction func logOutButtonCormet(_ sender: Any) {
         
@@ -194,7 +207,7 @@ class CormetSubmitMealsViewController: UIViewController {
 
     }
 
-    
+    /*
     // http://stackoverflow.com/questions/33109633/getting-weekdays-and-dates-for-a-week
     func formattedDaysInThisWeek() -> [String] {
         // create calendar
@@ -224,13 +237,52 @@ class CormetSubmitMealsViewController: UIViewController {
     }
     
     func formatDate(date: NSDate) -> String {
-        let format = "EEE MMMdd"
+        let format = " EEE MMM dd, yy"
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: date as Date)
     }
+    */
     
     
+    
+    
+    //MARK: functie to create an datePicker
+    func createDatePicker(){
+        
+        datePicker.datePickerMode = .date
+      
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneButton], animated: false)
+        datePickerField.inputAccessoryView = toolbar
+        
+        datePickerField.inputView = datePicker
+        
+    }
+    
+    func donePressed(){
+      let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        datePickerField.text = formatter.string(from: datePicker.date)
+        
+    
+        //let date = formatDate(date: datePicker.date as NSDate)
+        //datePickerField.text = "\(date)"
+        self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "day"{
+            let controller = segue.destination as! CormetDaysViewController
+            
+            controller.daysOfTheWeek = self.daysOfTheWeek
+            
+        }
+    }
     
     
     

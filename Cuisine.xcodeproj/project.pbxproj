@@ -10,10 +10,8 @@
 		0FAE5705C2E87D0A046A4151 /* Pods_Cuisine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518E46E90A6FEA036CBE337D /* Pods_Cuisine.framework */; };
 		CA1238B81E2F842700FE2759 /* week.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1238B71E2F842700FE2759 /* week.swift */; };
 		CA12F2AB1E2E595300C0003A /* meals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AA1E2E595300C0003A /* meals.swift */; };
-		CA12F2AD1E2E68E900C0003A /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */; };
 		CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */; };
 		CA12F2B11E2E692200C0003A /* MealsTodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */; };
-		CA12F2B31E2E692C00C0003A /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F2B21E2E692C00C0003A /* UsersTableViewCell.swift */; };
 		CA16B9CE1E2660BF004C1B2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA16B9CD1E2660BF004C1B2E /* GoogleService-Info.plist */; };
 		CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9D11E268A91004C1B2E /* LoginViewController.swift */; };
 		CA16B9E61E28F117004C1B2E /* TodayMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */; };
@@ -21,6 +19,12 @@
 		CA16B9F21E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */; };
 		CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */; };
 		CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */; };
+		CA18526B1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18526A1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift */; };
+		CA18526F1E38D94000EBB17F /* UserStandardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18526E1E38D94000EBB17F /* UserStandardTableViewCell.swift */; };
+		CA1852731E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1852721E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift */; };
+		CA1852751E3A030800EBB17F /* CormetDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1852741E3A030800EBB17F /* CormetDaysViewController.swift */; };
+		CA1852771E3A031400EBB17F /* CormetDaysMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1852761E3A031400EBB17F /* CormetDaysMenuViewController.swift */; };
+		CA18527D1E3A930200EBB17F /* CormetDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA18527C1E3A930200EBB17F /* CormetDaysTableViewCell.swift */; };
 		CA34ED661E24FE0900C8748F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34ED651E24FE0900C8748F /* AppDelegate.swift */; };
 		CA34ED6B1E24FE0900C8748F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED691E24FE0900C8748F /* Main.storyboard */; };
 		CA34ED6D1E24FE0900C8748F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA34ED6C1E24FE0900C8748F /* Assets.xcassets */; };
@@ -42,10 +46,8 @@
 		518E46E90A6FEA036CBE337D /* Pods_Cuisine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuisine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1238B71E2F842700FE2759 /* week.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = week.swift; sourceTree = "<group>"; };
 		CA12F2AA1E2E595300C0003A /* meals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = meals.swift; sourceTree = "<group>"; };
-		CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUserViewController.swift; sourceTree = "<group>"; };
 		CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsTodayTableViewCell.swift; sourceTree = "<group>"; };
-		CA12F2B21E2E692C00C0003A /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
 		CA16B9CD1E2660BF004C1B2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA16B9D11E268A91004C1B2E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayMealsViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +55,12 @@
 		CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetSubmitMealsViewController.swift; sourceTree = "<group>"; };
 		CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
 		CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
+		CA18526A1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStandardAssortimenViewController.swift; sourceTree = "<group>"; };
+		CA18526E1E38D94000EBB17F /* UserStandardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStandardTableViewCell.swift; sourceTree = "<group>"; };
+		CA1852721E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetMenuDaysTableViewCell.swift; sourceTree = "<group>"; };
+		CA1852741E3A030800EBB17F /* CormetDaysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetDaysViewController.swift; sourceTree = "<group>"; };
+		CA1852761E3A031400EBB17F /* CormetDaysMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetDaysMenuViewController.swift; sourceTree = "<group>"; };
+		CA18527C1E3A930200EBB17F /* CormetDaysTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetDaysTableViewCell.swift; sourceTree = "<group>"; };
 		CA34ED621E24FE0900C8748F /* Cuisine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cuisine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA34ED651E24FE0900C8748F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA34ED6A1E24FE0900C8748F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -114,12 +122,8 @@
 		CA16B9E91E2B97E4004C1B2E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */,
-				CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */,
-				CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */,
-				CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */,
-				CA12F2B21E2E692C00C0003A /* UsersTableViewCell.swift */,
-				CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */,
+				CA18527B1E3A038000EBB17F /* Users */,
+				CA18527A1E3A037400EBB17F /* Cormet */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -127,21 +131,61 @@
 		CA16B9EA1E2B97EA004C1B2E /* Viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
-				CA12F2AC1E2E68E900C0003A /* UsersViewController.swift */,
-				CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */,
-				CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */,
 				CA16B9D11E268A91004C1B2E /* LoginViewController.swift */,
-				CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */,
-				CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */,
-				CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */,
-				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
-				CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */,
-				CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */,
-				CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */,
-				CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */,
 				CA34ED7D1E250B4E00C8748F /* RegisterViewController.swift */,
+				CA1852791E3A034100EBB17F /* Cormet */,
+				CA1852781E3A033200EBB17F /* Users */,
 			);
 			name = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		CA1852781E3A033200EBB17F /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				CA8C41AA1E362847009A2BE7 /* StandardAssortimentViewController.swift */,
+				CA18526A1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift */,
+				CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */,
+				CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */,
+				CA12F2AE1E2E68F900C0003A /* MenuUserViewController.swift */,
+				CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */,
+				CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		CA1852791E3A034100EBB17F /* Cormet */ = {
+			isa = PBXGroup;
+			children = (
+				CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */,
+				CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */,
+				CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */,
+				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
+				CA1852741E3A030800EBB17F /* CormetDaysViewController.swift */,
+				CA1852761E3A031400EBB17F /* CormetDaysMenuViewController.swift */,
+			);
+			name = Cormet;
+			sourceTree = "<group>";
+		};
+		CA18527A1E3A037400EBB17F /* Cormet */ = {
+			isa = PBXGroup;
+			children = (
+				CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */,
+				CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */,
+				CA1852721E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift */,
+				CA18527C1E3A930200EBB17F /* CormetDaysTableViewCell.swift */,
+			);
+			name = Cormet;
+			sourceTree = "<group>";
+		};
+		CA18527B1E3A038000EBB17F /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */,
+				CA18526E1E38D94000EBB17F /* UserStandardTableViewCell.swift */,
+				CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */,
+				CA12F2B01E2E692200C0003A /* MealsTodayTableViewCell.swift */,
+			);
+			name = Users;
 			sourceTree = "<group>";
 		};
 		CA34ED591E24FE0900C8748F = {
@@ -308,17 +352,21 @@
 				CA659BD21E3765B000C45208 /* CormetMenuViewController.swift in Sources */,
 				CA12F2AB1E2E595300C0003A /* meals.swift in Sources */,
 				CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */,
+				CA1852771E3A031400EBB17F /* CormetDaysMenuViewController.swift in Sources */,
 				CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */,
-				CA12F2AD1E2E68E900C0003A /* UsersViewController.swift in Sources */,
 				CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */,
 				CA659BD61E37785C00C45208 /* CormetStandardViewController.swift in Sources */,
+				CA18527D1E3A930200EBB17F /* CormetDaysTableViewCell.swift in Sources */,
 				CA659BD81E3778B900C45208 /* CormetStandaardTableViewCell.swift in Sources */,
 				CA34ED7E1E250B4E00C8748F /* RegisterViewController.swift in Sources */,
 				CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */,
-				CA12F2B31E2E692C00C0003A /* UsersTableViewCell.swift in Sources */,
+				CA18526F1E38D94000EBB17F /* UserStandardTableViewCell.swift in Sources */,
 				CA659BD41E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift in Sources */,
+				CA1852751E3A030800EBB17F /* CormetDaysViewController.swift in Sources */,
 				CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */,
 				CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */,
+				CA1852731E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift in Sources */,
+				CA18526B1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift in Sources */,
 				CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */,
 				CA8C41AB1E362847009A2BE7 /* StandardAssortimentViewController.swift in Sources */,
 				CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */,

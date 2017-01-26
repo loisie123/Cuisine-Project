@@ -59,7 +59,7 @@ class MenuUserViewController: UIViewController {
         
         
         //get the day of the week
-        ref?.child("cormet").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let dictionary = snapshot.value as? NSDictionary
             self.daysOfTheWeek = dictionary?.allKeys as! [String]

@@ -17,29 +17,21 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var nameDay: UILabel!
     
     var listOfmeals = [meals]()
-    var listOFSoop = [meals]()
-    var listOFSandwiches = [meals]()
     var listNameSoop = ["soup"]
     var listNameSandwich = ["Sandwiches"]
     var listNameDinner = ["Warm Eten"]
-    var listPriceSoop = [String]()
-    var listPriceSandwich = [String]()
-    var listPriceDinner = [String]()
-    var listLikesSoop = [Int]()
-    var listLikesSandwich = [Int]()
-    var listLikesDinner = [Int]()
-    var listAllPrices = [[String]]()
     var listAll = [meals]()
     var daysOfTheWeek = [String]()
     
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
+    
     var meal = [String]()
     var prices = [String]()
     var likes = [Int]()
     var day = String()
+    
     var listAllNames = [[String]]()
-    var listAllLikes = [[Int]]()
     
     
     override func viewDidLoad() {
@@ -56,7 +48,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         print ("show table view")
         
         //get the day of the week
-        ref?.child("cormet").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref?.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let dictionary = snapshot.value as? NSDictionary
             self.daysOfTheWeek = dictionary?.allKeys as! [String]
@@ -85,7 +77,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        returnedView.backgroundColor = .lightGray
+        returnedView.backgroundColor = .red
         
         let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
         label.text = self.listAllNames[section][0]
@@ -101,6 +93,8 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
 
         let mealcell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealsTodayTableViewCell
 
+            mealcell.likeButton.isHidden = true
+            mealcell.unlikeButton.isHidden = true
         for meal in listAll{
             if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
                 mealcell.nameMeal.text = meal.name
@@ -116,14 +110,14 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                         print ("dit is user \(user)")
                         if person == FIRAuth.auth()!.currentUser!.uid{
                             print ("true")
-                            mealcell.likeButton.isHidden = true
+                            //mealcell.likeButton.isHidden = true
                             mealcell.unlikeButton.isHidden = false
                             }
                         }
                 
                 } else{
                     mealcell.likeButton.isHidden = false
-                    mealcell.unlikeButton.isHidden = true
+                    //mealcell.unlikeButton.isHidden = true
                     }
             }
         }
@@ -145,7 +139,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         
                
         let ref = FIRDatabase.database().reference()
-        ref.child("cormet").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("cormet").child("different days").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
             let Dish = snapshot.value as! [String: AnyObject]
             print (Dish)

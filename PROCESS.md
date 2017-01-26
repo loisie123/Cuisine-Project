@@ -64,4 +64,21 @@ Ik heb hulp gekregen bij het oplossen van het probleem van mijn table view contr
 bezig met het maken van een standaard assortiment. Echter het lezen uit firebase gaat nog niet zoals gewenst. Dat moet morgen opgelost worden. 
 
 
+## dag 13 Woensdag 25-01
+
+Standaard assortiment werkt. maar de categorien moeten nog wel gehardcoded worden
+
+- todo zorgen dat de categorien al van te voren worden meegestuurd. 
+
+Het liken gaat ook weer fout. De likes veranderen niet als je iets unliked hoewel het in firebase wel verwijderd word. 
+Nog geen idee hoe ik dit moet oplossen 
+Daarnaast ook nog een manier bedenken om de data beter op te slaan. Zodat cormet kan wijzigen en verwijderen. 
+het installeeren van een UIDatePicker kan hierbij helpen. 
+
+
+
+
+
+
+
 

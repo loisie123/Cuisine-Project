@@ -90,6 +90,8 @@ algemeen:
 - misschien een swift bestand aanmaken met functies die door de hele code gebruikt worden.
 - opmaak en constraints.
 - referenties 
+- readme aanpassen
+
 
 cormet:
 

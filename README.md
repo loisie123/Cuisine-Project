@@ -60,6 +60,9 @@ https://github.com/sirhazman07/FoodPin/tree/master/FoodPin
 In this app you can search for different restaurants and rate the restaurants. This app also saves different restaurant in the classe Restaurant with their ratings. Just like the previous app, this app can be very useful as an example for saving different dishes and rating them. 
 
 
+
+[![BCH compliance](https://bettercodehub.com/edge/badge/loisie123/Cuisine-Project)](https://bettercodehub.com)
+
  
 
 

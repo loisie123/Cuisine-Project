@@ -76,8 +76,39 @@ Daarnaast ook nog een manier bedenken om de data beter op te slaan. Zodat cormet
 het installeeren van een UIDatePicker kan hierbij helpen. 
 
 
+## dag 14 Donderdag 26-01
+
+Alle viewcontrollers zijn gemaakt en alles werkt nu grof weg. De Cateraar kan nu alle gerechten zien, ze wijzigen en deleten en ook weer nieuwe toevoegen. 
+ook het liken en unliken van een gerecht gaat goed (van de user)
+
+bugs en todo list die ik tot nu toe ben tegen gekomen:
+algemeen:
 
 
+- state restoration
+- code opschonen
+- misschien een swift bestand aanmaken met functies die door de hele code gebruikt worden.
+- opmaak en constraints.
+- referenties 
+
+cormet:
+
+- zodra de naam van een gerecht wijzigd is het niet meer mogelijk om het gerecht te liken. Dit komt door de naamverandering, alleen is de tak in firebase niet veranderd. 
+- Als er niks in de week staat (alles is verwijderd) dan crasht hij
+- het zelf kunnen toevoegen can categorien
+- opmaak van deze gebruiker
+- login scherm met twee gebruikersrollen (ipv dit gehardcoded)
+- alertcontrollers toevoegen. (bij deleten van dingen en dagen)
+- submitMealscontroller nog aanpassen op basis van het huidige idee (next day button misschien verwijderen)
+
+user:
+
+- nieuwe user kan een eerder gelikete gerecht niet liken (knop is afwezig)
+- favorite zijn de like knoppen sowieso verdwenen 
+- email adres ook kunnen veranderen 
+- opmaak
+- logout knop even omzetten naar de goede logout. 
+- settings knop
 
 
 

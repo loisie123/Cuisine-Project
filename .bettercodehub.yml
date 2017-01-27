@@ -1,4 +1,5 @@
-component_depth: 1
-languages:
-- swift
-- ruby
+exclude: - /mylibrary/src/.* component_depth: 1 languages: - swift - ruby
+
+
+
+

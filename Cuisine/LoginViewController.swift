@@ -22,6 +22,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hideKeyboardWhenTappedAroung()
        
 
         // Do any additional setup after loading the view.
@@ -33,7 +35,9 @@ class LoginViewController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: emailInput.text!, password: passwordInput.text!, completion: {(user, error) in
             
             if let error = error {
-                print(error.localizedDescription)
+                
+                self.showAlert(titleAlert: "Login Failed", messageAlert: "Try again")
+                print (error.localizedDescription)
 
             }
             
@@ -57,8 +61,49 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+}
 
-   
+extension UIViewController{
+    func hideKeyboardWhenTappedAroung(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
     
+    func dismissKeyboard(){
+        view.endEditing(true)
+    }
+}
+
+
+extension UIViewController{
+   func showAlert(titleAlert: String , messageAlert: String){
+    let alertcontroller = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: UIAlertControllerStyle.alert)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+    
+    alertcontroller.addAction(cancelAction)
+    
+    self.present(alertcontroller, animated: true, completion: nil)
+    
+    
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,15 +17,17 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     var ref:FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     var selectedDay = String()
+    var days = [String]()
     
     
     override func viewDidLoad() {
+        getweek()
         super.viewDidLoad()
 
         
         ref = FIRDatabase.database().reference()
         self.weekNumberTableViewImage.reloadData()
-        
+        print ("of is deze eerst ")
         print (daysOfTheWeek)
     }
 
@@ -42,17 +44,23 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! CormetDaysTableViewCell
         
-        cell.nameDays.text = daysOfTheWeek[indexPath.row]
+        cell.nameDays.text = days[indexPath.row]
+        
+       // cell.nameDays.text = daysOfTheWeek[indexPath.row]
         
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return daysOfTheWeek.count
+    //daysOfTheWeek.count
+        
+        return days.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedDay = daysOfTheWeek[indexPath.row]
+       // selectedDay = daysOfTheWeek[indexPath.row]
+        
+        selectedDay = days[indexPath.row]
         print("ik selecteerd deze ")
         self.performSegue(withIdentifier: "daysVC", sender: nil)
         
@@ -72,13 +80,28 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            let remove = daysOfTheWeek[indexPath.row]
+            let alertController = UIAlertController(title: "Delete", message: "Do you really want to delete this day?", preferredStyle: UIAlertControllerStyle.alert)
             
-            myDeleteFunction(firstTree: "cormet", secondTree: "different days", childIWantToRemove: remove)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default)
             
+            let deleteAction = UIAlertAction(title: "Delete", style: .default) {action in
+            
+                let remove = self.daysOfTheWeek[indexPath.row]
+                
+                self.myDeleteFunction(firstTree: "cormet", secondTree: "different days", childIWantToRemove: remove)
+
+            
+                 self.viewDidLoad()
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+
         }
         
-        viewDidLoad()
+       
     }
     
     //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
@@ -96,6 +119,26 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
             
             
         }
+    }
+    
+    
+    func getweek(){
+        let ref = FIRDatabase.database().reference()
+        
+        //get the day of the week
+        ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
+            let day = week()
+            let dictionary = snapshot.value as? NSDictionary
+            self.days = dictionary?.allKeys as! [String]
+            
+            
+            print ("wanneer begint dit")
+            print(self.days)
+            
+            self.weekNumberTableViewImage.reloadData()
+            
+        })
+
     }
     
 }

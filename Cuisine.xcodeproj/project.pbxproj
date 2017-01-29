@@ -257,6 +257,7 @@
 				TargetAttributes = {
 					CA34ED611E24FE0900C8748F = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 9YSZGYGV57;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -497,6 +498,8 @@
 			baseConfigurationReference = 41BAFE43EB1F6DF59C8ABC27 /* Pods-Cuisine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9YSZGYGV57;
 				INFOPLIST_FILE = Cuisine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.mprog.Cuisine;
@@ -510,6 +513,8 @@
 			baseConfigurationReference = EBB66214A2A1D4D0A90837BF /* Pods-Cuisine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9YSZGYGV57;
 				INFOPLIST_FILE = Cuisine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nl.mprog.Cuisine;

@@ -62,6 +62,8 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
     
     // table view met sections en een delete functie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let index = indexPath.row
             let removelist = self.listAllNames[indexPath.section]
@@ -270,4 +272,19 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
             
         }
     }
-}
+    
+    func changeItem(){
+        
+    }
+    
+    func deleteItem(){
+        
+            
+            
+        }
+        
+        
+        
+    }
+    
+

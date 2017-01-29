@@ -42,6 +42,8 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         present(picker, animated: true, completion: nil)
         
     }
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             self.profileImage.image = image
@@ -101,8 +103,13 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             })
             
             } else{
-            // alertcontroller. 
-            print ("password does not match")
+            let alertcontroller = UIAlertController(title: "Loggin failed", message: "Try again", preferredStyle: UIAlertControllerStyle.alert)
+
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+            alertcontroller.addAction(cancelAction)
+            
+            self.present(alertcontroller, animated: true, completion: nil)
+       
         }
         
     }

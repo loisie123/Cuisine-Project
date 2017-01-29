@@ -5,34 +5,47 @@
 //  Created by Lois van Vliet on 24-01-17.
 //  Copyright © 2017 Lois van Vliet. All rights reserved.
 //
+//
+// for pickerview:
+//  https://www.youtube.com/watch?v=_ADJxJ7pjRk#t=2.878095842
+
 
 import UIKit
 import Firebase
 
 class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var pickerTextField: UITextField!
+    
+    
     @IBOutlet weak var inputPrice: UITextField!
     @IBOutlet weak var inputName: UITextField!
-    let categories = ["Drinken","Wraps","MaaltijdSalades","Brood","vleeswaren"]
+    let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
     
-    @IBOutlet weak var categorieInput: UILabel!
-
-    @IBOutlet weak var PickerView: UIPickerView!
+    var picker = UIPickerView()
     
     
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    ref = FIRDatabase.database().reference()
-       
-     
+        
+        self.hideKeyboardWhenTappedAroung()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        
+        ref = FIRDatabase.database().reference()
+        picker.dataSource = self
+        picker.delegate = self
+        
+        pickerTextField.inputView = picker
     }
     
+    
+    // make pickerView:
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -51,7 +64,8 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        categorieInput.text = categories[row]
+       pickerTextField.text = categories[row]
+        self.view.endEditing(false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,9 +80,8 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
             self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("name").setValue(inputName.text!)
             self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("price").setValue(inputPrice.text!)
             self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("categorie").setValue(categorieInput.text!)
+            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("categorie").setValue(pickerTextField.text!)
             
-        
             inputName.text = ""
             inputPrice.text = ""
 
@@ -81,14 +94,30 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
             present(alertController, animated: true, completion: nil)
             
         }
-        
-        
-        
-        
     }
     
     
-
+    
+    
+    // reference: stackoverflow.nl
+    func keyboardWillShow(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
+    
+   
  
 
 }

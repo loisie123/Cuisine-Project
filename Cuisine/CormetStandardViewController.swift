@@ -14,12 +14,11 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
-    let categories = ["Drinken","Wraps","MaaltijdSalades","Brood","vleeswaren"]
+    let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
     
     var listAllNames = [[String]]()
-    var listOfmeals = [meals]()
     var listCategoryName = [String]()
-  
+     var listOfmeals = [meals]()
     
     @IBOutlet weak var standaardAssortimentTableView: UITableView!
     
@@ -28,8 +27,6 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
 
         super.viewDidLoad()        
         ref = FIRDatabase.database().reference()
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,9 +50,8 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
             let index = indexPath.row
             let removelist = listAllNames[indexPath.section]
             let remove = removelist[index + 1]
-           
+        
             myDeleteFunction(firstTree: "cormet", secondTree: "standaard-assortiment", childIWantToRemove: remove)
-            
         }
         
         viewDidLoad()
@@ -63,11 +59,10 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        
         return listAllNames[section].count-1
-        
     }
+    
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return listAllNames[section][0]
     }
@@ -75,42 +70,29 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "standaardCell", for: indexPath) as! CormetStandaardTableViewCell
-        //print(listAllNames)
         
         for meal in listOfmeals{
             if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
 
-              cell.nameMeal.text = meal.name
-            
+                cell.nameMeal.text = meal.name
                 cell.priceMeal.text = "€ \(meal.price!)"
-               cell.likesMeal.text = " \(meal.likes!) likes"
-                
-                }
+                cell.likesMeal.text = " \(meal.likes!) likes"
+            }
         }
-        
         return cell
-        
     }
 
-
-
-    
     
     func getStandardAssortiment(){
 
-        
-        print("gaat hij hier doorheen")
         listAllNames.removeAll()
         let ref = FIRDatabase.database().reference()
         
-       ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            print("ik wil dat hij hier doorheen gaat")
-        
+        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
             let meal = snapshot.value as! [String:AnyObject]
             self.listAllNames = [[String]]()
             self.listOfmeals = [meals]()
-        
-        
         
             for category in self.categories{
                 self.listCategoryName = [String]()
@@ -133,44 +115,11 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
                         }
                     }
                 }
-                   
-                    
-                
             }
-           // print(self.listCategoryName)
+
              self.listAllNames.append(self.listCategoryName)
-            //print(self.listAllNames)
-            
             }
-        
-        
         self.standaardAssortimentTableView.reloadData()
         })
-
-        
-        
     }
-    
-    //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
-        
-        
-        
-        ref?.child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
-            if error != nil {
-                print("error \(error)")
-            }
-            else{
-                print ("removed")
-            }
-            
-            
-        }
-    
-    }
-    
-    
-    
-    
-
 }

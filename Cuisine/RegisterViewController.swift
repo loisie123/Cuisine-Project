@@ -88,30 +88,16 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                                 let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
                                 self.present(vc, animated: true, completion: nil)
 
-                                
                             }
                         })
-                            
                     })
                     uploadTask.resume()
-                    
-                   
-                    
                 }
-            
-            
             })
-            
             } else{
-            let alertcontroller = UIAlertController(title: "Loggin failed", message: "Try again", preferredStyle: UIAlertControllerStyle.alert)
-
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-            alertcontroller.addAction(cancelAction)
             
-            self.present(alertcontroller, animated: true, completion: nil)
-       
+            showAlert(titleAlert: "Sign up failed", messageAlert: "try again")
         }
-        
     }
     
     

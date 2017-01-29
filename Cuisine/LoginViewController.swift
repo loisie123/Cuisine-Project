@@ -47,11 +47,11 @@ class LoginViewController: UIViewController {
                     self.performSegue(withIdentifier: "cormetVC", sender: nil)
                     }
                 }
-                else{
-                    if let user = user{
+            else{
+                if let user = user{
                     
-                        self.performSegue(withIdentifier: "usersVC", sender: nil)
-                    }
+                self.performSegue(withIdentifier: "usersVC", sender: nil)
+                }
                 }
         })
         

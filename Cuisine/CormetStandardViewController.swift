@@ -56,6 +56,18 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
         
         viewDidLoad()
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 0.7)
+        returnedView.backgroundColor = color
+        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
+        label.text = self.listAllNames[section][0]
+        label.textColor = .black
+        returnedView.addSubview(label)
+        
+        return returnedView
+    }
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

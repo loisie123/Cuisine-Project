@@ -43,21 +43,23 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
          }
     
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        returnedView.backgroundColor = UIColor.gray
-        
-        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
-        label.text = self.listAllNames[section][0]
-        label.textColor = .black
-        returnedView.addSubview(label)
-        
-        return returnedView
+
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+                let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+                let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+                returnedView.backgroundColor = color
+            
+                let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
+                label.textColor = .black
+                returnedView.addSubview(label)
+                
+                return returnedView
         }
     
 
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 80
+         return 100
+            
          }
          
          func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,14 +75,11 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
          func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          
             let cell = tableView.dequeueReusableCell(withIdentifier: "userStandaardCell", for: indexPath) as! UserStandardTableViewCell
-            
-            cell.likeButton.isHidden = true
-            cell.unlikeButton.isHidden = true
+    
             for meal in listOfmeals{
                 if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
                     
                     cell.nameLabel.text = meal.name
-                    
                     cell.priceLabel.text = "€ \(meal.price!)"
                     cell.likedLabel.text = " \(meal.likes!) likes"
                     
@@ -89,14 +88,18 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
                         
                         for person in meal.peopleWhoLike{
                             if person == FIRAuth.auth()!.currentUser!.uid{
+                                print ("true")
                                 cell.unlikeButton.isHidden = false
+                                cell.likeButton.isHidden = true
                             }
                             else {
                                 cell.likeButton.isHidden = false
+                                cell.unlikeButton.isHidden = true
                             }
                         }
                     } else{
                         cell.likeButton.isHidden = false
+                        cell.unlikeButton.isHidden = true
                     }
                 }
             }

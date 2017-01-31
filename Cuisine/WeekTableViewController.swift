@@ -19,33 +19,36 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     
-    var daysOfTheWeek = [String]()
+    var days = [String]()
     var selectedDay = String()
+    var array = [String]()
     
     
     
     override func viewDidLoad() {
+        getweek()
         super.viewDidLoad()
         
+        if days.isEmpty{
+            days = ["Add new days"]
+        }
         
         
         ref = FIRDatabase.database().reference()
-        
-        //get the day of the week
-      //  ref?.child("cormet").observeSingleEvent(of: .value, with: { (snapshot) in
-        
-           // let dictionary = snapshot.value as? NSDictionary
-           // print (dictionary)
-            //self.daysOfTheWeek = dictionary?.allKeys as! [String]
-         //   print(self.daysOfTheWeek)
-        
-       // })
-       
         self.tableViewImage.reloadData()
-        
-        
 
-        // Do any additional setup after loading the view.
+        }
+    
+    func getweek(){
+        let ref = FIRDatabase.database().reference()
+        ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
+            let dictionary = snapshot.value as? NSDictionary
+            self.array = dictionary?.allKeys as! [String]
+            
+            self.days = self.array.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+            self.tableViewImage.reloadData()
+            
+        })
     }
 
 
@@ -53,27 +56,25 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weekCell", for: indexPath) as! WeekTableViewCell
         
-        cell.weekLabel.text = daysOfTheWeek[indexPath.row]
+        cell.weekLabel.text = days[indexPath.row]
         
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return daysOfTheWeek.count
+        return days.count
     }
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-            selectedDay = daysOfTheWeek[indexPath.row]
+            selectedDay = days[indexPath.row]
         
             self.performSegue(withIdentifier: "mealsVC", sender: nil)
         
     }
-    
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

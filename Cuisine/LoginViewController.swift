@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     
     var currentUser = String()
     var stringPicture = NSString()
+    let color = UIColor(colorLiteralRed: 121, green: 172, blue: 43, alpha: 1.0)
     
 
     override func viewDidLoad() {

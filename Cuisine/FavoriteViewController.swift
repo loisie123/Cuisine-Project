@@ -13,17 +13,18 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
 
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
-    var listOfFavorites = [meals]()
-    var listOfFAvoriteMealsNamesSoop = ["soup"]
-    var listOfFavoriteMealsNameSandwich = ["Sandwich"]
-    var listOfFavoriteMealsNameMeals = ["warm eten"]
-    var listOfFavoritStandardMeals = ["Standaard Assortiment"]
-    var listAllFavoritesNames = [[String]]()
+    
+    let types = ["Soup", "Sandwich", "Hot dish", "standaard-assortiment"]
+    var listAllNamesFavorites = [[String]]()
+    var listCategorynameFavorites = [String]()
+    var listOfMealsFavorites = [meals]()
+    
     
     
     @IBOutlet weak var FavoriteTableImage: UITableView!
     
     override func viewDidLoad() {
+        getMealsFavorites()
                 super.viewDidLoad()
         
         // Define identifier
@@ -32,7 +33,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(FavoriteViewController.reloadTableView), name: reloadTableView, object: nil)
         
-        getMeals()
+        
 
         ref = FIRDatabase.database().reference()
 
@@ -42,7 +43,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func reloadTableView() {
-        getMeals()
+        getMealsFavorites()
         FavoriteTableImage.reloadData()
         
     }
@@ -51,28 +52,34 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     // make tableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return listAllFavoritesNames.count
+        return listAllNamesFavorites.count
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        returnedView.backgroundColor = .red
-        
-        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
-        label.textColor = .black
-        returnedView.addSubview(label)
-        
-        return returnedView
-    }
-    
+
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-    return listAllFavoritesNames[section].count-1
+    return listAllNamesFavorites[section].count-1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return listAllFavoritesNames[section][0]
+       
+        return listAllNamesFavorites[section][0]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+        returnedView.backgroundColor = color
+        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
+        label.text = self.listAllNamesFavorites[section][0]
+        label.textColor = .black
+
+      
+        returnedView.addSubview(label)
+        
+        return returnedView
     }
 
 
@@ -81,11 +88,11 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
     let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteTableViewCell
         
-        for meal in listOfFavorites{
-            if meal.name == listAllFavoritesNames[indexPath.section][indexPath.row+1] {
+        for meal in listOfMealsFavorites{
+            if meal.name == listAllNamesFavorites[indexPath.section][indexPath.row+1] {
                 cell.nameMeal.text = meal.name
                 cell.priceFavoriteMeal.text = "\(meal.price!)"
-                cell.likesFavoriteMeal.text = "\(meal.likes) likes"
+                cell.likesFavoriteMeal.text = "\(meal.likes!) likes"
                 cell.day = meal.day
             }
         }
@@ -93,120 +100,52 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
         
     }
     
     
-    func getMeals(){
-        listOfFavorites = [meals]()
-        listAllFavoritesNames = [[String]]()
-        listOfFAvoriteMealsNamesSoop = ["soup"]
-        listOfFavoriteMealsNameSandwich = ["Sandwich"]
-        listOfFavoriteMealsNameMeals = ["warm eten"]
-        listOfFavoritStandardMeals = ["Standaard Assortiment"]
+    func getMealsFavorites(){
+    
         
         let currentUser =  FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
+        
         ref.child("users").child(currentUser!).child("likes").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            print ("ik wil de likes zien ")
+        
             let Dish = snapshot.value as! [String: AnyObject]
-            for (_, value) in Dish{
-                print (value)
-                let mealsToShow = meals()
-                if let type = value["type"] as? String{
-                   print (type)
-                    //print (value["type"])
-                    
-                    if type == "soop"{
-                        
-                        print ("true")
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            print("true")
+            self.listAllNamesFavorites = [[String]]()
+            self.listOfMealsFavorites = [meals]()
+                
+            for type in self.types{
+                self.listCategorynameFavorites = [String]()
+                self.listCategorynameFavorites.append(type)
+                for (_, value) in Dish{
+                    let mealsToShow = meals()
+                    if let typ = value["type"] as? String{
+                        if typ == type{
+                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
+                                print ("true")
+                                self.listCategorynameFavorites.append(name)
+                                mealsToShow.name = name
+                                mealsToShow.likes = likes
+                                mealsToShow.price = price
+                                mealsToShow.day = value["day"] as? String
                             
-                            
-                            self.listOfFAvoriteMealsNamesSoop.append(name)
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.day = value["day"] as? String
-                            
-                        
-                            self.listOfFavorites.append(mealsToShow)
-                            
+                                self.listOfMealsFavorites.append(mealsToShow)
+                                
                             }
-                        else{
-                            print("het werkt niet")
                         }
-                        }
-                    else if type == "sandwich"{
-                        
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            print("true")
-                            
-                            
-                            
-                            self.listOfFavoriteMealsNameSandwich.append(name)
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.day = value["day"] as? String
-
-                            
-                            self.listOfFavorites.append(mealsToShow)
-                            
-                        }
-                    }
-                    else if type == "dinner"{
-                        
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            print("true")
-                            
-                            
-                            
-                            self.listOfFavoriteMealsNameMeals.append(name)
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.day = value["day"] as? String
-
-                            
-                            self.listOfFavorites.append(mealsToShow)
-                            
-                        }
-                    }
-                    else {
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            print ("hij hoort bij het standaarassortiment")
-                            self.listOfFavoritStandardMeals.append(name)
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.day = value["day"] as? String
-                            self.listOfFavorites.append(mealsToShow)
-                            
-                    }
                     }
                     
+                }
+                self.listAllNamesFavorites.append(self.listCategorynameFavorites)
             }
-                
-                
-            self.listAllFavoritesNames = [self.listOfFAvoriteMealsNamesSoop, self.listOfFavoriteMealsNameSandwich, self.listOfFavoriteMealsNameMeals, self.listOfFavoritStandardMeals]
-    
             self.FavoriteTableImage.reloadData()
-            }
-        })
-        
-        ref.removeAllObservers()
-        
-        
-    }
+            
+            })
+        }
     
     
     
-    
-    
-    
-
-
 }

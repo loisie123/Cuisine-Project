@@ -44,6 +44,18 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+        returnedView.backgroundColor = color
+        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
+        label.text = self.listAllNames[section][0]
+        label.textColor = .black
+        returnedView.addSubview(label)
+        
+        return returnedView
+    }
+    
     
     // table view met sections en een delete functie
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

@@ -59,30 +59,20 @@ class FavoriteTableViewCell: UITableViewCell {
         ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             if let properties = snapshot.value as? [String : AnyObject]{
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
-                    print (peopleWhoLike)
-                    
                     for(id, person) in peopleWhoLike{
-                        print (person)
                         if person as? String == FIRAuth.auth()!.currentUser!.uid{
                             // verwijder persoon uit deze lijst.
                             ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
                                 
                                 if error == nil{
-                                    
-                                        print("hij is verwijderd")
                                     ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: {(snap) in
-                                        
-                                       
-                                        
+             
                                         if let prop = snap.value as? [String: AnyObject] {
-                                            print("is de prop goed?")
-                                            print (prop)
+                                           
                                             
                                             if let likes = prop["peoplewholike"] as? [String : AnyObject] {
-                                                
-                                                
+                                               
                                                 let count = likes.count
-                                                print (count)
                                                 ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).updateChildValues(["likes" : count])
                                                 
                                             } else{

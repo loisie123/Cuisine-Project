@@ -16,47 +16,32 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var nameDay: UILabel!
     
-    var listOfmeals = [meals]()
-    var listNameSoop = ["soup"]
-    var listNameSandwich = ["Sandwiches"]
-    var listNameDinner = ["Warm Eten"]
-    var listAll = [meals]()
-    var daysOfTheWeek = [String]()
-    
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
-    
-    var meal = [String]()
-    var prices = [String]()
-    var likes = [Int]()
     var day = String()
+    let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+    
+    let types = ["Soup", "Sandwich", "Hot dish"]
     
     var listAllNames = [[String]]()
+    var listCategoryname = [String]()
+    var listOfMeals = [meals]()
+
     
     
     override func viewDidLoad() {
+        getMeals()
         super.viewDidLoad()
         nameDay.text = day
         print(day)
         
         
         ref = FIRDatabase.database().reference()
-        getMeals()
+        
 
         self.tableViewImage.reloadData()
         
-        print ("show table view")
-        
-        //get the day of the week
-        ref?.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let dictionary = snapshot.value as? NSDictionary
-            self.daysOfTheWeek = dictionary?.allKeys as! [String]
-            print(self.daysOfTheWeek)
-            
-        })
-        // Do any additional setup after loading the view.
-    }
+        }
     
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,8 +62,8 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        returnedView.backgroundColor = .red
-        
+        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+        returnedView.backgroundColor = color
         let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
         label.text = self.listAllNames[section][0]
         label.textColor = .black
@@ -95,7 +80,9 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
 
             mealcell.likeButton.isHidden = true
             mealcell.unlikeButton.isHidden = true
-        for meal in listAll{
+        for meal in listOfMeals{
+            
+
             if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
                 mealcell.nameMeal.text = meal.name
                 mealcell.priceMeal.text = "€ \(meal.price!)"
@@ -105,22 +92,19 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 if meal.likes != 0 {
                     for person in meal.peopleWhoLike{
-                        print (person)
-                        let user = FIRAuth.auth()!.currentUser!.uid
-                        print ("dit is user \(user)")
                         if person == FIRAuth.auth()!.currentUser!.uid{
-                            print ("true")
-                            //mealcell.likeButton.isHidden = true
                             mealcell.unlikeButton.isHidden = false
+                            mealcell.likeButton.isHidden = true
                             }
                         else{
                             mealcell.likeButton.isHidden = false
+                            mealcell.unlikeButton.isHidden = true
                         }
                         }
                 
                 } else{
+                    mealcell.unlikeButton.isHidden = true
                     mealcell.likeButton.isHidden = false
-                    //mealcell.unlikeButton.isHidden = true
                     }
             }
         }
@@ -145,87 +129,41 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
         ref.child("cormet").child("different days").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
             let Dish = snapshot.value as! [String: AnyObject]
-            print (Dish)
-            for (_, value) in Dish{
-                let mealsToShow = meals()
-                if let type = value["type"] as? String{
-                    print (type)
-                    if type == "soop"{
-                        print ("het is soop")
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            
-                            self.listNameSoop.append(name)
-                            
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.typeOFMEal = type
+            self.listCategoryname = [String]()
+            self.listOfMeals = [meals]()
+            for type in self.types{
+                self.listCategoryname = [String]()
+                self.listCategoryname.append(type)
+                for (_, value) in Dish{
+                    let mealsToShow = meals()
+                    if let typ = value["type"] as? String{
+                        if typ == type{
+                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
                                 
-                            if let people = value["peoplewholike"] as? [String : AnyObject] {
+                                self.listCategoryname.append(name)
+                                mealsToShow.name = name
+                                mealsToShow.likes = likes
+                                mealsToShow.price = price
+                                mealsToShow.typeOFMEal = type
+                                
+                                if let people = value["peoplewholike"] as? [String : AnyObject] {
                                     for (_,person) in people{
                                         
                                         mealsToShow.peopleWhoLike.append(person as! String)
                                     }
                                 }
-                            
-                            self.listAll.append(mealsToShow)
                                 
-                        }
-                    }
-                    else if type == "dinner"{
-                        if let name = value["name"] as? String, let price = value["price"] as? String, let likes = value["likes"] as? Int{
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.typeOFMEal = type
-                            
-                            self.listNameDinner.append(name)
-                            
-                            if let people = value["peoplewholike"] as? [String : AnyObject] {
-                                for (_,person) in people{
-                                    mealsToShow.peopleWhoLike.append(person as! String)
-                                }
+                                self.listOfMeals.append(mealsToShow)
                             }
-                            self.listAll.append(mealsToShow)
                         }
-                    }
-                   else if type == "sandwich"{
-                        if let name = value["name"] as? String, let price = value["price"] as? String, let likes = value["likes"] as? Int{
-                            mealsToShow.name = name
-                            mealsToShow.likes = likes
-                            mealsToShow.price = price
-                            mealsToShow.typeOFMEal = type
-                            
-                            self.listNameSandwich.append(name)
-                            
-                            if let people = value["peoplewholike"] as? [String : AnyObject] {
-                                print (people)
-                                for (_,person) in people{
-                                    mealsToShow.peopleWhoLike.append(person as! String)
-                                }
-                            }
-                            
-                            self.listAll.append(mealsToShow)
-                        }
+                
                     }
                 }
-            self.listAllNames = [self.listNameSoop, self.listNameSandwich, self.listNameDinner]
-            self.tableViewImage.reloadData()
+                self.listAllNames.append(self.listCategoryname)
             }
+            self.tableViewImage.reloadData()
         })
-        
-        ref.removeAllObservers()
-
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "letsgo"{
-            let controller = segue.destination as! WeekTableViewController
-            
-            controller.daysOfTheWeek = self.daysOfTheWeek
-            
-        }
-    }
-    
     
 }
+

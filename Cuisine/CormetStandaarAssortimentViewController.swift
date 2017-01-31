@@ -98,7 +98,6 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
     
     
     
-    
     // reference: stackoverflow.nl
     func keyboardWillShow(notification: NSNotification){
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{

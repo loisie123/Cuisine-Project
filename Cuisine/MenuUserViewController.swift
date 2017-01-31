@@ -43,31 +43,10 @@ class MenuUserViewController: UIViewController {
         ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
           
             let UserName = snapshot.value as! String
-            print(UserName)
             self.nameUser.text = "Welcome \(UserName)"
-            print (snapshot.value)
-            
-            
             
         })
         
-        
-        //profiePicture.downloadImage(from: pictureString)
-        
-        
-        
-        
-        
-        //get the day of the week
-        ref?.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let dictionary = snapshot.value as? NSDictionary
-            self.daysOfTheWeek = dictionary?.allKeys as! [String]
-            print(self.daysOfTheWeek)
-            
-        })
-
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func LogOutButton(_ sender: Any) {
@@ -83,17 +62,6 @@ class MenuUserViewController: UIViewController {
     }
 
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "letsgo"{
-            let controller = segue.destination as! WeekTableViewController
-
-            controller.daysOfTheWeek = self.daysOfTheWeek
-        }
-
-
-    
-    }
 }
 
 

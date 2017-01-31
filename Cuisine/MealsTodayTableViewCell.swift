@@ -55,9 +55,11 @@ class MealsTodayTableViewCell: UITableViewCell {
                             if let properties = snap.value as? [String : AnyObject] {
                                 if let likes = properties["peoplewholike"] as? [String : AnyObject]{
                                   let count = likes.count
-                                    print("werkt het?")
+                                    
+                                    
                                     self.numberOfLikes.text = "\(count) likes"
                                     let update = ["likes" : count]
+                                    
                                     ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).updateChildValues(update)
                                     self.likeButton.isHidden = true
                                     self.unlikeButton.isHidden = false
@@ -65,12 +67,8 @@ class MealsTodayTableViewCell: UITableViewCell {
         
                                     
                                     // slaat hij op in het likes van de gebruiker
-                                    ref.child("users").child(user!).child("likes").child(self.nameMeal.text!).child("name").setValue(self.nameMeal.text!)
-                                    ref.child("users").child(user!).child("likes").child(self.nameMeal.text!).child("price").setValue(self.priceMeal.text!)
-                                    ref.child("users").child(user!).child("likes").child(self.nameMeal.text!).child("likes").setValue(count)
-                                    ref.child("users").child(user!).child("likes").child(self.nameMeal.text!).child("day").setValue(self.day)
-                                    ref.child("users").child(user!).child("likes").child(self.nameMeal.text!).child("type").setValue(self.typeMealLiked)
-                                    
+                                    self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked)
+                            
                                     
                                 }
                             }
@@ -150,7 +148,17 @@ class MealsTodayTableViewCell: UITableViewCell {
         ref.removeAllObservers()
     }
     
-    
+    func saveMeal(user: String, name: String, price: String, count: Int, type: String){
+        
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("users").child(user).child("likes").child(name).child("name").setValue(name)
+        ref.child("users").child(user).child("likes").child(name).child("price").setValue(price)
+        ref.child("users").child(user).child("likes").child(name).child("likes").setValue(count)
+        ref.child("users").child(user).child("likes").child(name).child("day").setValue(day)
+        ref.child("users").child(user).child("likes").child(name).child("type").setValue(type)
+        
+    }
     
     //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
     func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {

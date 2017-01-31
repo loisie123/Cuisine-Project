@@ -118,15 +118,23 @@ Mijn code in BetterHubCode gegooid. Er kwam naar voren dat mijn codes voornameli
 Zo heb ik er nu bijvoorbeeld voor gekozen om de functies waarbij ik informatie ophaal toch nog apart te nemen. Ik kan er over nadenken om de functies die in zowel cormet als in de user voorkomen die wel te hergebruiken. 
 
 
-# day 16 zondag 28-01
+# day 16 zondag 29-01
 
 Veel alertcontrollers toegevoegd om het gemak te vegroten. Ook veel functies in de cormet ViewController korter kunnen maken door gebruik van externe functies. nu nog kijken hoe ik verschillende viewcontrollers met elkaar zou kunnen koppelen. 
 Een ander punt waar ik nog vast loop is het punt dat wanneer ik de naam van een dish wil wijzigen dat het wijzigen wel lukt, maar vervolgens kun je deze niet meer liken. Dit komt doordat de key naam niet veranderd waardoor de like functie hem niet goed kan vinden. Moet dus een manier vinden om de key te veranderen. Of misschien moet ik overwegen om dan een hele nieuwe dish aan te maken en deze te verwijderen. 
 Ook heb ik een manier gevonden om verschillende soorten eten/drankjes aan te laten maken. Echter zijnd e verschillende categorien nog gehardcode. Mocht ik nog tijd hebben zou ik dit nog willen veranderen. Maar voor nu is het belangrijk dat de andere functies allemaal vlekkeloos lopen. 
 
-# dag 17 Maandag 29-01
+# dag 17 Maandag 30-01
 
 Alle functies ingekort 
-Bezig met design geweest
+Bezig met design geweest. 
+Bij het verwerken van dubbele functies lukte het niet helemaal met de viewcontrollers laden. bij het maken van return functies werden de functies eerst gereturned voordat het observeSingleEvent aan het werk ging. 
+
+# dag 18 dinsdag 31 -01
+
+Alle functies zijn ingekort. Nu ook in de viewcontrollers alle dubbele functies zo min mogelijk gemaakt. Dus alle obserEventTyp functies zijn bijna allemaal binnen de extension gezet. Het probleem van gister Opgelost dankzij de hulp van Julian. De observe regels heb ik in de functies laten staan. Maar vervolgens alles in een algemene functie gezet. 
+Verder is het Design nu klaar. Op een paar constraints na. Moet nog even checken of alle lettertypes gelijk zijn en de gelijke grootte zijn. 
+
+
 
 

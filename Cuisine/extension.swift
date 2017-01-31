@@ -112,7 +112,21 @@ extension UIViewController{
         }
         
      return (listAllNames, listOfmeals)
+    }}
+
+
+
+
+extension UITableViewCell{
+    func saveMeal(user: String, name: String, price: String, count: Int, type : String){
+        
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("users").child(user).child("likes").child(name).child("name").setValue(name)
+        ref.child("users").child(user).child("likes").child(name).child("price").setValue(price)
+        ref.child("users").child(user).child("likes").child(name).child("likes").setValue(count)
+        ref.child("users").child(user).child("likes").child(name).child("day").setValue("standaard-assortiment")
+        ref.child("users").child(user).child("likes").child(name).child("type").setValue(type)
+        
     }
-    
-    
 }

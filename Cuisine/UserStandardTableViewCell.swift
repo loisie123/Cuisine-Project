@@ -22,6 +22,9 @@ class UserStandardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    var day: String!
+    var typeMealLiked: String!
+    
     
     
     override func awakeFromNib() {
@@ -46,11 +49,9 @@ class UserStandardTableViewCell: UITableViewCell {
         
         // Removed from  the liked list from the user
         let remove = self.nameLabel.text
-        print (remove!)
         self.myDeleteFunction(firstTree: currentUser!, secondTree: "likes", childIWantToRemove: remove!)
         
         // likes most be updated.
-        
         ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             if let properties = snapshot.value as? [String : AnyObject]{
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
@@ -59,22 +60,9 @@ class UserStandardTableViewCell: UITableViewCell {
                             ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
                                 if error == nil{
                                     ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).observeSingleEvent(of: .value, with: {(snap) in
-                                        if let prop = snap.value as? [String: AnyObject] {
-                                            if let likes = prop["peoplewholike"] as? [String : AnyObject] {
-                                                
-                                                let count = likes.count
-                                                self.likedLabel.text = "\(count) likes"
-                                                
-                                                ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(["likes" : count])
-                                                
-                                            } else{
-                                                self.likedLabel.text = "0 likes"
-                                                ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(["likes" : 0])
-                                            }
-                                            self.likeButton.isHidden = false
-                                            self.unlikeButton.isHidden = true
-                                            
-                                        }
+                                       
+                                            self.updateLikesAndButtosDislikes(snapshot: snap)
+                                        
                                     })
                                 }
                             })
@@ -88,11 +76,35 @@ class UserStandardTableViewCell: UITableViewCell {
     }
     
     
+    func updateLikesAndButtosDislikes(snapshot: FIRDataSnapshot){
+        
+        let ref = FIRDatabase.database().reference()
+
+         if let prop = snapshot.value as? [String: AnyObject] {
+        if let likes = prop["peoplewholike"] as? [String : AnyObject] {
+            
+            let count = likes.count
+            self.likedLabel.text = "\(count) likes"
+            
+            ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(["likes" : count])
+            
+            } else{
+                self.likedLabel.text = "0 likes"
+                    ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(["likes" : 0])
+        }
+        self.likeButton.isHidden = false
+        self.unlikeButton.isHidden = true
+        }
+    }
+    
+    
+    
+    
+    
     
     
     @IBAction func likePressed(_ sender: Any) {
         
-        let user =  FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
         
         let keytoPost = ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).childByAutoId().key
@@ -101,26 +113,17 @@ class UserStandardTableViewCell: UITableViewCell {
             
             if (snapshot.value as? [String : AnyObject]) != nil{
                 let updateLikes: [String : Any] = ["peoplewholike/\(keytoPost)" : FIRAuth.auth()!.currentUser!.uid]
+                
                 ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(updateLikes, withCompletionBlock: {(error, reff) in
+                    
                     if error == nil{
+                        
                         ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).observeSingleEvent(of: .value, with: { (snap) in
-                            if let properties = snap.value as? [String : AnyObject] {
-                                if let likes = properties["peoplewholike"] as? [String : AnyObject]{
-                                    let count = likes.count
                             
-                                    self.likedLabel.text = "\(count) likes"
-                                    let update = ["likes" : count]
-                                    ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(update)
-                                    self.likeButton.isHidden = true
-                                    self.unlikeButton.isHidden = false
-                                
-                                    self.saveMeal(user: user!, name: self.nameLabel.text!, price: self.priceLabel.text!, count: count)
-                                    // slaat hij op in het likes van de gebruiker
-                                    
-                                    
-                                    
-                                }
-                            }
+                            
+                            self.updateLabelsAndButtonsLiked(snapshot: snap)
+                            
+                  
                         })
                     }
                 })
@@ -132,11 +135,31 @@ class UserStandardTableViewCell: UITableViewCell {
         
     }
     
-    
-    
-    
+ 
 
-
+    func  updateLabelsAndButtonsLiked(snapshot: FIRDataSnapshot){
+        let ref = FIRDatabase.database().reference()
+        let user =  FIRAuth.auth()?.currentUser?.uid
+        if let properties = snapshot.value as? [String : AnyObject] {
+            if let likes = properties["peoplewholike"] as? [String : AnyObject]{
+                let count = likes.count
+                
+                self.likedLabel.text = "\(count) likes"
+                let update = ["likes" : count]
+                ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(update)
+            
+                self.likeButton.isHidden = true
+                self.unlikeButton.isHidden = false
+        
+                
+                saveMeal(user: user!, name: self.nameLabel.text!, price: self.priceLabel.text!, count: count, type: "standaard-assortiment")
+   
+            }
+        }
+    }
+    
+    
+    
     //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
     func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
         let ref = FIRDatabase.database().reference()
@@ -152,22 +175,28 @@ class UserStandardTableViewCell: UITableViewCell {
             
         }
     }
-
+    
+    
 }
 
-extension UITableViewCell{
-    
-    func saveMeal(user: String, name: String, price: String, count: Int){
-        
-        let ref = FIRDatabase.database().reference()
-        
-        ref.child("users").child(user).child("likes").child(name).child("name").setValue(name)
-        ref.child("users").child(user).child("likes").child(name).child("price").setValue(price)
-        ref.child("users").child(user).child("likes").child(name).child("likes").setValue(count)
-        ref.child("users").child(user).child("likes").child(name).child("day").setValue("standaard-assortiment")
-        ref.child("users").child(user).child("likes").child(name).child("type").setValue("standaard-assortiment")
-        
-    }
-    
 
-}
+
+
+//
+//
+//extension UITableViewCell{
+//    
+//    func saveMeal(user: String, name: String, price: String, count: Int){
+//        
+//        let ref = FIRDatabase.database().reference()
+//        
+//        ref.child("users").child(user).child("likes").child(name).child("name").setValue(name)
+//        ref.child("users").child(user).child("likes").child(name).child("price").setValue(price)
+//        ref.child("users").child(user).child("likes").child(name).child("likes").setValue(count)
+//        ref.child("users").child(user).child("likes").child(name).child("day").setValue("standaard-assortiment")
+//        ref.child("users").child(user).child("likes").child(name).child("type").setValue("standaard-assortiment")
+//        
+//    }
+//    
+//
+//}

@@ -41,10 +41,7 @@ class FavoriteTableViewCell: UITableViewCell {
     //MARK: Unlike a dish that is in favorites.
     @IBAction func UnlikePressedFavorites(_ sender: Any) {
         
-    
-        
         // bij unliken, verwijderen uit favorites van de user
-        
         let ref = FIRDatabase.database().reference()
         let currentUser =  FIRAuth.auth()?.currentUser?.uid
         
@@ -55,12 +52,12 @@ class FavoriteTableViewCell: UITableViewCell {
         self.myDeleteFunction(firstTree: currentUser!, secondTree: "likes", childIWantToRemove: remove!)
 
         // verwijderen van een like
-        
         ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: { (snapshot) in
             if let properties = snapshot.value as? [String : AnyObject]{
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
                     for(id, person) in peopleWhoLike{
                         if person as? String == FIRAuth.auth()!.currentUser!.uid{
+                            
                             // verwijder persoon uit deze lijst.
                             ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
                                 
@@ -69,7 +66,6 @@ class FavoriteTableViewCell: UITableViewCell {
              
                                         if let prop = snap.value as? [String: AnyObject] {
                                            
-                                            
                                             if let likes = prop["peoplewholike"] as? [String : AnyObject] {
                                                
                                                 let count = likes.count
@@ -92,9 +88,6 @@ class FavoriteTableViewCell: UITableViewCell {
         
         let reloadTableView = Notification.Name("reloadTableView")
         NotificationCenter.default.post(name: reloadTableView, object: nil)
-        
-        
-        
     }
     
 

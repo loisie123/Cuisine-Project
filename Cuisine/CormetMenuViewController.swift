@@ -29,19 +29,33 @@ class CormetMenuViewController: UIViewController {
     
 
     @IBAction func cormetLogOut(_ sender: Any) {
-    
-    let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-    
+        
+        let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let logOutAction = UIAlertAction(title: "Yes", style: .default) {action in
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                
             } catch let signOutError as NSError {
                 
-                showAlert(titleAlert: "Problems occured while siging out.", messageAlert: "Try again.")
+                self.showAlert(titleAlert: "Problems occured while siging out.", messageAlert: "Try again.")
                 print ("Error signing out: %@", signOutError)
             }
-    self.performSegue(withIdentifier: "logoutVC", sender: nil)
-    
+            self.performSegue(withIdentifier: "logoutVC", sender: nil)
+            
+        }
+        
+        
+        let cancelAction = UIAlertAction(title: "No", style: .default)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(logOutAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
+    
+
     
     // When the user quits the app encode state.
     override func encodeRestorableState(with coder: NSCoder) {
@@ -59,13 +73,5 @@ class CormetMenuViewController: UIViewController {
 }
 
 
-// Restore view.
-extension CormetMenuViewController: UIViewControllerRestoration {
-    public static func viewController(withRestorationIdentifierPath identifierComponents: [Any],
-                               coder: NSCoder) -> UIViewController? {
-        let vc = CormetMenuViewController()
-        return vc
-    }
-}
 
 

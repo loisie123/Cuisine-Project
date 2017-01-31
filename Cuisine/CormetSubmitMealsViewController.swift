@@ -38,7 +38,8 @@ class CormetSubmitMealsViewController: UIViewController {
         
         self.hideKeyboardWhenTappedAroung()
         
-        
+        addToolBar(textField: sandwichtInput)
+        addToolBar(textField: sandwichPrice)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -164,6 +165,33 @@ class CormetSubmitMealsViewController: UIViewController {
             }
         }
     }
+    
+    
+    func addToolBar(textField: UITextField) {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(donePressed))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        
+        
+        toolBar.isUserInteractionEnabled = true
+        toolBar.sizeToFit()
+        
+        textField.inputAccessoryView = toolBar
+    }
+    
+    func donePressed2() {
+        view.endEditing(true)
+    }
+    
+    func cancelPressed() {
+        view.endEditing(true) // or do something
+    }
+    
     
 
     func submitMeal(name: String, price: String, type: String){

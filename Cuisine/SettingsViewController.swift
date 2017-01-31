@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let urlImage = snapshot.value as! String
+            if let urlImage = snapshot.value as? String{
             
             if let url = NSURL(string: urlImage) {
                 
@@ -47,12 +47,14 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                 }
             }
             
+            }
         })
         
         ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let UserName = snapshot.value as! String
+            if let UserName = snapshot.value as? String{
             self.NameUser.text = "Welcome \(UserName)"
+            }
         })
         ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
             if let email = snapshot.value as? String

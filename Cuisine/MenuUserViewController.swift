@@ -30,38 +30,51 @@ class MenuUserViewController: UIViewController {
         
             ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let urlImage = snapshot.value as! String
+                if let urlImage = snapshot.value as? String{
             
-            if let url = NSURL(string: urlImage) {
+                    if let url = NSURL(string: urlImage) {
                 
-                if let data = NSData(contentsOf: url as URL) {
-                    self.profiePicture.image = UIImage(data: data as Data)
+                        if let data = NSData(contentsOf: url as URL) {
+                            self.profiePicture.image = UIImage(data: data as Data)
                 }
-            }
+                }
+                }
             })
         
         ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
           
-            let UserName = snapshot.value as! String
-            self.nameUser.text = "Welcome \(UserName)"
+            if let UserName = snapshot.value as? String{
+                self.nameUser.text = "Welcome \(UserName)"
+            }
+            
             
         })
         
     }
     @IBAction func LogOutButtonPressed(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            print("SIGNED OUT")
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+        
+        let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let logOutAction = UIAlertAction(title: "Log Out", style: .default) {action in
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                print("SIGNED OUT")
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            
+            self.performSegue(withIdentifier: "logoutVC", sender: nil)
         }
         
-        self.performSegue(withIdentifier: "logoutVC", sender: nil)
+        
+        let cancelAction = UIAlertAction(title: "No", style: .default)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(logOutAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
-
-
-    
 }
 
 

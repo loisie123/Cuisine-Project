@@ -18,7 +18,6 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var databaseHandle: FIRDatabaseHandle?
     
     
-    
     var days = [String]()
     var selectedDay = String()
     var array = [String]()
@@ -30,7 +29,7 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         if days.isEmpty{
-            days = ["Add new days"]
+            days = ["No information available"]
         }
         
         
@@ -39,13 +38,13 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
         }
     
+    
+    
     func getweek(){
         let ref = FIRDatabase.database().reference()
         ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
-            let dictionary = snapshot.value as? NSDictionary
-            self.array = dictionary?.allKeys as! [String]
             
-            self.days = self.array.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+            self.days = self.getWeekDays(snapshot: snapshot)
             self.tableViewImage.reloadData()
             
         })

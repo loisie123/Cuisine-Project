@@ -36,7 +36,6 @@ class MealsTodayTableViewCell: UITableViewCell {
 
     
     @IBAction func likePressed(_ sender: Any) {
-        self.likeButton.isEnabled = true
         
         let user =  FIRAuth.auth()?.currentUser?.uid
         
@@ -63,10 +62,17 @@ class MealsTodayTableViewCell: UITableViewCell {
                                     ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).updateChildValues(update)
                                     self.likeButton.isHidden = true
                                     self.unlikeButton.isHidden = false
-                                    self.likeButton.isEnabled = false
+                                    
         
                                     
                                     // slaat hij op in het likes van de gebruiker
+                                    
+                                    print (user!)
+                                    print (self.nameMeal.text!)
+                                    print (self.priceMeal.text!)
+                                    
+                                    print (count)
+                                    print(self.typeMealLiked)
                                     self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked)
                             
                                     

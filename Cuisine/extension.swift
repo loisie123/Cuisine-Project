@@ -30,74 +30,89 @@ extension UIViewController{
         }
     }
     
-    
-//    func getStandardAssortiment( tableview: UITableView) -> (array1: [[String]], array2: [meals]){
-//        var listAllNames = [[String]]()
-//        var listOfmeals = [meals]()
-//        
-//        print ("wanneer gaat hij hier doorheen")
-//
-//        
-//        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
-//        
-//        let ref = FIRDatabase.database().reference()
-//        
-//        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-//            
-//            print("punt 1")
-//            
-//            let meal = snapshot.value as! [String:AnyObject]
-//            listAllNames = [[String]]()
-//            listOfmeals = [meals]()
-//            
-//            for category in categories{
-//                var listCategoryName = [String]()
-//                listCategoryName.append(category)
-//                
-//                print("punt 2")
-//                for (_,value) in meal{
-//                    
-//                    let showmeals = meals()
-//                    if let cat = value["categorie"] as? String{
-//                        
-//                        if cat == category{
-//                            print("cat is gelijk aan category")
-//                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-//                                print ("punt 88")
-//                                listCategoryName.append(name)
-//                                showmeals.name = name
-//                                showmeals.price = price
-//                                showmeals.likes = likes
-//                                listOfmeals.append(showmeals)
-//                                print("listofmeals")
-//                            }
-//                        }
-//                    }
-//                }
-//                print("listCategoryName: \(listCategoryName)")
-//                listAllNames.append(listCategoryName)
-//            }
-//            
-//        self.LoadViewAgain(tablevie: tableview, listAllnames: listAllNames, listofMeals: listOfmeals)
-//            
-//        
-//        
-//        
-//        })
-//        print (listAllNames)
-//        print(listOfmeals)
-//        return (listAllNames, listOfmeals)
-//        
-//    }
-    
-    func LoadViewAgain(tablevie: UITableView, listAllnames: [[String]], listofMeals: [meals]) {
+    func getWeekDays(snapshot: FIRDataSnapshot) -> ([String]){
+        let ref = FIRDatabase.database().reference()
         
-        tablevie.reloadData()
+        let dictionary = snapshot.value as? NSDictionary
+        let array = dictionary?.allKeys as! [String]
+        let days = array.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        return days
+        
         
     }
     
     
+    func makeSectionHeader(returnedView: UIView, section : Int , listAllNames: [[String]]) -> (UIView){
+        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 0.5)
+        returnedView.backgroundColor = color
+        let label = UILabel(frame: CGRect(x: 5, y: 5, width: view.frame.size.width, height: 20))
+        
+       label.textAlignment = NSTextAlignment.center
+        label.font = UIFont.systemFont(ofSize: 18)
+        //label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = listAllNames[section][0]
+        label.textColor = .black
+        returnedView.addSubview(label)
+        
+        return returnedView
+    }
     
+
+   
+    
+    
+    func getMealInformation(snapshot: FIRDataSnapshot, categories: [String], kindOfCategorie: String) -> ([[String]], [meals]) {
+        print("punt 1")
+        
+        let meal = snapshot.value as! [String:AnyObject]
+        var listAllNames = [[String]]()
+        var listOfmeals = [meals]()
+        
+        let categorie = categories 
+        
+        for category in categorie {
+            var listCategoryName = [String]()
+            listCategoryName.append(category)
+            
+            print("punt 2")
+            for (_,value) in meal{
+                
+                let showmeals = meals()
+                if let cat = value[kindOfCategorie] as? String{
+                    
+                    if cat == category{
+                        print("cat is gelijk aan category")
+                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
+                            print ("punt 88")
+                            listCategoryName.append(name)
+                            showmeals.name = name
+                            showmeals.price = price
+                            showmeals.likes = likes
+                            showmeals.typeOFMEal = category
+                            
+                            if let days = value["day"] as? String{
+                                showmeals.day = days
+                            }
+                            
+                            
+                            if let people = value["peoplewholike"] as? [String : AnyObject] {
+                                for (_,person) in people{
+                                    
+                                    showmeals.peopleWhoLike.append(person as! String)
+                                }
+                            }
+
+                            listOfmeals.append(showmeals)
+                            print("listofmeals")
+                        }
+                    }
+                }
+            }
+            listAllNames.append(listCategoryName)
+        }
+        
+     return (listAllNames, listOfmeals)
+    }
     
     
 }

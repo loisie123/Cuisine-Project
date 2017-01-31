@@ -45,14 +45,9 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
-        returnedView.backgroundColor = color
-        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
-        label.text = self.listAllNames[section][0]
-        label.textColor = .black
-        returnedView.addSubview(label)
+        var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
         
+        returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: self.listAllNames)
         return returnedView
     }
     
@@ -66,7 +61,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
             let removelist = self.listAllNames[indexPath.section]
             let remove = removelist[index + 1]
             
-            self.myDeleteFunction(firstTree: "different days", secondTree: self.day, childIWantToRemove: remove)
+            self.myDeleteFunctionExtra(firstTree: "different days", secondTree: self.day, childIWantToRemove: remove)
             self.viewDidLoad()
         }
         
@@ -166,42 +161,10 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         
         
         ref.child("cormet").child("different days").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let Dish = snapshot.value as! [String: AnyObject]
-            self.listAllNames = [[String]]()
-            self.listOfmeals = [meals]()
-            
-            for type in self.types{
-                self.listCategoryName = [String]()
-                self.listCategoryName.append(type)
-                for (_, value) in Dish{
-                    let mealsToShow = meals()
-                    if let typ = value["type"] as? String{
-                        if typ == type{
-                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                                
-                                self.listCategoryName.append(name)
-                                
-                                mealsToShow.name = name
-                                mealsToShow.likes = likes
-                                mealsToShow.price = price
-                                mealsToShow.typeOFMEal = type
-                                
-                                if let people = value["peoplewholike"] as? [String : AnyObject] {
-                                    for (_,person) in people{
-                                        
-                                        mealsToShow.peopleWhoLike.append(person as! String)
-                                    }
-                                }
-                                
-                                self.listOfmeals.append(mealsToShow)
-                            }
-                        }
-                    }
-                }
-                self.listAllNames.append(self.listCategoryName)
-            }
-            self.self.mealsTableViewImage.reloadData()
+   
+            (self.listAllNames, self.listOfmeals) = self.getMealInformation(snapshot: snapshot, categories: self.types, kindOfCategorie: "type")
+
+        self.mealsTableViewImage.reloadData()
         })
 
     }
@@ -209,7 +172,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
    
     
     //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    override func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
+    func myDeleteFunctionExtra(firstTree: String, secondTree: String, childIWantToRemove: String) {
  
         ref?.child("cormet").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
             if error != nil {

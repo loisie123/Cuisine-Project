@@ -26,7 +26,12 @@ class LoginViewController: UIViewController {
         
         hideKeyboardWhenTappedAroung()
        
-
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil && user?.email != "cormet123@gmail.com" {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
+                self.present(vc, animated: true, completion: nil)
+            } 
+        }
         // Do any additional setup after loading the view.
     }
 

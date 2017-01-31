@@ -27,6 +27,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAroung()
+        
+        
         picker.delegate = self
         ref = FIRDatabase.database().reference()
         let storage = FIRStorage.storage().reference(forURL: "gs://cuisine-9474f.appspot.com")

@@ -21,6 +21,7 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     var array = [String]()
     
     override func viewDidLoad() {
+        
         getweek()
        
         super.viewDidLoad()
@@ -28,31 +29,29 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
         if days.isEmpty{
             days = ["Add new days"]
         }
-        ref = FIRDatabase.database().reference()
+
         self.weekNumberTableViewImage.reloadData()
     }
+    
 
     func getweek(){
         let ref = FIRDatabase.database().reference()
         ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
-            let dictionary = snapshot.value as? NSDictionary
-            self.array = dictionary?.allKeys as! [String]
             
-            self.days = self.array.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+            self.days = self.getWeekDays(snapshot: snapshot)
             self.weekNumberTableViewImage.reloadData()
-            
+
         })
         
     }
     
     
     
-    
-    
+ 
     // building a table View
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! CormetDaysTableViewCell
-        
+        print (days)
         cell.nameDays.text = days[indexPath.row]
         
         return cell
@@ -73,6 +72,7 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            // Aks if user is sure to delete.
             let alertController = UIAlertController(title: "Delete", message: "Do you really want to delete this day?", preferredStyle: UIAlertControllerStyle.alert)
             
             let cancelAction = UIAlertAction(title: "No", style: .default)

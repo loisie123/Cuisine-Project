@@ -22,7 +22,7 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
     
         override func viewDidLoad() {
             
-//            getStandardAssortiment(tableview: userStandardTableView)
+         getStandardAssortiment()
             
             super.viewDidLoad()
             
@@ -35,6 +35,21 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
             // Dispose of any resources that can be recreated.
         }
     
+    func getStandardAssortiment(){
+        
+        listAllNames = [[String]]()
+        listOfmeals = [meals]()
+        
+        let ref = FIRDatabase.database().reference()
+        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
+        
+        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            (self.listAllNames, self.listOfmeals) = self.getMealInformation(snapshot: snapshot, categories: categories, kindOfCategorie: "categorie")
+            self.userStandardTableView.reloadData()
+        })
+        }
+    
     
 
        func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,13 +59,9 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
     
 
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-                let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-                let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 1.0)
-                returnedView.backgroundColor = color
+                var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
             
-                let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
-                label.textColor = .black
-                returnedView.addSubview(label)
+                returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: self.listAllNames)
                 
                 return returnedView
         }

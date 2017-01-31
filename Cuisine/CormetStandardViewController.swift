@@ -28,11 +28,7 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
 
         super.viewDidLoad()        
         ref = FIRDatabase.database().reference()
-        if listOfmeals.isEmpty{
-                print("hij is nog empty")
-        }else{
-            standaardAssortimentTableView.reloadData()
-        }
+        
         
     }
 
@@ -43,53 +39,17 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
         print ("wanneer gaat hij hier doorheen")
 
         let ref = FIRDatabase.database().reference()
+        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
         
         ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
-            self.getMealInformation(snapshot: snapshot)
+            (self.listAllNames, self.listOfmeals) = self.getMealInformation(snapshot: snapshot, categories: categories, kindOfCategorie: "categorie")
+            self.standaardAssortimentTableView.reloadData()
             
         })
     }
     
-    private func getMealInformation(snapshot: FIRDataSnapshot) {
-        print("punt 1")
-        
-        let meal = snapshot.value as! [String:AnyObject]
-        listAllNames = [[String]]()
-        listOfmeals = [meals]()
-        
-        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
-        
-        for category in categories{
-            var listCategoryName = [String]()
-            listCategoryName.append(category)
-            
-            print("punt 2")
-            for (_,value) in meal{
-                
-                let showmeals = meals()
-                if let cat = value["categorie"] as? String{
-                    
-                    if cat == category{
-                        print("cat is gelijk aan category")
-                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                            print ("punt 88")
-                            listCategoryName.append(name)
-                            showmeals.name = name
-                            showmeals.price = price
-                            showmeals.likes = likes
-                            listOfmeals.append(showmeals)
-                            print("listofmeals")
-                        }
-                    }
-                }
-            }
-            print("listCategoryName: \(listCategoryName)")
-            listAllNames.append(listCategoryName)
-        }
-        
-        self.standaardAssortimentTableView.reloadData()
-    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -102,7 +62,7 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
     
     
@@ -120,13 +80,8 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-        let color = UIColor(red: 121.0/255.0, green: 172.0/255.0, blue: 43.0/255.0, alpha: 0.7)
-        returnedView.backgroundColor = color
-        let label = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width, height: 25))
-        label.text = self.listAllNames[section][0]
-        label.textColor = .black
-        returnedView.addSubview(label)
+        var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 50))
+        returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: listAllNames)
         
         return returnedView
     }

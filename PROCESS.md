@@ -135,6 +135,11 @@ Bij het verwerken van dubbele functies lukte het niet helemaal met de viewcontro
 Alle functies zijn ingekort. Nu ook in de viewcontrollers alle dubbele functies zo min mogelijk gemaakt. Dus alle obserEventTyp functies zijn bijna allemaal binnen de extension gezet. Het probleem van gister Opgelost dankzij de hulp van Julian. De observe regels heb ik in de functies laten staan. Maar vervolgens alles in een algemene functie gezet. 
 Verder is het Design nu klaar. Op een paar constraints na. Moet nog even checken of alle lettertypes gelijk zijn en de gelijke grootte zijn. 
 
+Het unliken in de favoriteViewController gaat nog verkeerd
+Ze gaan wel goed als het om een gerecht uit het dagelijkse menu gaat. Maar het gaat niet goed wanneer het een gerecht uit een standaard assortiment gaat. Misschien aan het overwegen om nog een extra laaag in de datastructuur aan te leggen. 
 
+Een ander Bug dat nog voorkomt is dat de likes die je ziet in je favorites niet gelijk zijn aan de likes in totaal. hier moet ik ook een keuze over gaan maken. 
+
+Net als over het veranderen van een gerecht door de cateraar. Wanneer ik het verander betekent dat de naam ook moet veranderen bij iedereen die dat gerecht in zin Likes lijst heeft. Ik kan ook doen dat je alleen het aantal likes kan veranderen en als je het gerecht verkeerd hebt geschreven dat je hem dan moet verwijderen en dan opnieuw moet toevoegen. 
 
 

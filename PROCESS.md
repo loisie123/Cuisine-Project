@@ -124,4 +124,9 @@ Veel alertcontrollers toegevoegd om het gemak te vegroten. Ook veel functies in 
 Een ander punt waar ik nog vast loop is het punt dat wanneer ik de naam van een dish wil wijzigen dat het wijzigen wel lukt, maar vervolgens kun je deze niet meer liken. Dit komt doordat de key naam niet veranderd waardoor de like functie hem niet goed kan vinden. Moet dus een manier vinden om de key te veranderen. Of misschien moet ik overwegen om dan een hele nieuwe dish aan te maken en deze te verwijderen. 
 Ook heb ik een manier gevonden om verschillende soorten eten/drankjes aan te laten maken. Echter zijnd e verschillende categorien nog gehardcode. Mocht ik nog tijd hebben zou ik dit nog willen veranderen. Maar voor nu is het belangrijk dat de andere functies allemaal vlekkeloos lopen. 
 
+# dag 17 Maandag 29-01
+
+Alle functies ingekort 
+Bezig met design geweest
+
 

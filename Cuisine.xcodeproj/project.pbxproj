@@ -35,6 +35,7 @@
 		CA659BD61E37785C00C45208 /* CormetStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */; };
 		CA659BD81E3778B900C45208 /* CormetStandaardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */; };
 		CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */; };
+		CAC337081E4098EA00AB0FB1 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC337071E4098EA00AB0FB1 /* extension.swift */; };
 		CAE569451E2CF46200E38109 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE569441E2CF46200E38109 /* users.swift */; };
 		CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */; };
 		CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */; };
@@ -72,6 +73,7 @@
 		CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetStandardViewController.swift; sourceTree = "<group>"; };
 		CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetStandaardTableViewCell.swift; sourceTree = "<group>"; };
 		CA8C41AC1E362999009A2BE7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CAC337071E4098EA00AB0FB1 /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		CAE569441E2CF46200E38109 /* users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
 		CAEBD4691E321B440095640E /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewCell.swift; path = ../FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		CAEBD46B1E321B7A0095640E /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */,
 				CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */,
+				CAC337071E4098EA00AB0FB1 /* extension.swift */,
 				CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */,
 				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
 				CA1852741E3A030800EBB17F /* CormetDaysViewController.swift */,
@@ -365,6 +368,7 @@
 				CA12F2AF1E2E68F900C0003A /* MenuUserViewController.swift in Sources */,
 				CA1852731E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift in Sources */,
 				CA18526B1E38D90B00EBB17F /* UserStandardAssortimenViewController.swift in Sources */,
+				CAC337081E4098EA00AB0FB1 /* extension.swift in Sources */,
 				CAEBD46C1E321B7A0095640E /* FavoriteViewController.swift in Sources */,
 				CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */,
 				CA16B9E61E28F117004C1B2E /* TodayMealsViewController.swift in Sources */,

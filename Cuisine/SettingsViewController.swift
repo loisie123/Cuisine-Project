@@ -55,7 +55,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
             self.NameUser.text = "Welcome \(UserName)"
         })
         ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value)
             if let email = snapshot.value as? String
             {
                 print(email)
@@ -99,12 +98,12 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                                        style: .default) { action in
                  
                             let nameField = alertController.textFields![0]
-                            if let newName = nameField.text! as? String{
-                                            
+                            if let newName = nameField.text {
                                 self.ref?.child("users").child(currentUser).updateChildValues(["name" : newName])
                                 self.NameUser.text! = "Welcome \(newName)"
                             }
                 }
+        
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
         alertController.addTextField(configurationHandler: { (textField) -> Void in
@@ -131,7 +130,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                                          style: .default) { action in
                                             
                                             let emailField = alertController.textFields![0]
-                                            if let newEmail = emailField.text! as? String{
+                                            if let newEmail = emailField.text{
                                                 if emailField.text != ""{
                                                     
                                                     FIRAuth.auth()!.currentUser!.updateEmail(newEmail) { error in
@@ -181,7 +180,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                                             
                                             let namePassword = alertController.textFields![0]
                                             let checkPassword = alertController.textFields![1]
-                                            if let newPassword = namePassword.text! as? String {
+                                            if let newPassword = namePassword.text {
                                                 if newPassword == checkPassword.text{
                                         
                                                     FIRAuth.auth()?.currentUser!.updatePassword(newPassword,  completion: { error in
@@ -273,10 +272,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         uploadTask.resume()
     }
     
-    
-   // maak hier nog een foutmelding
-    
-    
+
     func error(){
         let alertController = UIAlertController(title: "Something went wrong", message:
             

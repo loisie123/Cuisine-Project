@@ -48,8 +48,7 @@ class MenuUserViewController: UIViewController {
         })
         
     }
-
-    @IBAction func LogOutButton(_ sender: Any) {
+    @IBAction func LogOutButtonPressed(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()
         do {
             try firebaseAuth?.signOut()
@@ -57,9 +56,10 @@ class MenuUserViewController: UIViewController {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        self.performSegue(withIdentifier: "logoutVC", sender: nil)
         
+        self.performSegue(withIdentifier: "logoutVC", sender: nil)
     }
+
 
     
 }

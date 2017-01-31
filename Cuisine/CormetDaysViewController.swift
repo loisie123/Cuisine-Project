@@ -45,6 +45,10 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    
+    
+    
+    
     // building a table View
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! CormetDaysTableViewCell
@@ -78,7 +82,6 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
                 let remove = self.days[indexPath.row]
                 
                 self.myDeleteFunction(firstTree: "cormet", secondTree: "different days", childIWantToRemove: remove)
-            
                  self.viewDidLoad()
             }
             
@@ -108,24 +111,4 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
 
 
 
-
-extension UIViewController{
-    //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    
-    func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
-        var ref:FIRDatabaseReference?
-        
-        ref = FIRDatabase.database().reference()
-        ref?.child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
-            if error != nil {
-                print("error \(error)")
-            }
-            else{
-                print ("removed")
-            }
-            
-            
-        }
-    }
-}
 

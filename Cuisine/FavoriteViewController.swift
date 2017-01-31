@@ -137,12 +137,10 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                         }
                     }
-                    
                 }
                 self.listAllNamesFavorites.append(self.listCategorynameFavorites)
             }
             self.FavoriteTableImage.reloadData()
-            
             })
         }
     

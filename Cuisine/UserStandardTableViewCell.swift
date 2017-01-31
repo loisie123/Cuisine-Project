@@ -99,7 +99,7 @@ class UserStandardTableViewCell: UITableViewCell {
         
         ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).observeSingleEvent(of: .value, with: {(snapshot) in
             
-            if let meal = snapshot.value as? [String : AnyObject]{
+            if (snapshot.value as? [String : AnyObject]) != nil{
                 let updateLikes: [String : Any] = ["peoplewholike/\(keytoPost)" : FIRAuth.auth()!.currentUser!.uid]
                 ref.child("cormet").child("standaard-assortiment").child(self.nameLabel.text!).updateChildValues(updateLikes, withCompletionBlock: {(error, reff) in
                     if error == nil{

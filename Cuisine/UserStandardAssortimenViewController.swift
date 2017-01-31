@@ -16,15 +16,14 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
         var ref: FIRDatabaseReference?
         var databaseHandle: FIRDatabaseHandle?
     
-        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
-    
         var listAllNames = [[String]]()
         var listOfmeals = [meals]()
         var listCategoryName = [String]()
     
         override func viewDidLoad() {
             
-            getStandardAssortiment()
+//            getStandardAssortiment(tableview: userStandardTableView)
+            
             super.viewDidLoad()
             
             ref = FIRDatabase.database().reference()
@@ -106,40 +105,4 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
             return cell
          }
     
-    
-    
-    func getStandardAssortiment(){
-
-        listAllNames.removeAll()
-        let ref = FIRDatabase.database().reference()
-        
-        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let meal = snapshot.value as! [String:AnyObject]
-            self.listAllNames = [[String]]()
-            self.listOfmeals = [meals]()
-            
-            for category in self.categories{
-                self.listCategoryName = [String]()
-                self.listCategoryName.append(category)
-                for (_,value) in meal{
-                    let showmeals = meals()
-                    if let cat = value["categorie"] as? String{
-                        if cat == category{
-                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                                self.listCategoryName.append(name)
-                                showmeals.name = name
-                                showmeals.price = price
-                                showmeals.likes = likes
-                                self.listOfmeals.append(showmeals)
-                                
-                            }
-                        }
-                    }
-                }
-                self.listAllNames.append(self.listCategoryName)
-            }
-            self.userStandardTableView.reloadData()
-        })
     }
-}

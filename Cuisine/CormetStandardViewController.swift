@@ -14,19 +14,81 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
-    let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
+    
     
     var listAllNames = [[String]]()
     var listCategoryName = [String]()
-     var listOfmeals = [meals]()
-    
+    var listOfmeals = [meals]()
+
     @IBOutlet weak var standaardAssortimentTableView: UITableView!
     
     override func viewDidLoad() {
         getStandardAssortiment()
+        
 
         super.viewDidLoad()        
         ref = FIRDatabase.database().reference()
+        if listOfmeals.isEmpty{
+                print("hij is nog empty")
+        }else{
+            standaardAssortimentTableView.reloadData()
+        }
+        
+    }
+
+    func getStandardAssortiment() {
+        listAllNames = [[String]]()
+        listOfmeals = [meals]()
+        
+        print ("wanneer gaat hij hier doorheen")
+
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            self.getMealInformation(snapshot: snapshot)
+            
+        })
+    }
+    
+    private func getMealInformation(snapshot: FIRDataSnapshot) {
+        print("punt 1")
+        
+        let meal = snapshot.value as! [String:AnyObject]
+        listAllNames = [[String]]()
+        listOfmeals = [meals]()
+        
+        let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
+        
+        for category in categories{
+            var listCategoryName = [String]()
+            listCategoryName.append(category)
+            
+            print("punt 2")
+            for (_,value) in meal{
+                
+                let showmeals = meals()
+                if let cat = value["categorie"] as? String{
+                    
+                    if cat == category{
+                        print("cat is gelijk aan category")
+                        if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
+                            print ("punt 88")
+                            listCategoryName.append(name)
+                            showmeals.name = name
+                            showmeals.price = price
+                            showmeals.likes = likes
+                            listOfmeals.append(showmeals)
+                            print("listofmeals")
+                        }
+                    }
+                }
+            }
+            print("listCategoryName: \(listCategoryName)")
+            listAllNames.append(listCategoryName)
+        }
+        
+        self.standaardAssortimentTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,43 +157,4 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     }
 
     
-    func getStandardAssortiment(){
-
-        listAllNames.removeAll()
-        let ref = FIRDatabase.database().reference()
-        
-        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let meal = snapshot.value as! [String:AnyObject]
-            self.listAllNames = [[String]]()
-            self.listOfmeals = [meals]()
-        
-            for category in self.categories{
-                self.listCategoryName = [String]()
-                self.listCategoryName.append(category)
-                
-                for (_,value) in meal{
-                    
-                    let showmeals = meals()
-                    if let cat = value["categorie"] as? String{
-                        
-                        if cat == category{
-                        
-                            if let likes = value["likes"] as? Int, let name = value["name"] as? String, let price = value["price"] as? String{
-                                self.listCategoryName.append(name)
-                                showmeals.name = name
-                                showmeals.price = price
-                                showmeals.likes = likes
-                                self.listOfmeals.append(showmeals)
-                                
-                        }
-                    }
-                }
-            }
-
-             self.listAllNames.append(self.listCategoryName)
-            }
-        self.standaardAssortimentTableView.reloadData()
-        })
-    }
 }

@@ -26,6 +26,7 @@ class MenuUserViewController: UIViewController {
         
         ref = FIRDatabase.database().reference()
         
+        // show image:
         let userID =  FIRAuth.auth()?.currentUser?.uid
         
             ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -51,6 +52,8 @@ class MenuUserViewController: UIViewController {
         })
         
     }
+    
+    //MARK:- Log out function
     @IBAction func LogOutButtonPressed(_ sender: Any) {
         
         let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: UIAlertControllerStyle.alert)

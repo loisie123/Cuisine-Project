@@ -11,54 +11,44 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
-    
     @IBOutlet weak var emailInput: UITextField!
-    
     @IBOutlet weak var passwordInput: UITextField!
     
     var currentUser = String()
     var stringPicture = NSString()
-    let color = UIColor(colorLiteralRed: 121, green: 172, blue: 43, alpha: 1.0)
     
-
     override func viewDidLoad() {
+        checkIfSomeoneIsLoggedIn()
+        
         super.viewDidLoad()
         
-        hideKeyboardWhenTappedAroung()
-       
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if user != nil && user?.email != "cormet123@gmail.com" {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
-                self.present(vc, animated: true, completion: nil)
-            } 
+        hideKeyboardWhenTappedAround()
         }
-        // Do any additional setup after loading the view.
-    }
-
+    
+    
+    //MARK:- LogIn
     @IBAction func loginButton(_ sender: Any) {
         guard emailInput.text != "", passwordInput.text != "" else {return}
         
         FIRAuth.auth()?.signIn(withEmail: emailInput.text!, password: passwordInput.text!, completion: {(user, error) in
             
             if let error = error {
-                
                 self.showAlert(titleAlert: "Login Failed", messageAlert: "Try again")
                 print (error.localizedDescription)
 
             }
             
             if self.emailInput.text! == "cormet123@gmail.com"{
-                
-                if let user = user{
+                if user != nil{
                     self.performSegue(withIdentifier: "cormetVC", sender: nil)
                     }
                 }
             else{
-                if let user = user{
+                if user != nil{
                     
                 self.performSegue(withIdentifier: "usersVC", sender: nil)
                 }
-                }
+            }
         })
         
     }
@@ -67,34 +57,33 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    //MARK:- Automatic Log In Function
+    func checkIfSomeoneIsLoggedIn(){
+        //
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil && user?.email != "cormet123@gmail.com" {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
+                self.present(vc, animated: true, completion: nil)
+            } else if user?.email == "cormet123@gmail.com"{
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "cormetVC")
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+        
+    }
+
+
+
+
 }
 
-extension UIViewController{
-    func hideKeyboardWhenTappedAroung(){
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard(){
-        view.endEditing(true)
-    }
-}
 
 
-extension UIViewController{
-   func showAlert(titleAlert: String , messageAlert: String){
-    let alertcontroller = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: UIAlertControllerStyle.alert)
-    
-    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-    
-    alertcontroller.addAction(cancelAction)
-    
-    self.present(alertcontroller, animated: true, completion: nil)
-    
-    
-    }
-    
-}
+
+
+
 
 
 

@@ -29,6 +29,34 @@ extension UIViewController{
             
         }
     }
+
+        
+        //MARK:- function to remove and show keyboard.
+        //reference: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
+        func hideKeyboardWhenTappedAround(){
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+            view.addGestureRecognizer(tap)
+        }
+        
+        func dismissKeyboard(){
+            view.endEditing(true)
+        }
+        
+        //MARK:- Alertcontroller
+        func showAlert(titleAlert: String , messageAlert: String){
+            let alertcontroller = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+            
+            alertcontroller.addAction(cancelAction)
+            
+            self.present(alertcontroller, animated: true, completion: nil)
+            
+            
+        }
+        
+
+    
     
     func getWeekDays(snapshot: FIRDataSnapshot) -> ([String]){
         let ref = FIRDatabase.database().reference()
@@ -112,7 +140,25 @@ extension UIViewController{
         }
         
      return (listAllNames, listOfmeals)
-    }}
+    }
+
+    
+    
+    //MARK:- delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
+    func myDeleteFunctionExtra(firstTree: String, secondTree: String, childIWantToRemove: String) {
+        var ref:FIRDatabaseReference?
+        
+        ref?.child("cormet").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
+            if error != nil {
+                print("error \(error)")
+            }
+            else{
+                print ("removed")
+            }
+        }
+    }
+
+}
 
 
 

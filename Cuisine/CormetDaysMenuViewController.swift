@@ -13,19 +13,18 @@ import Firebase
 class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var dayNameLabel: UILabel!
+    @IBOutlet weak var mealsTableViewImage: UITableView!
+    
     
     let types = ["Soup", "Sandwich" ,"Hot dish" ]
     
     var listAllNames = [[String]]()
     var listCategoryName = [String]()
-    var listOfmeals = [meals]()
+    var listOfMeals = [meals]()
     
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
-
-    
     var day = String()
-    @IBOutlet weak var mealsTableViewImage: UITableView!
     
     
     override func viewDidLoad() {
@@ -33,6 +32,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         
         super.viewDidLoad()
         dayNameLabel.text = day
+        
         ref = FIRDatabase.database().reference()
         
         self.mealsTableViewImage.reloadData()
@@ -44,6 +44,8 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK:- Make tableView with sections and a delete/change function.
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
         
@@ -51,8 +53,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         return returnedView
     }
     
-    
-    // table view met sections en een delete functie
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         
@@ -74,33 +75,29 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
             
             let changeAction = UIAlertAction(title: "Change", style: .default) {action in
                 
-                let newName = alertcontroller.textFields![0]
-                let newPrice = alertcontroller.textFields![1]
+                //let newName = alertcontroller.textFields![0]
+                let newPrice = alertcontroller.textFields![0]
 
                 
-                if newName.text != ""{
-                    
-                    self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["name" : newName.text])
-                    print("is het gelukt?")
-                }
+//                if newName.text != ""{
+//                    
+//                    self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["name" : newName.text])
+//                    print("is het gelukt?")
+//                }
                 if newPrice.text != "" {
-                    self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["price" : newPrice.text])
+                    self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["price" : newPrice.text!])
                 }
                 
-                print("ik wil wijzigen")
                 self.viewDidLoad()
-            
-            
-            
-            
+ 
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .default)
             
             
-            alertcontroller.addTextField(configurationHandler: { (textField) -> Void in
-                textField.text = ""
-                textField.placeholder = "Enter new Name"
-            })
+//            alertcontroller.addTextField(configurationHandler: { (textField) -> Void in
+//                textField.text = ""
+//                textField.placeholder = "Enter new Name"
+//            })
             alertcontroller.addTextField(configurationHandler: { (textField) -> Void in
                 textField.text = ""
                 textField.placeholder = "Enter new Price"
@@ -117,6 +114,9 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         return [delete, change]
     }
     
+    
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return listAllNames.count
     }
@@ -132,18 +132,15 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-       print (listAllNames)
         return listAllNames[section][0]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! CormetMenuDaysTableViewCell
-        print(listAllNames)
-        
-        for meal in listOfmeals{
+      
+        for meal in listOfMeals{
             if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
-                
                 cell.nameLabel.text = meal.name
                 cell.priceLabel.text = "€ \(meal.price!)"
                 cell.likesLabel.text = " \(meal.likes!) likes"
@@ -154,7 +151,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
   
     
     
-    //MARK: Get meals from firebase
+    //MARK:- Get meals from firebase
     func getMeals(){
         
         let ref = FIRDatabase.database().reference()
@@ -162,26 +159,11 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         
         ref.child("cormet").child("different days").child(day).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
    
-            (self.listAllNames, self.listOfmeals) = self.getMealInformation(snapshot: snapshot, categories: self.types, kindOfCategorie: "type")
+            (self.listAllNames, self.listOfMeals) = self.getMealInformation(snapshot: snapshot, categories: self.types, kindOfCategorie: "type")
 
         self.mealsTableViewImage.reloadData()
         })
 
-    }
-
-   
-    
-    //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    func myDeleteFunctionExtra(firstTree: String, secondTree: String, childIWantToRemove: String) {
- 
-        ref?.child("cormet").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
-            if error != nil {
-                print("error \(error)")
-            }
-            else{
-                print ("removed")
-            }
-        }
     }
 }
     

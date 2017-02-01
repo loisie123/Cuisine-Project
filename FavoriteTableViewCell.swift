@@ -11,9 +11,6 @@ import Firebase
 
 class FavoriteTableViewCell: UITableViewCell {
 
-    
-    
-    
     @IBOutlet weak var nameMeal: UILabel!
     @IBOutlet weak var priceFavoriteMeal: UILabel!
     @IBOutlet weak var UnlikeButton: UIButton!
@@ -21,16 +18,9 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var likesFavoriteMeal: UILabel!
     
     var day = String()
-    var child = String()
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-       
-        
-    
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,108 +29,69 @@ class FavoriteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    //MARK: Unlike a dish that is in favorites.
+    //MARK:- Unlike a dish that is in favorites and update the dish.
     @IBAction func UnlikePressedFavorites(_ sender: Any) {
         
         // bij unliken, verwijderen uit favorites van de user
         let ref = FIRDatabase.database().reference()
         let currentUser =  FIRAuth.auth()?.currentUser?.uid
-        
-        
-        // Removed from  the liked list from the user
         let remove = self.nameMeal.text
-        
-        print ("komen we uberhaupt nog wel ergens")
-    
-        
         self.myDeleteFunction(firstTree: currentUser!, secondTree: "likes", childIWantToRemove: remove!)
         
-        if self.child == self.day {
-            // verwijderen van een like
-            ref.child("cormet").child(self.child).child(remove!).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                print("hallo")
-                
-                print (snapshot)
-                if let properties = snapshot.value as? [String : AnyObject]{
-                    
-                    print("hei")
-                    print (properties)
-                    
-                    if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
-                        for(id, person) in peopleWhoLike{
-                            if person as? String == FIRAuth.auth()!.currentUser!.uid{
-                                
-                                // verwijder persoon uit deze lijst.
-                                ref.child("cormet").child(self.child).child(remove!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
-                                    
-                                    print( "punt 2878942")
-                                    if error == nil{
-                                        ref.child("cormet").child(self.child).child(remove!).observeSingleEvent(of: .value, with: {(snap) in
-                                            
-                                            if let prop = snap.value as? [String: AnyObject] {
-                                                
-                                                if let likes = prop["peoplewholike"] as? [String : AnyObject] {
-                                                    print ("komt hij hier")
-                                                    let count = likes.count
-                                                    ref.child("cormet").child(self.child).child(remove!).updateChildValues(["likes" : count])
-                                                    
-                                                } else{
-                                                    ref.child("cormet").child(self.child).child(remove!).updateChildValues(["likes" : 0])
-                                                }
-                                                
-                                            }
-                                        })
-                                    }
-                                })
-                            }
-                        }
-                    }
-                }
-            })
+        
+        // In This case the dish is saved under Standard-assortiment
+        if self.day == "standaard-assortiment"{
+            
+            let keyToPostStandard = ref.child("cormet").child("standaard-assortiment").child(remove!)
+            
+            unlikePost(keyToPost: keyToPostStandard)
             ref.removeAllObservers()
             
             let reloadTableView = Notification.Name("reloadTableView")
             NotificationCenter.default.post(name: reloadTableView, object: nil)
         }
-        
-
-            
+        // In this case the dish was is saved under different days.
         else{
-       
-        // verwijderen van een like
-        ref.child("cormet").child(self.child).child(self.day).child(remove!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let keyToPostDays = ref.child("cormet").child("different days").child(self.day).child(remove!)
             
-            print("hallo")
+            unlikePost(keyToPost: keyToPostDays)
+            ref.removeAllObservers()
             
-            print (snapshot)
+            let reloadTableView = Notification.Name("reloadTableView")
+            NotificationCenter.default.post(name: reloadTableView, object: nil)
+        }
+    }
+
+    
+    
+    // MARK: - Function that unlikes an dish when someone clicks on the hart. 
+    // Reference: https://www.youtube.com/watch?v=AIN_bbIku_o
+    
+    func unlikePost(keyToPost: AnyObject){
+        
+        keyToPost.observeSingleEvent(of: .value, with: { (snapshot) in
             if let properties = snapshot.value as? [String : AnyObject]{
                 
-                print("hei")
-                print (properties)
-                
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
+                    
                     for(id, person) in peopleWhoLike{
                         if person as? String == FIRAuth.auth()!.currentUser!.uid{
                             
-                            // verwijder persoon uit deze lijst.
-                            ref.child("cormet").child(self.child).child(self.day).child(remove!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
-                                
-                                print( "punt 2878942")
+                            // Delete id from list of id's that like that particular dish 
+                            // Ans update amount of total likes
+                            keyToPost.child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
                                 if error == nil{
-                                    ref.child("cormet").child(self.child).child(self.day).child(remove!).observeSingleEvent(of: .value, with: {(snap) in
-             
+                                    keyToPost.observeSingleEvent(of: .value, with: {(snap) in
+                                        
                                         if let prop = snap.value as? [String: AnyObject] {
-                                           
                                             if let likes = prop["peoplewholike"] as? [String : AnyObject] {
-                                                print ("komt hij hier")
+                            
                                                 let count = likes.count
-                                                ref.child("cormet").child(self.child).child(self.day).child(remove!).updateChildValues(["likes" : count])
+                                                keyToPost.updateChildValues(["likes" : count])
                                                 
                                             } else{
-                                                ref.child("cormet").child(self.child).child(self.day).child(remove!).updateChildValues(["likes" : 0])
+                                                keyToPost.updateChildValues(["likes" : 0])
                                             }
-                                            
                                         }
                                     })
                                 }
@@ -150,20 +101,15 @@ class FavoriteTableViewCell: UITableViewCell {
                 }
             }
         })
-        ref.removeAllObservers()
-        
-        let reloadTableView = Notification.Name("reloadTableView")
-        NotificationCenter.default.post(name: reloadTableView, object: nil)
-        }
     }
     
 
-
     
-    //MARK: delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
+    //MARK:- Delete function
+    // reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
     func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
         let ref = FIRDatabase.database().reference()
-        
+
         ref.child("users").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
             if error != nil {
                 print("error \(error)")
@@ -171,12 +117,7 @@ class FavoriteTableViewCell: UITableViewCell {
             else{
                 print ("removed")
             }
-            
-            
         }
     }
-
-    
-    
 }
 

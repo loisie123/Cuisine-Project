@@ -35,6 +35,8 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
             // Dispose of any resources that can be recreated.
         }
     
+    
+    //MARK:- Get dishes from Firebase.
     func getStandardAssortiment(){
         
         listAllNames = [[String]]()
@@ -51,69 +53,65 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
         }
     
     
-
-       func numberOfSections(in tableView: UITableView) -> Int {
-         return listAllNames.count
-         }
+    //MARk:- TableView with sections.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return listAllNames.count
+    }
     
     
 
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-                var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
-            
-                returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: self.listAllNames)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
+        returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: self.listAllNames)
                 
-                return returnedView
-        }
+        return returnedView
+    }
     
 
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 100
-            
-         }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
          
-         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return listAllNames[section].count-1
-         }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listAllNames[section].count-1
+    }
          
-         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return listAllNames[section][0]
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return listAllNames[section][0]
 
-         }
+    }
    
     
-         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          
-            let cell = tableView.dequeueReusableCell(withIdentifier: "userStandaardCell", for: indexPath) as! UserStandardTableViewCell
-    
-            for meal in listOfmeals{
-                if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userStandaardCell", for: indexPath) as! UserStandardTableViewCell
+        for meal in listOfmeals{
+            if meal.name == listAllNames[indexPath.section][indexPath.row+1]{
                     
-                    cell.nameLabel.text = meal.name
-                    cell.priceLabel.text = "€ \(meal.price!)"
-                    cell.likedLabel.text = " \(meal.likes!) likes"
+                cell.nameLabel.text = meal.name
+                cell.priceLabel.text = "€ \(meal.price!)"
+                cell.likedLabel.text = " \(meal.likes!) likes"
                     
-                    // Check if user already like the dish
-                    if meal.likes != 0 {
+                // Check if user already like the dish
+                if meal.likes != 0 {
                         
-                        for person in meal.peopleWhoLike{
-                            if person == FIRAuth.auth()!.currentUser!.uid{
-                                print ("true")
-                                cell.unlikeButton.isHidden = false
-                                cell.likeButton.isHidden = true
+                    for person in meal.peopleWhoLike{
+                        if person == FIRAuth.auth()!.currentUser!.uid{
+                            cell.unlikeButton.isHidden = false
+                            cell.likeButton.isHidden = true
                             }
-                            else {
-                                cell.likeButton.isHidden = false
-                                cell.unlikeButton.isHidden = true
-                            }
+                        else {
+                            cell.likeButton.isHidden = false
+                            cell.unlikeButton.isHidden = true
                         }
-                    } else{
-                        cell.likeButton.isHidden = false
-                        cell.unlikeButton.isHidden = true
-                    }
+                        }
+                } else{
+                    cell.likeButton.isHidden = false
+                    cell.unlikeButton.isHidden = true
+                }
                 }
             }
             return cell
-         }
+        }
     
     }

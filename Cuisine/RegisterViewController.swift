@@ -5,6 +5,8 @@
 //  Created by Lois van Vliet on 10-01-17.
 //  Copyright © 2017 Lois van Vliet. All rights reserved.
 //
+//  reference to this viewcontroller: https://www.youtube.com/watch?v=AsSZulMc7sk
+//
 
 import UIKit
 import Firebase
@@ -23,21 +25,18 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
     var userStorage: FIRStorageReference!
     var ref: FIRDatabaseReference!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hideKeyboardWhenTappedAroung()
-        
-        
+        hideKeyboardWhenTappedAround()
+
         picker.delegate = self
         ref = FIRDatabase.database().reference()
         let storage = FIRStorage.storage().reference(forURL: "gs://cuisine-9474f.appspot.com")
         userStorage = storage.child("users")
         // Do any additional setup after loading the view.
     }
-    
-   
+
  
     @IBAction func selectPhotoImage(_ sender: Any) {
         picker.allowsEditing = true
@@ -46,15 +45,13 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             self.profileImage.image = image
         }
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
+
     @IBAction func registreButton(_ sender: Any) {
         
         guard nameInput.text != "", emailInput.text != "", passwordInpu.text != "", confirmPasswordInput.text != "" else {return}
@@ -103,9 +100,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
-    
-    
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

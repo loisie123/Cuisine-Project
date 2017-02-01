@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Lois van Vliet on 20-01-17.
-//
+//  ViewController that shows the favorite meals
 //
 
 import UIKit
@@ -20,7 +20,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     var listOfMealsFavorites = [meals]()
     
     
-    
     @IBOutlet weak var FavoriteTableImage: UITableView!
     
     override func viewDidLoad() {
@@ -33,30 +32,39 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(FavoriteViewController.reloadTableView), name: reloadTableView, object: nil)
         
-        
-
         ref = FIRDatabase.database().reference()
 
-        
         self.FavoriteTableImage.reloadData()
-        // Do any additional setup after loading the view.
+        
     }
 
+    //MARK:- Reload tableview
     func reloadTableView() {
         getMealsFavorites()
         FavoriteTableImage.reloadData()
         
     }
     
+    //MARK:- Get information from Firebase
+    func getMealsFavorites(){
+        
+        let currentUser =  FIRAuth.auth()?.currentUser?.uid
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("users").child(currentUser!).child("likes").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            (self.listAllNamesFavorites, self.listOfMealsFavorites) = self.getMealInformation(snapshot: snapshot, categories: self.types, kindOfCategorie: "type")
+            
+            
+            self.FavoriteTableImage.reloadData()
+        })
+    }
     
-    // make tableView
-    
+    //MARK:- Make tableview with sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return listAllNamesFavorites.count
     }
     
-
-   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
     return listAllNamesFavorites[section].count-1
@@ -67,17 +75,13 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         return listAllNamesFavorites[section][0]
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
         returnedView = makeSectionHeader(returnedView: returnedView, section: section, listAllNames: self.listAllNamesFavorites)
-        
-        
+    
         return returnedView
     }
 
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
     let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell", for: indexPath) as! FavoriteTableViewCell
@@ -88,12 +92,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.priceFavoriteMeal.text = "\(meal.price!)"
                 cell.likesFavoriteMeal.text = "\(meal.likes!) likes"
                 cell.day = meal.day
-                if meal.day == "standaard-assortiment"{
-                    cell.child = "standaard-assortiment"
-                }else {
-                    cell.child = "different days"
-                }
-                
+                                
                 
             }
         }
@@ -102,25 +101,5 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-        
     }
-    
-    
-    func getMealsFavorites(){
-    
-        
-        let currentUser =  FIRAuth.auth()?.currentUser?.uid
-        let ref = FIRDatabase.database().reference()
-        
-        ref.child("users").child(currentUser!).child("likes").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
-               (self.listAllNamesFavorites, self.listOfMealsFavorites) = self.getMealInformation(snapshot: snapshot, categories: self.types, kindOfCategorie: "type")
-            
-        
-            self.FavoriteTableImage.reloadData()
-            })
-        }
-    
-    
-    
 }

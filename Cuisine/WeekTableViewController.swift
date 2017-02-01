@@ -32,14 +32,13 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
             days = ["No information available"]
         }
         
-        
         ref = FIRDatabase.database().reference()
         self.tableViewImage.reloadData()
 
         }
     
     
-    
+    //MARK:- Get the available dates.
     func getweek(){
         let ref = FIRDatabase.database().reference()
         ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -50,8 +49,7 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
         })
     }
 
-
-    
+    //MARK:- Make tableview
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weekCell", for: indexPath) as! WeekTableViewCell
         
@@ -75,14 +73,11 @@ class WeekTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mealsVC"{
             
             let controller = segue.destination as! TodayMealsViewController
                         controller.day = selectedDay
-         
-           
         }
         
     }

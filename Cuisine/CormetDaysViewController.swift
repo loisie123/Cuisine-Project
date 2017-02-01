@@ -34,6 +34,7 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     }
     
 
+    //MARK:- Get the available information from Firebase.
     func getweek(){
         let ref = FIRDatabase.database().reference()
         ref.child("cormet").child("different days").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -44,11 +45,8 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
         })
         
     }
-    
-    
-    
  
-    // building a table View
+    //MARK:- TableView with sections.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! CormetDaysTableViewCell
         print (days)
@@ -98,7 +96,7 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    // prepare when a row is selected
+    // Prepare when a row is selected
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "daysVC"{
             let controller = segue.destination as! CormetDaysMenuViewController

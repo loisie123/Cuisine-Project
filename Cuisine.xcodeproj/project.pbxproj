@@ -15,7 +15,6 @@
 		CA16B9CE1E2660BF004C1B2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA16B9CD1E2660BF004C1B2E /* GoogleService-Info.plist */; };
 		CA16B9D21E268A91004C1B2E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9D11E268A91004C1B2E /* LoginViewController.swift */; };
 		CA16B9E61E28F117004C1B2E /* TodayMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */; };
-		CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */; };
 		CA16B9F21E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */; };
 		CA16B9F41E2C13CD004C1B2E /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */; };
 		CA16B9F61E2C13DC004C1B2E /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */; };
@@ -51,7 +50,6 @@
 		CA16B9CD1E2660BF004C1B2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA16B9D11E268A91004C1B2E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CA16B9E51E28F117004C1B2E /* TodayMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayMealsViewController.swift; sourceTree = "<group>"; };
-		CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
 		CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CormetSubmitMealsViewController.swift; sourceTree = "<group>"; };
 		CA16B9F31E2C13CD004C1B2E /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
 		CA16B9F51E2C13DC004C1B2E /* WeekTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
@@ -114,6 +112,7 @@
 			children = (
 				CAE569441E2CF46200E38109 /* users.swift */,
 				CA12F2AA1E2E595300C0003A /* meals.swift */,
+				CAC337071E4098EA00AB0FB1 /* extension.swift */,
 				CA1238B71E2F842700FE2759 /* week.swift */,
 			);
 			name = objects;
@@ -157,7 +156,6 @@
 			children = (
 				CA659BD31E3765BE00C45208 /* CormetStandaarAssortimentViewController.swift */,
 				CA659BD11E3765B000C45208 /* CormetMenuViewController.swift */,
-				CAC337071E4098EA00AB0FB1 /* extension.swift */,
 				CA659BD51E37785C00C45208 /* CormetStandardViewController.swift */,
 				CA16B9F11E2BAE00004C1B2E /* CormetSubmitMealsViewController.swift */,
 				CA1852741E3A030800EBB17F /* CormetDaysViewController.swift */,
@@ -169,7 +167,6 @@
 		CA18527A1E3A037400EBB17F /* Cormet */ = {
 			isa = PBXGroup;
 			children = (
-				CA16B9EB1E2B9F13004C1B2E /* MealsTableViewCell.swift */,
 				CA659BD71E3778B900C45208 /* CormetStandaardTableViewCell.swift */,
 				CA1852721E3A02F400EBB17F /* CormetMenuDaysTableViewCell.swift */,
 				CA18527C1E3A930200EBB17F /* CormetDaysTableViewCell.swift */,
@@ -352,7 +349,6 @@
 				CA34ED661E24FE0900C8748F /* AppDelegate.swift in Sources */,
 				CA659BD21E3765B000C45208 /* CormetMenuViewController.swift in Sources */,
 				CA12F2AB1E2E595300C0003A /* meals.swift in Sources */,
-				CA16B9EC1E2B9F13004C1B2E /* MealsTableViewCell.swift in Sources */,
 				CA1852771E3A031400EBB17F /* CormetDaysMenuViewController.swift in Sources */,
 				CA8C41AD1E362999009A2BE7 /* SettingsViewController.swift in Sources */,
 				CAEBD46A1E321B440095640E /* FavoriteTableViewCell.swift in Sources */,

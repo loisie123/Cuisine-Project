@@ -32,42 +32,12 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         userStorage = storage.child("users")
         
-        let userID = FIRAuth.auth()?.currentUser?.uid
         
         picker.delegate = self
         
-        ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let urlImage = snapshot.value as? String{
-            
-            if let url = NSURL(string: urlImage) {
-                
-                if let data = NSData(contentsOf: url as URL) {
-                    self.imageUser.image = UIImage(data: data as Data)
-                }
-            }
-            
-            }
-        })
-        
-        ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let UserName = snapshot.value as? String{
-            self.NameUser.text = "Welcome \(UserName)"
-            }
-        })
-        ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let email = snapshot.value as? String
-            {
-                print(email)
-                self.EmailUser.text = email
-            }
-            else
-            {
-                print( "default title")
-            }
-            
-        })
+        showImage()
+  
+        showUsername()
 
         
     
@@ -87,14 +57,49 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK:- Shows profile picture:
+    func showImage(){
+        let userID = FIRAuth.auth()?.currentUser?.uid
 
+        ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let urlImage = snapshot.value as? String{
+                
+                if let url = NSURL(string: urlImage) {
+                    
+                    if let data = NSData(contentsOf: url as URL) {
+                        self.imageUser.image = UIImage(data: data as Data)
+                    }
+                }
+                
+            }
+        })
+        
+    }
+    
+    //MARK:- Shows Username
+    func showUsername(){
+        let userID = FIRAuth.auth()?.currentUser?.uid
+
+        ref?.child("users").child(userID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let UserName = snapshot.value as? String{
+                self.NameUser.text = "Welcome \(UserName)"
+            }
+        })
+        
+    }
+    
+    
+    
+    //MARK:- change username:
     @IBAction func changeNameButton(_ sender: Any) {
         let currentUser = FIRAuth.auth()!.currentUser!.uid
         
         let alertController = UIAlertController(title: "Change Username", message:
             
             "Do you want to change your username?", preferredStyle: UIAlertControllerStyle.alert)
-        
         
         let changeAction = UIAlertAction(title: "Change",
                                        style: .default) { action in
@@ -117,62 +122,10 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
-        
-        
-    }
- 
-    @IBAction func changeEmail(_ sender: Any) {
-        let alertController = UIAlertController(title: "Change Email", message:
-            
-            "Do you want to change your Email?", preferredStyle: UIAlertControllerStyle.alert)
-        
-        let userRef = FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid)
-        
-        let changeAction = UIAlertAction(title: "Change",
-                                         style: .default) { action in
-                                            
-                                            let emailField = alertController.textFields![0]
-                                            if let newEmail = emailField.text{
-                                                if emailField.text != ""{
-                                                    
-                                                    FIRAuth.auth()!.currentUser!.updateEmail(newEmail) { error in
-                                                        
-                                                        if error == nil{
-                                                            userRef.updateChildValues(["email" : newEmail ], withCompletionBlock: {(errEM, referenceEM)   in
-                                                                print("change succeeded")
-                                                                if errEM == nil{
-                                                                    print(referenceEM)
-                                                                }else{
-                                                                    self.error()
-                                                                    print(errEM?.localizedDescription)
-                                                                }
-                                                            })
-                                                        }
-                                                        else{
-                                                            self.error()
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            else { print("Email Field is empty")
-                                            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
-        alertController.addTextField(configurationHandler: { (textField) -> Void in
-            textField.text = ""
-            textField.placeholder = "Enter Email"
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(changeAction)
-        present(alertController, animated: true, completion: nil)
-        
     }
     
-  
-    
-    
-    //MARK: function to change Password
+    //MARK:- function to change Password
+    //reference: http://stackoverflow.com/questions/35953867/changing-user-email-and-password-with-swift-and-firebase
     @IBAction func changePassword(_ sender: Any) {
         let alertController = UIAlertController(title: "Change Password", message:
             
@@ -204,7 +157,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
         
-        
         alertController.addTextField(configurationHandler: { (textField) -> Void in
             textField.text = ""
             textField.placeholder = "Password"
@@ -222,7 +174,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         present(alertController, animated: true, completion: nil)
     }
     
-    
+    //MARK:- Change picture
     @IBAction func changePicture(_ sender: Any) {
         
         picker.allowsEditing = true
@@ -232,7 +184,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     }
     
     
-    //MARK: fuction to pick an image
+    //MARK:- fuction to pick an image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             self.imageUser.image = image
@@ -241,7 +193,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     
     }
     
-    //MARK: Function to save an image
+    //MARK:- Save an image
     func saveImage() {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
@@ -275,6 +227,7 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
     }
     
 
+    //MARK:- Alertcontroller for when something fails. 
     func error(){
         let alertController = UIAlertController(title: "Something went wrong", message:
             

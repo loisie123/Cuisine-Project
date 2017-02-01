@@ -15,9 +15,7 @@ import Firebase
 
 class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var pickerTextField: UITextField!
-    
-    
+    @IBOutlet weak var pickerTextField: UITextField!  
     @IBOutlet weak var inputPrice: UITextField!
     @IBOutlet weak var inputName: UITextField!
     let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
@@ -32,7 +30,8 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hideKeyboardWhenTappedAroung()
+        hideKeyboardWhenTappedAround()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -45,7 +44,7 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
     }
     
     
-    // make pickerView:
+    //MARk: make pickerView:
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -73,6 +72,7 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK:- function to save meals as a dish in Standard Assortiment
     @IBAction func saveMealButton(_ sender: Any) {
         
         if inputName.text != "" && inputPrice.text != ""{
@@ -87,18 +87,13 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
 
             
         } else{
-            let alertController = UIAlertController(title: "Empty box", message: "There is nothing to save", preferredStyle: UIAlertControllerStyle.alert)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-            alertController.addAction(cancelAction)
-            present(alertController, animated: true, completion: nil)
-            
+            showAlert(titleAlert: "Empty box", messageAlert: "There is nothing to save")
         }
     }
     
     
-    
-    // reference: stackoverflow.nl
+    //MARK:- functions to show and hide keyboard.
+    //reference:http://stackoverflow.com/questions/37825327/swift-3-nsnotificationcenter-keyboardwillshow-hide
     func keyboardWillShow(notification: NSNotification){
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
             if self.view.frame.origin.y == 0{

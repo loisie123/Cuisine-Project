@@ -13,9 +13,7 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
 
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
-    
-    
-    
+  
     var listAllNames = [[String]]()
     var listCategoryName = [String]()
     var listOfmeals = [meals]()
@@ -32,7 +30,12 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
         
     }
 
+    
+    //MARK:- Get dishes from firebase and fill the different lists that are used to make the tableView
+    //referencen: https://firebase.google.com/docs/database/admin/retrieve-data
     func getStandardAssortiment() {
+        
+        // Maak de lijsten leeg:
         listAllNames = [[String]]()
         listOfmeals = [meals]()
         
@@ -49,13 +52,13 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
         })
     }
     
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK:- TableView with sections
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return listAllNames.count
@@ -64,7 +67,6 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

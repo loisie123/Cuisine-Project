@@ -85,7 +85,7 @@ class MealsTodayTableViewCell: UITableViewCell {
                 self.unlikeButton.isHidden = false
     
                 // slaat hij op in het likes van de gebruiker
-                self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked)
+                self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked, day: self.day, child: "different users")
                 
                 
                 

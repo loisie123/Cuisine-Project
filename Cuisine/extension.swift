@@ -118,15 +118,16 @@ extension UIViewController{
 
 
 extension UITableViewCell{
-    func saveMeal(user: String, name: String, price: String, count: Int, type : String){
+    func saveMeal(user: String, name: String, price: String, count: Int, type : String, day: String, child: String){
         
         let ref = FIRDatabase.database().reference()
         
         ref.child("users").child(user).child("likes").child(name).child("name").setValue(name)
         ref.child("users").child(user).child("likes").child(name).child("price").setValue(price)
         ref.child("users").child(user).child("likes").child(name).child("likes").setValue(count)
-        ref.child("users").child(user).child("likes").child(name).child("day").setValue("standaard-assortiment")
+        ref.child("users").child(user).child("likes").child(name).child("day").setValue(day)
         ref.child("users").child(user).child("likes").child(name).child("type").setValue(type)
+        ref.child("users").child(user).child("likes").child(name).child("child").setValue(child)
         
     }
 }

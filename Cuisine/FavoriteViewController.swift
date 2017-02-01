@@ -88,6 +88,13 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.priceFavoriteMeal.text = "\(meal.price!)"
                 cell.likesFavoriteMeal.text = "\(meal.likes!) likes"
                 cell.day = meal.day
+                if meal.day == "standaard-assortiment"{
+                    cell.child = "standaard-assortiment"
+                }else {
+                    cell.child = "different days"
+                }
+                
+                
             }
         }
      return cell

@@ -21,6 +21,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var likesFavoriteMeal: UILabel!
     
     var day = String()
+    var child = String()
     
     
     override func awakeFromNib() {
@@ -48,31 +49,96 @@ class FavoriteTableViewCell: UITableViewCell {
         
         // Removed from  the liked list from the user
         let remove = self.nameMeal.text
-        print (remove!)
+        
+        print ("komen we uberhaupt nog wel ergens")
+    
+        
         self.myDeleteFunction(firstTree: currentUser!, secondTree: "likes", childIWantToRemove: remove!)
+        
+        if self.child == self.day {
+            // verwijderen van een like
+            ref.child("cormet").child(self.child).child(remove!).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                print("hallo")
+                
+                print (snapshot)
+                if let properties = snapshot.value as? [String : AnyObject]{
+                    
+                    print("hei")
+                    print (properties)
+                    
+                    if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
+                        for(id, person) in peopleWhoLike{
+                            if person as? String == FIRAuth.auth()!.currentUser!.uid{
+                                
+                                // verwijder persoon uit deze lijst.
+                                ref.child("cormet").child(self.child).child(remove!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
+                                    
+                                    print( "punt 2878942")
+                                    if error == nil{
+                                        ref.child("cormet").child(self.child).child(remove!).observeSingleEvent(of: .value, with: {(snap) in
+                                            
+                                            if let prop = snap.value as? [String: AnyObject] {
+                                                
+                                                if let likes = prop["peoplewholike"] as? [String : AnyObject] {
+                                                    print ("komt hij hier")
+                                                    let count = likes.count
+                                                    ref.child("cormet").child(self.child).child(remove!).updateChildValues(["likes" : count])
+                                                    
+                                                } else{
+                                                    ref.child("cormet").child(self.child).child(remove!).updateChildValues(["likes" : 0])
+                                                }
+                                                
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    }
+                }
+            })
+            ref.removeAllObservers()
+            
+            let reloadTableView = Notification.Name("reloadTableView")
+            NotificationCenter.default.post(name: reloadTableView, object: nil)
+        }
+        
 
+            
+        else{
+       
         // verwijderen van een like
-        ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("cormet").child(self.child).child(self.day).child(remove!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            print("hallo")
+            
+            print (snapshot)
             if let properties = snapshot.value as? [String : AnyObject]{
+                
+                print("hei")
+                print (properties)
+                
                 if let peopleWhoLike = properties["peoplewholike"] as? [String : AnyObject]{
                     for(id, person) in peopleWhoLike{
                         if person as? String == FIRAuth.auth()!.currentUser!.uid{
                             
                             // verwijder persoon uit deze lijst.
-                            ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
+                            ref.child("cormet").child(self.child).child(self.day).child(remove!).child("peoplewholike").child(id).removeValue(completionBlock: {(error,reff) in
                                 
+                                print( "punt 2878942")
                                 if error == nil{
-                                    ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).observeSingleEvent(of: .value, with: {(snap) in
+                                    ref.child("cormet").child(self.child).child(self.day).child(remove!).observeSingleEvent(of: .value, with: {(snap) in
              
                                         if let prop = snap.value as? [String: AnyObject] {
                                            
                                             if let likes = prop["peoplewholike"] as? [String : AnyObject] {
-                                               
+                                                print ("komt hij hier")
                                                 let count = likes.count
-                                                ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).updateChildValues(["likes" : count])
+                                                ref.child("cormet").child(self.child).child(self.day).child(remove!).updateChildValues(["likes" : count])
                                                 
                                             } else{
-                                                ref.child("cormet").child("different days").child(self.day).child(self.nameMeal.text!).updateChildValues(["likes" : 0])
+                                                ref.child("cormet").child(self.child).child(self.day).child(remove!).updateChildValues(["likes" : 0])
                                             }
                                             
                                         }
@@ -88,6 +154,7 @@ class FavoriteTableViewCell: UITableViewCell {
         
         let reloadTableView = Notification.Name("reloadTableView")
         NotificationCenter.default.post(name: reloadTableView, object: nil)
+        }
     }
     
 

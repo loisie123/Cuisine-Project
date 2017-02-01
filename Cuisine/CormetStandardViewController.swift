@@ -106,6 +106,7 @@ class CormetStandardViewController: UIViewController,UITableViewDelegate, UITabl
                 cell.nameMeal.text = meal.name
                 cell.priceMeal.text = "€ \(meal.price!)"
                 cell.likesMeal.text = " \(meal.likes!) likes"
+               
             }
         }
         return cell

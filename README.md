@@ -8,9 +8,7 @@ In opdracht van: [Minor programmeren Universiteit van Amsterdam](http://www.mpro
 2017
 
 
-
 [![BCH compliance](https://bettercodehub.com/edge/badge/loisie123/Cuisine-Project)](https://bettercodehub.com)
-
 
 ### Korte Beschrijving
 

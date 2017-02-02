@@ -81,7 +81,6 @@ extension UIViewController{
                 if let cat = value[kindOfCategorie] as? String{
                     
                     if cat == category{
-                        print("cat is gelijk aan category")
                         if let likes = value["likes"] as? Int,
                             let name = value["name"] as? String,
                             let price = value["price"] as? String{

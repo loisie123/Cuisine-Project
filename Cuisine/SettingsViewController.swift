@@ -173,58 +173,8 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    //MARK:- Change picture
-    @IBAction func changePicture(_ sender: Any) {
-        
-        picker.allowsEditing = true
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
-        
-    }
-    
-    
-    //MARK:- fuction to pick an image
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
-            self.imageUser.image = image
-        }
-        self.dismiss(animated: true, completion: nil)
-    
-    }
-    
-    //MARK:- Save an image
-    func saveImage() {
-        
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        let changeRequest = FIRAuth.auth()!.currentUser!.profileChangeRequest()
-        
-        changeRequest.commitChanges(completion: nil)
-        
-        let imageRef = self.userStorage.child("\(userID).jpg")
-        let data = UIImageJPEGRepresentation(self.imageUser.image!, 0.5)
-        
-        let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
-            if err != nil {
-                self.error()
-            }
-            
-            imageRef.downloadURL(completion: {(url, er) in
-                if er != nil {
-                    print(er!.localizedDescription)
-                    
-                    self.error()
-                }
-                
-                if let url = url {
-                        self.ref?.child("users").child(userID!).child("urlToImage").setValue(url.absoluteString)
-                }
-            })
-        })
-        
-        uploadTask.resume()
-    }
-    
+
+
 
     //MARK:- Alertcontroller for when something fails. 
     func error(){

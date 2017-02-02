@@ -96,12 +96,7 @@ class TodayMealsViewController: UIViewController, UITableViewDelegate, UITableVi
                             mealcell.unlikeButton.isHidden = false
                             mealcell.likeButton.isHidden = true
                             }
-                        else{
-                            mealcell.likeButton.isHidden = false
-                            mealcell.unlikeButton.isHidden = true
                         }
-                        }
-                
                 } else{
                     mealcell.unlikeButton.isHidden = true
                     mealcell.likeButton.isHidden = false

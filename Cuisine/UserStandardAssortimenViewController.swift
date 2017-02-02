@@ -91,20 +91,18 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
                 cell.nameLabel.text = meal.name
                 cell.priceLabel.text = "€ \(meal.price!)"
                 cell.likedLabel.text = " \(meal.likes!) likes"
-                    
+                
+                
                 // Check if user already like the dish
                 if meal.likes != 0 {
-                        
+                        print(meal.likes)
                     for person in meal.peopleWhoLike{
                         if person == FIRAuth.auth()!.currentUser!.uid{
+                            
                             cell.unlikeButton.isHidden = false
                             cell.likeButton.isHidden = true
                             }
-                        else {
-                            cell.likeButton.isHidden = false
-                            cell.unlikeButton.isHidden = true
-                        }
-                        }
+                    }
                 } else{
                     cell.likeButton.isHidden = false
                     cell.unlikeButton.isHidden = true

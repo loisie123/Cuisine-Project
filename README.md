@@ -58,6 +58,11 @@ User kan zich registreren met een foto en username door middel van email en een 
 - [Stack overflow!](http://www.stackoverflow.nl)
 
 
+
+
+
+
+
 This project is licensed with MIT License
 
 Copyright (c) [2017] [Lois van Vliet]

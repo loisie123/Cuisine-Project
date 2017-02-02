@@ -39,7 +39,20 @@ ALLE USER VIEWCONTROLLERS
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-01-09 om 23.10.04.png)
 
 
-# License
+### License
+
+
+### Credits:
+
+- [Picture Knife and Fork:](https://clipartfest.com/categories/view/36b4a86c8b81c4e190f353db5669214323af68a0/fork-and-knife-clipart-free.html)
+- Afbeelding [Cormet](https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjq_Nvmm_LRAhXIwBQKHdcMD8MQjRwIBw&url=http%3A%2F%2Fwww.allesovercatering.nl%2Fcateraars%2Fcormet-bv%2F&psig=AFQjCNEGB2ZEZAUXj_8fUQB9BdIyjbv40A&ust=1486152545761477)
+- Afbeelding [NoImageFound](https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwirwceRnPLRAhXC1RQKHQJyDgYQjRwIBw&url=http%3A%2F%2Fwww.bookmysports.com%2Fresults.aspx%3Fsportid%3D16&psig=AFQjCNE9m1bQvwvtig7C8IyG-SaQuVOIfw&ust=1486152634739566)
+- Afbeelding [Categoriseren](https://www.google.nl/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjO0o65nPLRAhXGaRQKHfXyDdgQjRwIBw&url=http%3A%2F%2Fwww.scopedesk.com%2Fblog%2Fcolumn%2Fsupport-ticket-categorization-and-classification%2F&bvm=bv.146073913,d.d24&psig=AFQjCNGoqaFs8g2cMj5Uwow-2BozXZcgSw&ust=1486152716984115)
+- Inloggen en registreren en liken dankzij [Vasil Nunev](https://www.youtube.com/watch?v=AsSZulMc7sk)
+- UIDate Picker dankzij [Sergey Kargopolov](https://www.youtube.com/watch?v=QmeKjXZX_mU)
+- [Ray Wendelich](https://www.raywenderlich.com/139322/firebase-tutorial-getting-started-2)
+- Het maken van [sections](http://www.edumobile.org/ios/creating-grouped-table-views-in-swift/)
+- [Stack overflow!](http://www.stackoverflow.nl)
 
 
 

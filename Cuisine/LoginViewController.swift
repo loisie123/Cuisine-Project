@@ -61,7 +61,6 @@ class LoginViewController: UIViewController {
     }
     
     
-    
     //MARK:- Automatic Log In Function
     func checkIfSomeoneIsLoggedIn(){
         //
@@ -76,10 +75,6 @@ class LoginViewController: UIViewController {
         }
         
     }
-
-
-
-
 }
 
 

@@ -40,9 +40,9 @@ class FavoriteTableViewCell: UITableViewCell {
         
         
         // In This case the dish is saved under Standard-assortiment
-        if self.day == "standaard-assortiment"{
+        if self.day == "Standard Assortment"{
             
-            let keyToPostStandard = ref.child("cormet").child("standaard-assortiment").child(remove!)
+            let keyToPostStandard = ref.child("cormet").child("Standard Assortment").child(remove!)
             
             unlikePost(keyToPost: keyToPostStandard)
             ref.removeAllObservers()
@@ -50,7 +50,7 @@ class FavoriteTableViewCell: UITableViewCell {
             let reloadTableView = Notification.Name("reloadTableView")
             NotificationCenter.default.post(name: reloadTableView, object: nil)
         }
-        // In this case the dish was is saved under different days.
+        // In this case the dish was is saved under: different days.
         else{
             let keyToPostDays = ref.child("cormet").child("different days").child(self.day).child(remove!)
             
@@ -101,23 +101,6 @@ class FavoriteTableViewCell: UITableViewCell {
                 }
             }
         })
-    }
-    
-
-    
-    //MARK:- Delete function
-    // reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
-        let ref = FIRDatabase.database().reference()
-
-        ref.child("users").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
-            if error != nil {
-                print("error \(error)")
-            }
-            else{
-                print ("removed")
-            }
-        }
     }
 }
 

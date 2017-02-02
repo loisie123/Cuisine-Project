@@ -45,7 +45,7 @@ class UserStandardAssortimenViewController: UIViewController, UITableViewDelegat
         let ref = FIRDatabase.database().reference()
         let categories = ["Bread", "Dairy", "Drinks", "Fruits", "Salads", "Warm food", "Wraps", "Remaining Categories"]
         
-        ref.child("cormet").child("standaard-assortiment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("cormet").child("Standard Assortment").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             
             (self.listAllNames, self.listOfmeals) = self.getMealInformation(snapshot: snapshot, categories: categories, kindOfCategorie: "categorie")
             self.userStandardTableView.reloadData()

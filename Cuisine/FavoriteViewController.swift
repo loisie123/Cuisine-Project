@@ -14,7 +14,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
-    let types = ["Soup", "Sandwich", "Hot dish", "standaard-assortiment"]
+    let types = ["Soup", "Sandwich", "Hot dish", "Standard Assortment"]
     var listAllNamesFavorites = [[String]]()
     var listCategorynameFavorites = [String]()
     var listOfMealsFavorites = [meals]()

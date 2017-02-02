@@ -78,12 +78,6 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
                 //let newName = alertcontroller.textFields![0]
                 let newPrice = alertcontroller.textFields![0]
 
-                
-//                if newName.text != ""{
-//                    
-//                    self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["name" : newName.text])
-//                    print("is het gelukt?")
-//                }
                 if newPrice.text != "" {
                     self.ref?.child("cormet").child("different days").child(self.day).child(change).updateChildValues(["price" : newPrice.text!])
                 }
@@ -92,12 +86,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
  
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-            
-            
-//            alertcontroller.addTextField(configurationHandler: { (textField) -> Void in
-//                textField.text = ""
-//                textField.placeholder = "Enter new Name"
-//            })
+        
             alertcontroller.addTextField(configurationHandler: { (textField) -> Void in
                 textField.text = ""
                 textField.placeholder = "Enter new Price"
@@ -148,9 +137,7 @@ class CormetDaysMenuViewController: UIViewController, UITableViewDelegate,UITabl
         }
         return cell
     }
-  
-    
-    
+   
     //MARK:- Get meals from firebase
     func getMeals(){
         

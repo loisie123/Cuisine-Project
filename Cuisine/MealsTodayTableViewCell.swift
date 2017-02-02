@@ -78,18 +78,12 @@ class MealsTodayTableViewCell: UITableViewCell {
                     
                     self.likeButton.isHidden = true
                     self.unlikeButton.isHidden = false
-                    
-                    // slaat hij op in het likes van de gebruiker
-                    self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked, day: self.day, child: "different users")
+                    self.saveMeal(user: user!, name: self.nameMeal.text!, price: self.priceMeal.text!, count: count, type: self.typeMealLiked, day: self.day, child: "different days")
                     
                 }
             }
         })
     }
-    
-
-
-    
     
     //MARK:- function that unlikes the different dishes. 
     // reference: https://www.youtube.com/watch?v=AIN_bbIku_o
@@ -116,14 +110,9 @@ class MealsTodayTableViewCell: UITableViewCell {
                                     
                                    
                                     self.updateLikesAndButtosDislikes(key: keyToUnlike)
-                                    
-                                   
-                                    
         
                                 }
                             })
-                            
-                         
                         }
                     }
                 }
@@ -155,26 +144,5 @@ class MealsTodayTableViewCell: UITableViewCell {
         })
     }
     
-    
-    
- 
-    
-    //MARK:- delete function. reference: http://stackoverflow.com/questions/39631998/how-to-delete-from-firebase-database
-    func myDeleteFunction(firstTree: String, secondTree: String, childIWantToRemove: String) {
-        let ref = FIRDatabase.database().reference()
-        
-        ref.child("users").child(firstTree).child(secondTree).child(childIWantToRemove).removeValue { (error, ref) in
-            if error != nil {
-                print("error \(error)")
-            }
-            else{
-                print ("removed")
-            }
-            
-            
-        }
-    }
-    
-
-
 }
+

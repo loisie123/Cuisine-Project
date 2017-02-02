@@ -16,8 +16,7 @@ class meals: NSObject {
     var typeOFMEal: String!
     var day: String!
     var amountOfLikes: String!
-    
-    
+   
     var peopleWhoLike: [String] = [String]()
     
 }

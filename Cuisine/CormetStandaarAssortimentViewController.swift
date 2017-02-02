@@ -22,7 +22,6 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
     
     var picker = UIPickerView()
     
-    
     var ref: FIRDatabaseReference?
     var databaseHandle: FIRDatabaseHandle?
     
@@ -77,15 +76,14 @@ class CormetStandaarAssortimentViewController: UIViewController, UIPickerViewDel
         
         if inputName.text != "" && inputPrice.text != ""{
             
-            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("name").setValue(inputName.text!)
-            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("price").setValue(inputPrice.text!)
-            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("likes").setValue(0)
-            self.ref?.child("cormet").child("standaard-assortiment").child(inputName.text!).child("categorie").setValue(pickerTextField.text!)
+            self.ref?.child("cormet").child("Standard Assortment").child(inputName.text!).child("name").setValue(inputName.text!)
+            self.ref?.child("cormet").child("Standard Assortment").child(inputName.text!).child("price").setValue(inputPrice.text!)
+            self.ref?.child("cormet").child("Standard Assortment").child(inputName.text!).child("likes").setValue(0)
+            self.ref?.child("cormet").child("Standard Assortment").child(inputName.text!).child("categorie").setValue(pickerTextField.text!)
             
             inputName.text = ""
             inputPrice.text = ""
 
-            
         } else{
             showAlert(titleAlert: "Empty box", messageAlert: "There is nothing to save")
         }

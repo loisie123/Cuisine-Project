@@ -99,17 +99,17 @@
                                 </constraints>
                                 <color key="barTintColor" red="0.47451937199999999" green="0.6746683121" blue="0.1667033732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="25"/>
+                                    <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Standard Range" id="O1A-fZ-9bp">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;" id="Jeu-NO-CiB">
+                                    <navigationItem title="Standard Assortment" id="O1A-fZ-9bp">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;&lt;" id="Jeu-NO-CiB">
                                             <connections>
                                                 <segue destination="1O9-hV-AlV" kind="show" id="QFv-rs-I6e"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="+" id="5ft-oM-d63">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5ft-oM-d63">
                                             <connections>
                                                 <segue destination="B2I-CX-MKd" kind="show" id="d2r-Rz-UtK"/>
                                             </connections>
@@ -193,7 +193,7 @@
                                                         <rect key="frame" x="0.0" y="111" width="375" height="111.5"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="28"/>
-                                                        <state key="normal" title="Standard Range">
+                                                        <state key="normal" title="Standard Assortment">
                                                             <color key="titleColor" red="0.47451937199999999" green="0.6746683121" blue="0.1667033732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -266,7 +266,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Add new item" id="dOu-gK-WMi">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;" id="kfB-74-b7n">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;&lt;" id="kfB-74-b7n">
                                             <connections>
                                                 <segue destination="I65-FP-FEu" kind="show" id="aeo-t6-yXn"/>
                                             </connections>
@@ -463,7 +463,7 @@
                                 <items>
                                     <navigationItem id="voA-AV-T3R">
                                         <nil key="title"/>
-                                        <barButtonItem key="leftBarButtonItem" title="&lt; back" id="NhM-6P-mTN">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;&lt;" id="NhM-6P-mTN">
                                             <connections>
                                                 <segue destination="lDp-m1-p2K" kind="show" identifier="day" id="b2w-X7-lob"/>
                                             </connections>
@@ -485,9 +485,6 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                <connections>
-                                                    <action selector="inputNameKeyboardShow:" destination="5QR-Yz-Cak" eventType="editingDidEnd" id="QuA-Q3-Ss8"/>
-                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="thW-Y7-gsX">
                                                 <rect key="frame" x="18" y="111.5" width="100" height="30"/>
@@ -503,9 +500,6 @@
                                                 <rect key="frame" x="320" y="111.5" width="30" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="+"/>
-                                                <connections>
-                                                    <action selector="inputSoopButton:" destination="5QR-Yz-Cak" eventType="touchUpInside" id="N6d-VC-lom"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25a-sz-10Y">
                                                 <rect key="frame" x="18" y="46" width="45.5" height="20.5"/>
@@ -659,10 +653,11 @@
                     <connections>
                         <outlet property="datePickerField" destination="kai-3i-fGL" id="xxl-77-nwV"/>
                         <outlet property="inputDinner" destination="03b-zv-xBK" id="630-jF-TdY"/>
+                        <outlet property="inputSoop" destination="ppE-Qy-5eR" id="1jG-sU-3TZ"/>
                         <outlet property="priceDinner" destination="T64-Jl-QiS" id="9Tl-If-5it"/>
                         <outlet property="priceSoop" destination="thW-Y7-gsX" id="22f-Ki-BWf"/>
                         <outlet property="sandwichPrice" destination="lIj-P0-31R" id="ytH-mj-tPL"/>
-                        <outlet property="sandwichtInput" destination="Hlk-t2-jf3" id="XBf-15-0wD"/>
+                        <outlet property="sandwichtInput" destination="Hlk-t2-jf3" id="rNi-ze-8gd"/>
                         <segue destination="1O9-hV-AlV" kind="show" identifier="cormetVC" id="YeL-Or-hJ9"/>
                     </connections>
                 </viewController>
@@ -690,7 +685,7 @@
                                 <color key="barTintColor" red="0.47451937199999999" green="0.6746683121" blue="0.1667033732" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem id="WNW-bF-YJ2">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="iZW-gi-e2h">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt;&lt;&lt;" id="iZW-gi-e2h">
                                             <connections>
                                                 <segue destination="lDp-m1-p2K" kind="show" identifier="day" id="py3-GT-kJM"/>
                                             </connections>
@@ -1142,7 +1137,7 @@
                                                         <rect key="frame" x="0.0" y="160" width="375" height="79.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="23"/>
-                                                        <state key="normal" title="Standard Range           &gt;&gt;">
+                                                        <state key="normal" title="Standard Assortment   &gt;&gt;">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
@@ -1312,7 +1307,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Standard Range" id="UD9-9u-Aji">
+                                    <navigationItem title="Standard Assortment" id="UD9-9u-Aji">
                                         <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="bOv-Mh-gcE">
                                             <connections>
                                                 <segue destination="Ut6-vv-8jO" kind="show" id="lSL-KG-NHi"/>
@@ -1869,12 +1864,12 @@
         <image name="unlikebutton" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ME1-sx-gZq"/>
+        <segue reference="UhY-AH-h0o"/>
         <segue reference="lSL-KG-NHi"/>
-        <segue reference="zCI-6Y-OSN"/>
-        <segue reference="b2w-X7-lob"/>
-        <segue reference="CkR-a6-GHd"/>
+        <segue reference="uT7-tw-uYy"/>
+        <segue reference="eOO-j6-NqK"/>
         <segue reference="QFv-rs-I6e"/>
-        <segue reference="aeo-t6-yXn"/>
+        <segue reference="NOD-lq-4J6"/>
+        <segue reference="zIP-sV-Jdw"/>
     </inferredMetricsTieBreakers>
 </document>

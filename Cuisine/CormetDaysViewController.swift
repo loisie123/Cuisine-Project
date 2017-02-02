@@ -87,7 +87,7 @@ class CormetDaysViewController: UIViewController, UITableViewDataSource, UITable
             alertController.addAction(deleteAction)
             
             self.present(alertController, animated: true, completion: nil)
-
+         viewDidLoad()   
         }
     }
     

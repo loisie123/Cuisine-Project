@@ -24,11 +24,9 @@ class CormetSubmitMealsViewController: UIViewController {
     var databaseHandle: FIRDatabaseHandle?
     
     let datePicker = UIDatePicker()
-    var keyboardSizeRect: CGRect?
     
     override func viewDidLoad() {
         
-    
         super.viewDidLoad()
         
         hideKeyboardWhenTappedAround()
@@ -127,13 +125,14 @@ class CormetSubmitMealsViewController: UIViewController {
     }
     
     func keyboardWillHide(notification: NSNotification){
-         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
             if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y += keyboardSize.height
-                
             }
         }
     }
+    
+    
     
     //MARK:- Save Dish in Firebase.
     func submitMeal(name: String, price: String, type: String){

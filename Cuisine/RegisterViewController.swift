@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         // Do any additional setup after loading the view.
     }
 
- 
+    //MARK:- Select photo
     @IBAction func selectPhotoImage(_ sender: Any) {
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
@@ -45,13 +45,15 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
     
+    //MARK:- Select image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             self.profileImage.image = image
         }
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    //MARK:- Save everything
     @IBAction func registreButton(_ sender: Any) {
         
         guard nameInput.text != "", emailInput.text != "", passwordInpu.text != "", confirmPasswordInput.text != "" else {return}
@@ -82,7 +84,6 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                             if let url = url{
                                 let userInfo: [String:Any] = ["uid" : user.uid, "name" : self.nameInput.text!,
                                                               "urlToImage" : url.absoluteString]
-                                
                                 self.ref.child("users").child(user.uid).setValue(userInfo)
                                 
                                 let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: "usersVC")
@@ -96,7 +97,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
             })
             } else{
             
-            showAlert(titleAlert: "Sign up failed", messageAlert: "try again")
+            showAlert(titleAlert: "Sign up failed", messageAlert: "Make sure your password is longer than 6 letters")
         }
     }
     
@@ -106,7 +107,4 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-
 }

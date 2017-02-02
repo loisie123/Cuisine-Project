@@ -214,7 +214,6 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
                     print(er!.localizedDescription)
                     
                     self.error()
-                    
                 }
                 
                 if let url = url {
@@ -241,6 +240,4 @@ class SettingsViewController: UIViewController,UIImagePickerControllerDelegate, 
         
         present(alertController, animated: true, completion: nil)
     }
-
-
 }

@@ -112,7 +112,6 @@
 			children = (
 				CAE569441E2CF46200E38109 /* users.swift */,
 				CA12F2AA1E2E595300C0003A /* meals.swift */,
-				CAC337071E4098EA00AB0FB1 /* extension.swift */,
 				CA1238B71E2F842700FE2759 /* week.swift */,
 			);
 			name = objects;
@@ -208,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				CA34ED651E24FE0900C8748F /* AppDelegate.swift */,
+				CAC337071E4098EA00AB0FB1 /* extension.swift */,
 				CA16B9E81E2B97D8004C1B2E /* objects */,
 				CA16B9E91E2B97E4004C1B2E /* Cells */,
 				CA16B9EA1E2B97EA004C1B2E /* Viewcontrollers */,

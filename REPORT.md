@@ -21,10 +21,12 @@ In dit report worden de volgende onderwerpen besproken:
 
 Op de Universiteit van Amsterdam op locatie Science Park zitten menig studenten en medewerkers dagenlang op locatie. Aangezien niet iedereen altijd een lunchpakketje mee heeft, levert Cormet een dagelijkse voorraad aan eten en drinken. Er zijn elke dag andere soorten soep, broodjes en warme maaltijden beschikbaar. Omdat veel studenten en ook werknemers ’s ochtends wel eens in tijdnood zitten, is het handig wanneer informatie over het menu al eerder op de dag bekend zou zijn. 
 Deze app lost dit probleem op. Studenten en werknemers kunnen zich aanmelden en kunnen zien welke producten er op die dag verkrijgbaar zijn en welke producten er ook standaard geleverd worden. De gebruikers kunnen elk gerecht liken, zodat men ook weet welk gerecht in de goede smaak valt en welke iets minder. Hieronder is een Screenshot te zien van hoe een lijst met gerechten eruit ziet. 
+
 ![Screenshot](https://github.com/loisie123/Cuisine-Project/blob/master/doc/Schermafbeelding 2017-02-02 om 16.28.30.png)
+![Screemshot](https://github.com/loisie123/Cuisine-Project/blob/master/doc/Schermafbeelding 2017-02-02 om 16.29.58.png)
 
 Daarnaast kan de cateraar (in de geval Cormet) ook inloggen op de app. Allee komen zij in een ander gedeelte terecht. Zij kunnen menu’s toevoegen, veranderen en verwijderen. Ook kunnen zij zien hoe deze producten in de smaak vallen. Dus zo werkt het ook als feedback. Hieronder is een screenshot te zien waar de cateraar de maaltijden kan toevoegen. 
-![Screemshot](https://github.com/loisie123/Cuisine-Project/blob/master/doc/Schermafbeelding 2017-02-02 om 16.29.58.png)
+
 
 
 ## Design

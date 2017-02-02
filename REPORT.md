@@ -1,7 +1,7 @@
 # Cuisine A la SP
 
-Naam: Lois van Vliet
-Studentennummer: 10438033
+Naam: Lois van Vliet 
+
 
 In dit report worden de volgende onderwerpen besproken:
 * [Applicatie](#Applicatie)
@@ -12,7 +12,7 @@ In dit report worden de volgende onderwerpen besproken:
 ## Applicatie
 
 
-
+<img src="https://github.com/loisie123/Cuisine-Project/blob/master/doc/Datastructuur.paint">
 
 
 

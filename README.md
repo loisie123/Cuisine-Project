@@ -16,8 +16,8 @@ Deze applicatie kan gebruikt worden door elke gast, medewerker of student op Sci
 
 
 
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.54.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.54.png)
 
 
 
@@ -26,36 +26,25 @@ De cateraar hoeft niet meer geregistreerd te worden. Hij of zij kan direct aan d
 Ook kan het Standaard Assortiment aangepast worden. 
 
 
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.48.24.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.48.24.png)
 
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.48.32.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.51.19.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.36.36.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 16.29.58.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.36.51.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.48.32.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.51.19.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.36.36.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 16.29.58.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.36.51.png)
 
 
 #### User:
 User kan zich registreren met een foto en username door middel van email en een wachtwoord. Vervolgens kunnen ze meteen aan de slag gaan door te kijken naar welke maaltijden er beschikbaar zijn. 
 
 
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-
-
-
-
-ALLE USER VIEWCONTROLLERS
-
-
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-A-la-UvA/master/doc/Schermafbeelding 2017-01-09 om 23.10.04.png)
-
-
-### License
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.36.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.56.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.41.31.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.41.49.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 16.28.30.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.46.png)
 
 
 ### Credits:
@@ -72,6 +61,4 @@ ALLE USER VIEWCONTROLLERS
 
 
 
-
-
-
+This project is written with swift 3.0 and available for everyone with xcode 8.1 or higher.

@@ -41,6 +41,7 @@ User kan zich registreren met een foto en username door middel van email en een 
 
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.36.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.56.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.34.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.41.31.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.41.49.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 16.28.30.png)

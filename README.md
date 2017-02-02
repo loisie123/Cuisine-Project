@@ -7,7 +7,6 @@ Lois van Vliet
 In opdracht van: [Minor programmeren Universiteit van Amsterdam](http://www.mprog.nl)
 2017
 
-
 [![BCH compliance](https://bettercodehub.com/edge/badge/loisie123/Cuisine-Project)](https://bettercodehub.com)
 
 ### Korte Beschrijving

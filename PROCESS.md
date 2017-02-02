@@ -15,19 +15,19 @@ Dus dat een gebruiker een maaltijd kan toevoegen ga ik voor nu nog maar even ach
 
 ## Dag 4 Vrijdag 14-01
 
-Vandaag presentaties gegeven en alle views aangemaakt. Ik moet erover gaan nadenken om de app te specialiseren op 1 gebruiker. Dus niet een app maken di gebruikt kan worden door zowel de studenten als de cateraar, maar dat ik me richt op de student. 
-
+Vandaag presentaties gegeven en alle views aangemaakt. Ik moet erover gaan nadenken om de app te specialiseren op 1 gebruiker. Dus niet een app maken die gebruikt kan worden door zowel de studenten als de cateraar, maar dat ik me richt op de student. 
 
 
 ## Dag 5 Zondag 15-01
 
-Toch ervoor gekozen om nog even met cormet te werken. De view voor cormet is aangemaakt en werkt nu. Alleen nog data toevoegen. Is misschien  ook handig om nog centrale functie toe te voegen waardoor de code korter wordt. Maar dat kan later nog. 
+Toch ervoor gekozen om nog even met cormet te werken. Dus voor beide gebruikersrollen te gaan. De view voor cormet is aangemaakt en werkt nu. Alleen nog data toevoegen. Is misschien ook handig om nog centrale functie toe te voegen waardoor de code korter wordt. Maar dat kan later nog. 
 
 - to do:  kortere code in cormetSubmitViewController. 
 
 ## Dag 6 Maandag 16-01
 
-Bezig geweest met het maken van een classe van users 
+Bezig geweest met het maken van een classe van users. 
+Github moet nog steeds aangepast worden.
 
 
 ## Dag 7 Dinsdag 17-01
@@ -41,22 +41,19 @@ Classe meal.swift werkt nu goed. Hier moet ik ook nog kijken naar of ik de code 
 
 ## Dag  9 Donderdag 19-01
 
-De beginselen van de like en unlike functie zijn er. maar werkt nog niet optimaal 
+De beginselen van de like en unlike functie zijn er. maar werkt nog niet optimaal. Buttons gaan niet weg of blijven juist weg. Likes worden niet goed opgeslagen. 
 
 ## Dag 10 Vrijdag 20-01
 
 Like en unlike werken inmiddels. Maar nog steeds problemen met wanneer ik de app open hij niet laat zien welke al geliket zijn door de persoon
 De favorieten pagina is ook gemaakt, maar moet nog aangepst worden. Een cell wordt nog niet verwijderd zodra een like wordt 'geunliked'
 
-allee viewcontrollers moeten ook nog moooie constraints krijgenen mooi aangekleed worden
-
+Alleen viewcontrollers moeten ook nog moooie constraints krijgenen mooi aangekleed worden
 
 ## dag 11 maandag 23-01
 
 settings pagina aangemaakt. 
 alleen het veranderen van de email werkt nog niet helemaal.Wachtwoord veranderen en username en foto veranderen werkt wel. 
-
-
 
 ## dag 12 dinsdag 24-01
 
@@ -97,8 +94,8 @@ cormet:
 
 - zodra de naam van een gerecht wijzigd is het niet meer mogelijk om het gerecht te liken. Dit komt door de naamverandering, alleen is de tak in firebase niet veranderd. 
 - Als er niks in de week staat (alles is verwijderd) dan crasht hij
-- het zelf kunnen toevoegen can categorien
-- opmaak van deze gebruiker
+- Het zelf kunnen toevoegen van categorien
+- opmaak van de gebruiker
 - login scherm met twee gebruikersrollen (ipv dit gehardcoded)
 - alertcontrollers toevoegen. (bij deleten van dingen en dagen)
 - submitMealscontroller nog aanpassen op basis van het huidige idee (next day button misschien verwijderen)
@@ -112,25 +109,24 @@ user:
 - logout knop even omzetten naar de goede logout. 
 - settings knop
 
-# day 15 Vrijdag 27-01
+## day 15 Vrijdag 27-01
 
 Mijn code in BetterHubCode gegooid. Er kwam naar voren dat mijn codes voornamelijk te lang waren en daarnaast ook te vaak herhaald werden. Dit moet ik volgende week gaan oplossen. Problemen wel dat sommige codes heel erg hetzelfde lijken, maar op te veel plaatsen net wat anders zijn waardoor ik de code niet dubbel kan gebruiken. Hier moet ik dus keuzes gaan maken om bepaalde stukjes code te gaan herhalen of dat ik kleine stukjes code toch in een aparte functie zet. 
 Zo heb ik er nu bijvoorbeeld voor gekozen om de functies waarbij ik informatie ophaal toch nog apart te nemen. Ik kan er over nadenken om de functies die in zowel cormet als in de user voorkomen die wel te hergebruiken. 
 
-
-# day 16 zondag 29-01
+## Day 16 zondag 29-01
 
 Veel alertcontrollers toegevoegd om het gemak te vegroten. Ook veel functies in de cormet ViewController korter kunnen maken door gebruik van externe functies. nu nog kijken hoe ik verschillende viewcontrollers met elkaar zou kunnen koppelen. 
 Een ander punt waar ik nog vast loop is het punt dat wanneer ik de naam van een dish wil wijzigen dat het wijzigen wel lukt, maar vervolgens kun je deze niet meer liken. Dit komt doordat de key naam niet veranderd waardoor de like functie hem niet goed kan vinden. Moet dus een manier vinden om de key te veranderen. Of misschien moet ik overwegen om dan een hele nieuwe dish aan te maken en deze te verwijderen. 
-Ook heb ik een manier gevonden om verschillende soorten eten/drankjes aan te laten maken. Echter zijnd e verschillende categorien nog gehardcode. Mocht ik nog tijd hebben zou ik dit nog willen veranderen. Maar voor nu is het belangrijk dat de andere functies allemaal vlekkeloos lopen. 
+Ook heb ik een manier gevonden om verschillende soorten eten/drankjes aan te laten maken. Echter zijn de verschillende categorien nog gehardcode. Mocht ik nog tijd hebben zou ik dit nog willen veranderen. Maar voor nu is het belangrijk dat de andere functies allemaal vlekkeloos lopen. 
 
-# dag 17 Maandag 30-01
+## Dag 17 Maandag 30-01
 
 Alle functies ingekort 
 Bezig met design geweest. 
 Bij het verwerken van dubbele functies lukte het niet helemaal met de viewcontrollers laden. bij het maken van return functies werden de functies eerst gereturned voordat het observeSingleEvent aan het werk ging. 
 
-# dag 18 dinsdag 31 -01
+## Dag 18 dinsdag 31 -01
 
 Alle functies zijn ingekort. Nu ook in de viewcontrollers alle dubbele functies zo min mogelijk gemaakt. Dus alle obserEventTyp functies zijn bijna allemaal binnen de extension gezet. Het probleem van gister Opgelost dankzij de hulp van Julian. De observe regels heb ik in de functies laten staan. Maar vervolgens alles in een algemene functie gezet. 
 Verder is het Design nu klaar. Op een paar constraints na. Moet nog even checken of alle lettertypes gelijk zijn en de gelijke grootte zijn. 
@@ -142,4 +138,12 @@ Een ander Bug dat nog voorkomt is dat de likes die je ziet in je favorites niet 
 
 Net als over het veranderen van een gerecht door de cateraar. Wanneer ik het verander betekent dat de naam ook moet veranderen bij iedereen die dat gerecht in zin Likes lijst heeft. Ik kan ook doen dat je alleen het aantal likes kan veranderen en als je het gerecht verkeerd hebt geschreven dat je hem dan moet verwijderen en dan opnieuw moet toevoegen. 
 
+## Dag 19 Woensdag 01-02
+
+Vandaag vooral bezig geweest met een opzet voor het verslag, het maken van een icon en het opschonen van codes. Ervoor gekozen dat alleen de prijs van een gerecht kan veranderen. Geen tijd meer voor het implementeren van de rest. 
+
+## Dag 20 Donderdag 02-02
+
+Vandaag alle puntjes op de I gezet. Verslag gemaakt en alles nagelopen op spelfouten (sorry als ze er nog inzitten). 
+Data toegevoegd en nog laatste functionaliteit gedaan. 
 

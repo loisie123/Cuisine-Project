@@ -15,19 +15,20 @@ In opdracht van: [Minor programmeren Universiteit van Amsterdam](http://www.mpro
 ### Korte Beschrijving
 
  
-Deze applicatie kan gebruikt worden door elke gast, medewerker of student op Science Park Amsterdam. De normale gebruiker kunnen zien welke maaltijden er geserveerd worden en of deze in de smaak vallen  bij andere gebruikers. Daarnaast heeft de cateraar de mogelijkheid om de menu's op te stellen, veranderen en feedback te krijgen op hun gerechten. 
-
-
-
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
-![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.54.png)
-
+Deze applicatie kan gebruikt worden door elke gast, medewerker of student op Science Park Amsterdam. Gebruikers kunnen zien welke maaltijden er geserveerd worden op Science park en of deze in de smaak vallen bij andere gebruikers. Daarnaast heeft de cateraar de mogelijkheid om de menu's op te stellen, veranderen en feedback te krijgen op hun gerechten. 
 
 
 #### Cormet:
 De cateraar hoeft niet meer geregistreerd te worden. Hij of zij kan direct aan de slag gaan en maaltijd zien en toevoegen door in het hoofdmenu naar Available days -> Add Menu's te gaan. 
 Ook kan het Standaard Assortiment aangepast worden. 
 
+
+
+#### User:
+User kan zich registreren met een foto en username door middel van email en een wachtwoord. Vervolgens kunnen ze meteen aan de slag gaan door te kijken naar welke maaltijden er beschikbaar zijn. 
+
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.41.png)
+![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.40.54.png)
 
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.48.24.png)
 
@@ -36,14 +37,6 @@ Ook kan het Standaard Assortiment aangepast worden.
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.36.36.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 16.29.58.png)
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.36.51.png)
-
-
-
-
-#### User:
-User kan zich registreren met een foto en username door middel van email en een wachtwoord. Vervolgens kunnen ze meteen aan de slag gaan door te kijken naar welke maaltijden er beschikbaar zijn. 
-
-
 
 
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.56.png)

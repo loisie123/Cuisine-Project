@@ -34,6 +34,9 @@ class LoginViewController: UIViewController {
             
             if let error = error {
                 self.showAlert(titleAlert: "Login Failed", messageAlert: "Try again")
+                
+                self.emailInput.text = ""
+                self.passwordInput.text = ""
                 print (error.localizedDescription)
 
             }

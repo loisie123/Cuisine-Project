@@ -24,9 +24,10 @@ class CormetSubmitMealsViewController: UIViewController {
     var databaseHandle: FIRDatabaseHandle?
     
     let datePicker = UIDatePicker()
-    
+    var keyboardSizeRect: CGRect?
     
     override func viewDidLoad() {
+        
     
         super.viewDidLoad()
         
@@ -55,15 +56,11 @@ class CormetSubmitMealsViewController: UIViewController {
             
             inputSoop.text = ""
             priceSoop.text = ""
-            
         }
         else{
             showAlert(titleAlert: "Empty box", messageAlert: "There is nothing to save")
         }
     }
-    
-    
-    
     
     @IBAction func addSanwich(_ sender: Any) {
         
@@ -78,9 +75,7 @@ class CormetSubmitMealsViewController: UIViewController {
         else{
              showAlert(titleAlert: "Empty box", messageAlert: "There is nothing to save")
         }
-        
     }
-    
     
     @IBAction func addDinnerButton(_ sender: Any) {
     
@@ -90,16 +85,11 @@ class CormetSubmitMealsViewController: UIViewController {
             
                 inputDinner.text = ""
                 priceDinner.text = ""
-            
         }
-            
         else{
              showAlert(titleAlert: "Empty box", messageAlert: "There is nothing to save")
         }
     }
-
-    
-    
     
     //MARK:- Function to create a datePicker
     func createDatePicker(){
@@ -125,7 +115,6 @@ class CormetSubmitMealsViewController: UIViewController {
         
         self.view.endEditing(true)
     }
-  
     
     //MARK:- Show keyboard and hide keyboard functions
     //reference: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
@@ -141,10 +130,10 @@ class CormetSubmitMealsViewController: UIViewController {
          if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)? .cgRectValue{
             if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y += keyboardSize.height
+                
             }
         }
     }
-    
     
     //MARK:- Save Dish in Firebase.
     func submitMeal(name: String, price: String, type: String){

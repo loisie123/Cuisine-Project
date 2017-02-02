@@ -310,6 +310,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ct3-Ab-eUY" firstAttribute="leading" secondItem="686-2q-qxf" secondAttribute="leadingMargin" constant="51" id="3EO-IT-3zo"/>
                             <constraint firstAttribute="trailing" secondItem="8GC-RS-zEf" secondAttribute="trailing" id="7ai-7i-aI3"/>
@@ -484,6 +485,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                <connections>
+                                                    <action selector="inputNameKeyboardShow:" destination="5QR-Yz-Cak" eventType="editingDidEnd" id="QuA-Q3-Ss8"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="thW-Y7-gsX">
                                                 <rect key="frame" x="18" y="111.5" width="100" height="30"/>
@@ -503,8 +507,8 @@
                                                     <action selector="inputSoopButton:" destination="5QR-Yz-Cak" eventType="touchUpInside" id="N6d-VC-lom"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soep" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25a-sz-10Y">
-                                                <rect key="frame" x="18" y="46" width="43.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25a-sz-10Y">
+                                                <rect key="frame" x="18" y="46" width="45.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -655,7 +659,6 @@
                     <connections>
                         <outlet property="datePickerField" destination="kai-3i-fGL" id="xxl-77-nwV"/>
                         <outlet property="inputDinner" destination="03b-zv-xBK" id="630-jF-TdY"/>
-                        <outlet property="inputSoop" destination="ppE-Qy-5eR" id="KMG-1a-xwX"/>
                         <outlet property="priceDinner" destination="T64-Jl-QiS" id="9Tl-If-5it"/>
                         <outlet property="priceSoop" destination="thW-Y7-gsX" id="22f-Ki-BWf"/>
                         <outlet property="sandwichPrice" destination="lIj-P0-31R" id="ytH-mj-tPL"/>
@@ -1350,8 +1353,8 @@
                                                                 <action selector="unlikePressed:" destination="KhB-5i-cPD" eventType="touchUpInside" id="mWa-yz-2FR"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ane-wa-Hnw">
-                                                            <rect key="frame" x="0.0" y="79" width="70" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ane-wa-Hnw">
+                                                            <rect key="frame" x="0.0" y="55" width="70" height="44"/>
                                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1627,7 +1630,6 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="lqZ-Y5-5Fg" secondAttribute="bottom" constant="-8" id="JjU-G5-P3G"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="KVC-MJ-TIG" secondAttribute="trailing" constant="11" id="Jsa-lw-kC8"/>
                                                 <constraint firstItem="lqZ-Y5-5Fg" firstAttribute="top" secondItem="quk-JF-PaN" secondAttribute="topMargin" id="OC0-3C-fEa"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="lqZ-Y5-5Fg" secondAttribute="bottom" constant="-9" id="VwI-zD-nOd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lqZ-Y5-5Fg" secondAttribute="trailing" id="cPS-Tb-8Pk"/>
                                                 <constraint firstItem="KVC-MJ-TIG" firstAttribute="top" secondItem="quk-JF-PaN" secondAttribute="topMargin" constant="35" id="cxP-9p-2ei"/>
                                                 <constraint firstItem="lqZ-Y5-5Fg" firstAttribute="trailing" secondItem="quk-JF-PaN" secondAttribute="trailingMargin" id="fDr-5y-dRj"/>
@@ -1868,11 +1870,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ME1-sx-gZq"/>
-        <segue reference="f2p-i4-fSA"/>
+        <segue reference="lSL-KG-NHi"/>
         <segue reference="zCI-6Y-OSN"/>
-        <segue reference="thV-UP-8As"/>
         <segue reference="b2w-X7-lob"/>
         <segue reference="CkR-a6-GHd"/>
+        <segue reference="QFv-rs-I6e"/>
         <segue reference="aeo-t6-yXn"/>
     </inferredMetricsTieBreakers>
 </document>

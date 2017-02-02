@@ -12,7 +12,8 @@ In opdracht van: [Minor programmeren Universiteit van Amsterdam](http://www.mpro
 [![BCH compliance](https://bettercodehub.com/edge/badge/loisie123/Cuisine-Project)](https://bettercodehub.com)
 
 
- ## Beschrijving:
+### Korte Beschrijving
+
  
 Deze applicatie kan gebruikt worden door elke gast, medewerker of student op Science Park Amsterdam. De normale gebruiker kunnen zien welke maaltijden er geserveerd worden en of deze in de smaak vallen  bij andere gebruikers. Daarnaast heeft de cateraar de mogelijkheid om de menu's op te stellen, veranderen en feedback te krijgen op hun gerechten. 
 
@@ -37,8 +38,12 @@ Ook kan het Standaard Assortiment aangepast worden.
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.36.51.png)
 
 
+
+
 #### User:
 User kan zich registreren met een foto en username door middel van email en een wachtwoord. Vervolgens kunnen ze meteen aan de slag gaan door te kijken naar welke maaltijden er beschikbaar zijn. 
+
+
 
 
 ![ScreenShot](https://raw.github.com/loisie123/Cuisine-Project/master/doc/Schermafbeelding 2017-02-02 om 22.47.56.png)

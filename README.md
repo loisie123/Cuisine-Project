@@ -65,7 +65,7 @@ User kan zich registreren met een foto en username door middel van email en een 
 
 This project is licensed with MIT License
 
-Copyright (c) [2017] [Lois van Vliet]
+Copyright (c) 2017 Lois van Vliet
 
 
 This project is written with swift 3.0 and available for everyone with xcode 8.1 or higher.
